@@ -34,7 +34,7 @@ p.s. There's a third way of using 3rd party auth integration. It's expensive so 
 
 GraphQL client libraries offer caching for SPAs.
 
-1. Install urql: `npm i -D @urql/svelte`
+1. Install urql: `npm i -D @urql/svelte graphql`
 
 Once installed, you want to initialize it, and add utilities if needed.
 

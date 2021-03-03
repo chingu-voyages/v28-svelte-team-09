@@ -1,3 +1,9 @@
+# v28-svelte-team-09
+
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/chingu-voyages/v28-svelte-team-09">
+  <img src="https://www.netlify.com/img/deploy/button.svg">
+</a>
+
 ## netlify-routify/fauna
 
 The [Routify starter template](https://github.com/roxiness/routify-starter) but cleaned up for barebones Netlify & Fauna development

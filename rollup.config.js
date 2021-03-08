@@ -7,8 +7,6 @@ import { terser } from "rollup-plugin-terser";
 import { copySync, removeSync } from "fs-extra";
 import { spassr } from "spassr";
 import getConfig from "@roxi/routify/lib/utils/config";
-import autoPreprocess from "svelte-preprocess";
-import postcssImport from "postcss-import";
 import { injectManifest } from "rollup-plugin-workbox";
 
 const { distDir } = getConfig(); // use Routify's distDir for SSOT
@@ -66,9 +64,12 @@ export default {
       css: (css) => css.write(`bundle.css`),
       hot: isNollup,
       preprocess: [
-        autoPreprocess({
-          postcss: { plugins: [postcssImport()] },
-          defaults: { style: "postcss" },
+        require("svelte-windicss-preprocess").preprocess({
+          config: "tailwind.config.js", // tailwind config file path (optional)
+          compile: true, // false: interpretation mode; true: compilation mode
+          prefix: "windi-", // set compilation mode style prefix
+          globalPreflight: true, // set preflight style is global or scoped
+          globalUtility: true, // set utility style is global or scoped
         }),
       ],
     }),

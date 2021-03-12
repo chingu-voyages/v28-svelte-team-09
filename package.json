@@ -29,6 +29,7 @@
     "@roxi/routify": "^2.14.0",
     "@urql/svelte": "^1.2.0",
     "cross-env": "^7.0.3",
+    "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",
     "faunadb": "^4.1.1",
     "fs-extra": "^9.1.0",

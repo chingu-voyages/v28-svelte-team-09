@@ -53,9 +53,13 @@ export default {
     chunkFileNames: `[name]${(production && "-[hash]") || ""}.js`,
   },
   plugins: [
-    production // process undefined fix for @urql/svelte
-      ? replace({ "process.env.NODE_ENV": JSON.stringify("production") })
-      : replace({ "process.env.NODE_ENV": JSON.stringify("development") }),
+    replace({
+      // process undefined fix for @urql/svelte
+      "process.env.NODE_ENV": JSON.stringify(
+        production ? "production" : "development"
+      ),
+      preventAssignment: true,
+    }),
 
     svelte({
       dev: !production, // run-time checks

@@ -7,6 +7,6 @@
     letter-spacing: 1px;
   }
   :global(input[type="text"]) {
-    color: black;
+    @apply text-black;
   }
 </style>

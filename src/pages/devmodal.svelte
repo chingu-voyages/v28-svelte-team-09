@@ -5,7 +5,7 @@
   let open = true;
 </script>
 
-<header class="flex row items-center justify-between px-2">
+<header class="flex row items-center justify-between px-4 lg:px-20">
   <h2 class="justify-self-start font-logo text-indigo-500">DShift</h2>
   <nav>
     <Button>Login</Button>
@@ -39,15 +39,18 @@
         </div>
       </div>
     </div>
-    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+    <div
+      class="bg-gray-50 px-4 py-3 grid gap-2 sm:px-6 sm:flex sm:flex-row-reverse"
+    >
       <Button>Save</Button>
-      <button
+      <Button type="outline" on:click={() => (open = !open)}>Cancel</Button>
+      <!-- <button
         class="mx-2 bg-transparent shadow cursor-pointer hover:bg-indigo-500 focus:outline-none text-indigo-500 focus:border-indigo-500 font-main font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
         type="button"
         on:click={() => (open = !open)}
       >
         Cancel
-      </button>
+      </button> -->
     </div>
   </ModalBox>
   <Button>Hi Hello!</Button>

@@ -4,5 +4,6 @@
 <style>
   :global(*) {
     @apply font-main;
+    letter-spacing: 1px;
   }
 </style>

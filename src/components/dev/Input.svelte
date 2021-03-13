@@ -1,14 +1,14 @@
 <script>
   export let id = "";
   export let label = "";
-  let value = "";
+  export let value = "";
 
   const labelHandler = (e) => e.target.previousElementSibling.focus();
 </script>
 
-<div class="relative">
+<div class="relative overflow-hidden">
   <input
-    class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
+    class="input border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
     bind:value
     class:filled={value}
     {id}
@@ -17,7 +17,7 @@
   />
   <span
     on:click={labelHandler}
-    class="[ label ] absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
+    class="label absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text whitespace-nowrap"
     id="{id}-label"
     >{label}
   </span>

@@ -1,15 +1,22 @@
 module.exports = {
-  // tailwind design system config
-  // where not defined, uses defaults
-  // theme: {
-  //   extend: {
-  //     colors: {
-  //       somecolorname: {
-  //         500: "#b40000",
-  //         600: "#9c0000",
-  //         700: "#750000",
-  //       },
-  //     },
-  //   },
-  // },
+  theme: {
+    fontFamily: {
+      'logo': 'Pacifico',
+      'main': 'Quicksand, sans-serif'
+    },
+    extend: {
+      colors: {
+        purple: {
+          DEFAULT: "#3F51B5",
+        },
+        yellow: {
+          DEFAULT: "#FDCA5C",
+          100: "#E3A56C",
+        },
+        mint: {
+          DEFAULT: "#4AE789",
+        },
+      },
+    },
+  },
 };

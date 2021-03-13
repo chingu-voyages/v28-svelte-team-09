@@ -8,7 +8,7 @@
 
 <div class="relative overflow-hidden">
   <input
-    class="input border border-gray-400 shadow-md appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-purple focus:outline-none active:outline-none active:border-purple"
+    class="input border border-gray-400 shadow-md appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
     bind:value
     class:filled={value}
     {id}
@@ -17,7 +17,7 @@
   />
   <span
     on:click={labelHandler}
-    class="label absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base font-main mt-2 cursor-text whitespace-nowrap"
+    class="label absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text whitespace-nowrap"
     id="{id}-label"
     >{label}
   </span>
@@ -34,7 +34,7 @@
     font-size: 0.75rem;
     transition: all 0.2s ease-out;
     top: -1.6rem;
-    color: #3F51B5;
+    color: #6366F1;
   }
 
   .label {

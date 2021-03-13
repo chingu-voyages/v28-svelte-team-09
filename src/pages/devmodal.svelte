@@ -1,16 +1,16 @@
 <script>
-  import Button from "../components/demo/Button.svelte";
-  import ButtonOutline from "../components/demo/ButtonOutline.svelte";
-  import Input from "../components/demo/Input.svelte";
+  import Button from "../components/dev/Button.svelte";
+  import ButtonOutline from "../components/dev/ButtonOutline.svelte";
+  import Input from "../components/dev/Input.svelte";
   import ModalBox from "../components/ModalBox.svelte";
   let open = true;
 </script>
 
 <header class="flex row items-center justify-between px-2">
-  <h2 class="justify-self-start font-logo text-purple">DShift</h2>
+  <h2 class="justify-self-start font-logo text-indigo-500">DShift</h2>
   <nav>
-    <Button value="Login"></Button>
-    <ButtonOutline value="Register"></ButtonOutline>
+    <Button>Login</Button>
+    <ButtonOutline>Register</ButtonOutline>
   </nav>
 </header>
 
@@ -20,13 +20,13 @@
       <div class="sm:flex sm:items-start">
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3
-            class="text-lg font-main text-purple leading-6 font-medium "
+            class="text-lg font-main text-indigo-500 leading-6 font-medium "
             id="modal-headline"
           >
             Add new Employee
           </h3>
           <div class="mt-2">
-            <p class="text-sm font-main text-purple">
+            <p class="text-sm font-main text-indigo-500">
               Add as many new people as you want by typing their names and email
               addresses. You can always edit someone's details later, under
               People tab.
@@ -41,15 +41,15 @@
       </div>
     </div>
     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-      <Button value="Save"></Button>
-      <button class="mx-2 bg-transparent shadow cursor-pointer hover:bg-purple focus:outline-none text-purple focus:border-purple font-main font-semibold hover:text-white py-2 px-4 border border-purple hover:border-transparent rounded"
+      <Button>Save</Button>
+      <button class="mx-2 bg-transparent shadow cursor-pointer hover:bg-indigo-500 focus:outline-none text-indigo-500 focus:border-indigo-500 font-main font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
       type="button"
       on:click={() => (open = !open)}>
         Cancel
       </button>
     </div>
   </ModalBox>
-  <Button value="Hi Hello"></Button>
+  <Button>Hi Hello!</Button>
 </div>
 
 <style>

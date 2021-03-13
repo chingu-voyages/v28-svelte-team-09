@@ -1,5 +1,5 @@
 <script>
-import Input from "../components/demo/Input.svelte";
+import Input from "../components/dev/Input.svelte";
 
   // TODO: If you care about dynamic metatags, add them here. Otherwise, delete example later.
   // import { metatags } from '@roxi/routify'

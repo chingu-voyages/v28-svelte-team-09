@@ -1,6 +1,5 @@
 <script>
   import Button from "../components/dev/Button.svelte";
-  import ButtonOutline from "../components/dev/ButtonOutline.svelte";
   import Input from "../components/dev/Input.svelte";
   import ModalBox from "../components/ModalBox.svelte";
   let open = true;
@@ -10,7 +9,7 @@
   <h2 class="justify-self-start font-logo text-indigo-500">DShift</h2>
   <nav>
     <Button>Login</Button>
-    <ButtonOutline>Register</ButtonOutline>
+    <Button type="outline">Register</Button>
   </nav>
 </header>
 
@@ -26,7 +25,7 @@
             Add new Employee
           </h3>
           <div class="mt-2">
-            <p class="text-sm font-main text-indigo-500">
+            <p class="text-sm font-main text-indigo-300">
               Add as many new people as you want by typing their names and email
               addresses. You can always edit someone's details later, under
               People tab.
@@ -42,9 +41,11 @@
     </div>
     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
       <Button>Save</Button>
-      <button class="mx-2 bg-transparent shadow cursor-pointer hover:bg-indigo-500 focus:outline-none text-indigo-500 focus:border-indigo-500 font-main font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
-      type="button"
-      on:click={() => (open = !open)}>
+      <button
+        class="mx-2 bg-transparent shadow cursor-pointer hover:bg-indigo-500 focus:outline-none text-indigo-500 focus:border-indigo-500 font-main font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
+        type="button"
+        on:click={() => (open = !open)}
+      >
         Cancel
       </button>
     </div>
@@ -59,5 +60,4 @@
   .input-box > :global(div:first-child) {
     width: 50%;
   }
-
 </style>

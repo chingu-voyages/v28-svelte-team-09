@@ -3,7 +3,10 @@
 
 <style>
   :global(*) {
-    @apply font-main;
+    @apply font-main text-indigo-500;
     letter-spacing: 1px;
+  }
+  :global(input[type="text"]) {
+    color: black;
   }
 </style>

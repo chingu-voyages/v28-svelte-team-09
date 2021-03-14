@@ -3,6 +3,10 @@
   export let open = false;
 </script>
 
+<!-- @component
+@open Modal open or closed
+-->
+
 {#if open}
   <div
     class="fixed z-10 inset-0 overflow-y-auto"

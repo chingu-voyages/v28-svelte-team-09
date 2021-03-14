@@ -6,9 +6,15 @@
   const labelHandler = (e) => e.target.previousElementSibling.focus();
 </script>
 
+<!--@component
+@id ID name
+@label label name
+@value `bind:value` for input value
+-->
+
 <div class="relative overflow-hidden">
   <input
-    class="input border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
+    class="input border border-gray-400 shadow-md appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
     bind:value
     class:filled={value}
     {id}
@@ -34,7 +40,7 @@
     font-size: 0.75rem;
     transition: all 0.2s ease-out;
     top: -1.6rem;
-    color: #667eea;
+    color: #6366f1;
   }
 
   .label {

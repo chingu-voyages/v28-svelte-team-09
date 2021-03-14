@@ -2,8 +2,10 @@
   // TODO: If you care about dynamic metatags, add them here. Otherwise, delete example later.
   // import { metatags } from '@roxi/routify'
   // metatags.title = 'My Routify app'
-  // metatags.description = 'Description coming soon...'
+  // metatags.description = 'Description coming soon...
+  import Input from "../components/dev/Input.svelte";
   import { authStore } from "../stores/auth"
+  let value = "";
 </script>
 
 <!-- <h1 class="bg-red-100 text-blue-500">
@@ -19,4 +21,10 @@
     <a href="/signin" target="_self" class="link">Sign in</a>
     <a href="/signup" target="_self" class="link">Sign up</a>
   </section>
+  <Input id="example" label="Some input" bind:value />
 {/if}
+
+ 
+
+
+

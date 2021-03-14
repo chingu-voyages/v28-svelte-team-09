@@ -53,7 +53,7 @@
         on:click={labelHandler}
         id="email-label"
         class="[ label ] absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
-        >Email Address
+        >Username
       </span>
     </div>
     <div class="mb-4 relative">

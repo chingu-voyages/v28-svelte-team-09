@@ -7,19 +7,22 @@
   export let login = false;
 
   const labelHandler = (e) => e.target.previousElementSibling.focus();
-  `/.netlify/functions/signin`
+  `/.netlify/functions/signin`;
   if ($authStore) location.pathname = "./home";
 
   async function handleSubmit() {
     if (!login && password != confirm) return;
 
-    var res = await fetch(`/.netlify/functions/${login ? 'signin' : 'signup'} `, {
-      method: "POST", 
-      body: JSON.stringify({
-        name,
-        password,
-      }),
-    });
+    var res = await fetch(
+      `/.netlify/functions/${login ? "signin" : "signup"} `,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          password,
+        }),
+      }
+    );
     var { secret = "", instance: { "@ref": { id } } = "" } = await res.json();
     if (secret) {
       var authData = {
@@ -92,10 +95,39 @@
         </span>
       </div>
     {/if}
-    <button
-      class="bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded"
-      >Submit</button
-    >
+    <div>
+      <button
+        class="bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded mb-4"
+        >Submit</button
+      >
+      {#if !login}
+        <span class="ml-6">
+          <span class="mt-6 text-center  text-gray-900"> or </span>
+          <span class="mt-2 text-center text-sm text-gray-600">
+            <a
+              href="/signin"
+              class="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Login
+            </a>
+          </span>
+        </span>
+      {/if}
+    </div>
+
+    {#if login}
+      <div>
+        <span class="mt-6 text-center  text-gray-900"> Not a member yet? </span>
+        <span class="mt-2 text-center text-sm text-gray-600">
+          <a
+            href="/signup"
+            class="font-medium text-indigo-600 hover:text-indigo-500"
+          >
+            Register now!
+          </a>
+        </span>
+      </div>
+    {/if}
   </div>
 </form>
 

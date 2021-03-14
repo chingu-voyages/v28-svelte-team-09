@@ -7,29 +7,19 @@
   export let login = false;
 
   const labelHandler = (e) => e.target.previousElementSibling.focus();
-  `/.netlify/functions/signin`;
   if ($authStore) location.pathname = "./home";
 
   async function handleSubmit() {
     if (!login && password != confirm) return;
-
-    var res = await fetch(
-      `/.netlify/functions/${login ? "signin" : "signup"} `,
+    var res = await fetch(`/.netlify/functions/${login ? "signin" : "signup"} `,
       {
         method: "POST",
-        body: JSON.stringify({
-          name,
-          password,
-        }),
+        body: JSON.stringify({ name,  password }),
       }
     );
     var { secret = "", instance: { "@ref": { id } } = "" } = await res.json();
     if (secret) {
-      var authData = {
-        secret,
-        id,
-      };
-
+      var authData = { secret, id };
       localStorage.setItem("auth", JSON.stringify(authData));
       location.pathname = "/home";
     } else {
@@ -37,8 +27,6 @@
     }
   }
 </script>
-
-
 
 <form on:submit|preventDefault={handleSubmit}>
   <div class="shadow-xl p-10 bg-white max-w-xl rounded">

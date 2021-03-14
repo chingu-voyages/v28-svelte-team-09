@@ -4,7 +4,7 @@
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...
   import Input from "../components/dev/Input.svelte";
-  import { authStore } from "../stores/auth"
+  import { authStore } from "../stores/auth";
   let value = "";
 </script>
 
@@ -13,18 +13,13 @@
 </h1> -->
 {#if $authStore?.secret}
   <div style="display:none;">
-    {(location.pathname = "/home")}
+    {(location.pathname = "/schedule")}
   </div>
 {:else}
   <section>
-    <div> Welcome to DSHIFT</div>
+    <div>Welcome to DSHIFT</div>
     <a href="/signin" target="_self" class="link">Sign in</a>
     <a href="/signup" target="_self" class="link">Sign up</a>
   </section>
   <Input id="example" label="Some input" bind:value />
 {/if}
-
- 
-
-
-

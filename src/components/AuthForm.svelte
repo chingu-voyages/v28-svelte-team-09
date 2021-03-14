@@ -38,7 +38,7 @@
   }
 </script>
 
-<!-- class:filled={email} -->
+
 
 <form on:submit|preventDefault={handleSubmit}>
   <div class="shadow-xl p-10 bg-white max-w-xl rounded">
@@ -48,6 +48,7 @@
         use:focus
         class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
         bind:value={name}
+        class:filled={name}
         id="email"
         type="text"
         aria-labelledby="email-label"

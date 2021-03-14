@@ -7,14 +7,14 @@
   export let login = false;
 
   const labelHandler = (e) => e.target.previousElementSibling.focus();
-
+  `/.netlify/functions/signin`
   if ($authStore) location.pathname = "./home";
 
   async function handleSubmit() {
     if (!login && password != confirm) return;
 
-    var res = await fetch(`/.netlify/functions/signin`, {
-      method: "POST",
+    var res = await fetch(`/.netlify/functions/${login ? 'signin' : 'signup'} `, {
+      method: "POST", 
       body: JSON.stringify({
         name,
         password,

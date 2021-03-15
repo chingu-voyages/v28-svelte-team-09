@@ -2,8 +2,11 @@
 <slot />
 
 <style>
-  :global(:not(input[type="text"])) {
-    @apply font-main text-indigo-500;
+  :global(*) {
+    @apply font-main;
     letter-spacing: 1px;
+  }
+  :global(:not(input[type="text"])) {
+    @apply text-indigo-500;
   }
 </style>

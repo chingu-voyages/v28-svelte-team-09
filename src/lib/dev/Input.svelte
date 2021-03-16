@@ -23,7 +23,7 @@
   />
   <span
     on:click={labelHandler}
-    class="label absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text whitespace-nowrap"
+    class="label absolute mb-0 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text whitespace-nowrap"
     id="{id}-label"
     >{label}
   </span>

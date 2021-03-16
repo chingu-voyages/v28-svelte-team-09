@@ -1,6 +1,13 @@
 const sveltePreprocess = require("svelte-preprocess");
 
-// setTimeout(()=>)
+const production = process.env.NODE_ENV == "production";
+!production && // log DB API link
+  setTimeout(() => {
+    const msg =
+      "\nView GraphQL Playground to explore your site's data and schema\n\n  ";
+    const link = "https://dashboard.fauna.com/graphql/@db/DShift";
+    console.log(msg, "\x1b[35m\x1b[47m", link, "\x1b[0m", "\n");
+  }, 0);
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {

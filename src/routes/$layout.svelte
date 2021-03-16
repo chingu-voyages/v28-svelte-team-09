@@ -1,8 +1,8 @@
 <script>
   import "../global.css";
-  import { initClient } from "../utils/client";
+  // import { initClient } from "../utils/client";
   // TODO: init client w/ secret
-  initClient("da hello");
+  // secret && initClient(secret)
 </script>
 
 <slot />

@@ -1,5 +1,5 @@
 // Consult https://vitejs.dev/config/ to learn about these options
-import { join } from "path";
+import { join, resolve } from "path";
 import { readFileSync } from "fs";
 import { cwd } from "process";
 

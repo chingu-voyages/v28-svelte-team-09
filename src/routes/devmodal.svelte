@@ -5,14 +5,6 @@
   let open = true;
 </script>
 
-<header class="flex row items-center justify-between px-4 lg:px-20 pt-4">
-  <h2 class="justify-self-start font-logo text-xl font-semibold">DShift</h2>
-  <nav>
-    <Button>Login</Button>
-    <Button type="outline">Register</Button>
-  </nav>
-</header>
-
 <div class="h-screen grid place-content-center">
   <ModalBox {open}>
     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

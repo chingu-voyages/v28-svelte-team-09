@@ -1,5 +1,5 @@
 <script>
-  import { authStore } from "../stores/auth";
+  import { authStore } from "$stores/auth";
   let name = "";
   let password = "";
   let confirm = "";

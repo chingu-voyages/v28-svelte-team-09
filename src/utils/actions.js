@@ -1,3 +1,4 @@
+/** The event callback is not dynamically added. Only on init. */
 export function clickOutside(node, { enabled: initialEnabled, cb }) {
   const handleOutsideClick = ({ target }) => {
     if (!node.contains(target)) {

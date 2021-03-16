@@ -52,7 +52,7 @@
       <span
         on:click={labelHandler}
         id="email-label"
-        class="[ label ] absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
+        class="[ label ] absolute mb-0 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
         >Username
       </span>
     </div>
@@ -68,7 +68,7 @@
       <span
         on:click={labelHandler}
         id="password-label"
-        class="[ label ] absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
+        class="[ label ] absolute mb-0 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
       >
         Password
       </span>
@@ -86,7 +86,7 @@
         <span
           on:click={labelHandler}
           id="password-label"
-          class="[ label ] absolute mb-0 -mt-2 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
+          class="[ label ] absolute mb-0 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
         >
           Confirm
         </span>

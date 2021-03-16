@@ -1,3 +1,5 @@
+const tw = require("@tailwindcss/jit");
+
 module.exports = {
-  plugins: [require("@tailwindcss/jit")],
+  plugins: [tw],
 };

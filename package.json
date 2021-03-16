@@ -14,6 +14,7 @@
     "dotenv": "^8.2.0",
     "faunadb": "^4.1.1",
     "graphql": "^15.5.0",
+    "postcss-load-config": "^3.0.1",
     "svelte": "^3.35.0",
     "svelte-preprocess": "^4.6.9",
     "vite": "^2.1.0"

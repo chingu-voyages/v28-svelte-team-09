@@ -1,6 +1,6 @@
 <script>
   import Input from "$lib/dev/Input.svelte";
-  import { authStore } from "../stores/auth";
+  import { authStore } from "$stores/auth";
   let value = "";
 </script>
 

@@ -1,7 +1,7 @@
 <script>
   // import RegisterForm from "$lib/RegisterForm.svelte";
   import AuthForm from "$lib/AuthForm.svelte";
-  // import { authStore } from "../stores/auth";
+  // import { authStore } from "$stores/auth";
 </script>
 
 <main>

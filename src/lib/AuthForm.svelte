@@ -1,6 +1,6 @@
 <script>
   import { authStore } from "$stores/auth";
-  import Button from "$lib/dev/Button.svelte";
+  import Button from "$lib/Button.svelte";
 
   let name = "";
   let password = "";
@@ -33,7 +33,9 @@
 <form on:submit|preventDefault={handleSubmit}>
   <div class="shadow-xl p-10 bg-white max-w-xl rounded">
     {#if !login}
-      <h1 class="text-4xl font-black mb-4">Start using <span class="font-logo font-normal">DShift</span> today!</h1>
+      <h1 class="text-4xl font-black mb-4">
+        Start using <span class="font-logo font-normal">DShift</span> today!
+      </h1>
     {:else}
       <h1 class="text-4xl font-black mb-4">We are glad you are back!</h1>
     {/if}
@@ -94,7 +96,9 @@
       <Button>Submit</Button>
       {#if !login}
         <div class="my-2">
-          <span class="mt-6 text-center text-gray-900"> Already a member? </span>
+          <span class="mt-6 text-center text-gray-900">
+            Already a member?
+          </span>
           <span class="mt-2 text-center text-gray-600">
             <a
               href="/signin"
@@ -111,10 +115,7 @@
       <div class="my-2">
         <span class="mt-6 text-center text-gray-900"> Not a member yet? </span>
         <span class="mt-2 text-center text-gray-600">
-          <a
-            href="/signup"
-            class="text-indigo-500 hover:text-indigo-400"
-          >
+          <a href="/signup" class="text-indigo-500 hover:text-indigo-400">
             Register now!
           </a>
         </span>

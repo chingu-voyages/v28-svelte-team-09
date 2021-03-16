@@ -1,6 +1,6 @@
 <script>
-  import Button from "$lib/dev/Button.svelte";
-  import Input from "$lib/dev/Input.svelte";
+  import Button from "$lib/Button.svelte";
+  import Input from "$lib/Input.svelte";
   import ModalBox from "$lib/ModalBox.svelte";
   let open = true;
 </script>

@@ -1,5 +1,5 @@
 <script>
-  import Input from "$lib/dev/Input.svelte";
+  import Input from "$lib/Input.svelte";
   import { authStore } from "$stores/auth";
   let value = "";
 </script>

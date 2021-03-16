@@ -1,6 +1,5 @@
 <script>
   import { authStore } from "../stores/auth";
-  import { focus } from "@roxi/routify";
   let name = "";
   let password = "";
   let confirm = "";
@@ -34,7 +33,7 @@
     <h1 class="text-4xl font-black mb-4">{!login ? "Register" : " Login"}</h1>
     <div class="mb-4 relative">
       <input
-        use:focus
+        autofocus
         class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
         bind:value={name}
         class:filled={name}

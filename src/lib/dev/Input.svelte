@@ -23,7 +23,7 @@
   />
   <span
     on:click={labelHandler}
-    class="label absolute mb-0 pt-4 pl-3 top-[-0.8rem] leading-tighter text-gray-400 text-base mt-2 cursor-text whitespace-nowrap"
+    class="label absolute mb-0 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text whitespace-nowrap"
     id="{id}-label"
     >{label}
   </span>
@@ -39,13 +39,13 @@
   .input.filled + .label {
     font-size: 0.75rem;
     transition: all 0.2s ease-out;
-    top: -1.6rem;
+    top: -1.4rem;
     color: #6366f1;
   }
 
   .label {
     transition: all 0.2s ease-out;
-    top: -0.8rem;
+    top: -0.5rem;
     left: 0;
   }
 </style>

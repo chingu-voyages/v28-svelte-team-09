@@ -1,10 +1,9 @@
 <script>
-import AuthForm from "../components/AuthForm.svelte";
+  import AuthForm from "$lib/AuthForm.svelte";
 </script>
 
-
 <main>
-  <AuthForm login={true}  />
+  <AuthForm login={true} />
 </main>
 
 <style>

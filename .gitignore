@@ -1,12 +1,10 @@
-**/node_modules/
-/dist/
 .DS_Store
-**/.history
-src/tmp/
-.routify
-.netlify
-assets/build
-yarn-error.log
+node_modules
+/.svelte
+/build
 .env
-.faunarc
 .vscode
+/functions/render
+
+# Netlify
+.netlify

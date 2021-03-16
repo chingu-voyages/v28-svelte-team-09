@@ -1,7 +1,7 @@
 <script>
-  import Button from "../components/dev/Button.svelte";
-  import Input from "../components/dev/Input.svelte";
-  import ModalBox from "../components/ModalBox.svelte";
+  import Button from "$lib/dev/Button.svelte";
+  import Input from "$lib/dev/Input.svelte";
+  import ModalBox from "$lib/ModalBox.svelte";
   let open = true;
 </script>
 

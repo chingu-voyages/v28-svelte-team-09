@@ -1,9 +1,8 @@
 <script>
-  import { Router } from "@roxi/routify";
-  import { routes } from "../.routify/routes";
+  import "../global.css";
   // import { initClient } from "./utils/client";
   // TODO: init client w/ secret
   // secret && initClient(secret)
 </script>
 
-<Router {routes} />
+<slot />

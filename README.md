@@ -4,11 +4,25 @@
   <img src="https://www.netlify.com/img/deploy/button.svg">
 </a>
 
-## netlify-routify/fauna
+A template for Svelte Kit `&&` Netlify
 
-The [Routify starter template](https://github.com/roxiness/routify-starter) but cleaned up for barebones Netlify & Fauna development
+⚠ **SvelteKit is currently in public beta**. This template and its API may change drastically in the next few months.
 
-SPA-only. No SSR enabled as Netlify Dev doesn't work with SSR. However, SSR can be enabled in `netlify.toml` when dev is no longer required.
+last tested working versions (as of 3/15/2021):
+- `@sveltejs/adapter-netlify` 1.0.0-next.3
+- `@sveltejs/kit` 1.0.0-next.49
+- `vite` 2.1.0
+
+This branch is quite opinionated and adds:
+- fauna
+- urql
+- tailwind (JIT)
+
+Command to use template: `npx degit armchair-traveller/svelte-kitify#fauna`
+
+## svelte-kitify#fauna
+
+The Svelte Kit template but cleaned up for barebones Netlify & Fauna development
 
 Basic packages added for FaunaDB.
 
@@ -40,7 +54,7 @@ p.s. There's a third way of using 3rd party auth integration. It's expensive so 
 
 GraphQL client libraries offer caching for SPAs.
 
-1. Install urql: `npm i -D @urql/svelte graphql`
+1. Install urql: `npm i -D graphql && npm i @urql/svelte`
 
 Once installed, you want to initialize it, and add utilities if needed.
 

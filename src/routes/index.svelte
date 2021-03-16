@@ -3,7 +3,7 @@
   // import { metatags } from '@roxi/routify'
   // metatags.title = 'My Routify app'
   // metatags.description = 'Description coming soon...
-  import Input from "../components/dev/Input.svelte";
+  import Input from "$lib/dev/Input.svelte";
   import { authStore } from "../stores/auth";
   let value = "";
 </script>

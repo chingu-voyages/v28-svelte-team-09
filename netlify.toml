@@ -1,25 +1,6 @@
-
 [build]
-  publish = "dist"
-  functions = "api/netlify"
-  command = "npm run build && cd api/netlify && npm run build"
-
-# Dev doesn't work yet. Any takers?
-# [dev]  
-  # command = "npm run dev:ssr"
-  # targetPort = 5000
-  # publish = "assets"
-  # autoLaunch = true
-
-[[redirects]]
-  # SSR and SPA
-  # from = "/*"
-  # to = "/.netlify/functions/ssr"
-  # status = 200
-  
-  # TODO: Enable SSR on prod by switching these redirects
-  # SPA only is enabled as Netlify Dev fails with SSR
-  # SPA only
-  from = "/*"
-  to = "/__app.html"
-  status = 200
+  command = "npm run build"
+  publish = "build"
+  functions = "functions"
+[build.environment]
+  NODE_VERSION = "14"

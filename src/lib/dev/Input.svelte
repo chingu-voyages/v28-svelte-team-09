@@ -14,7 +14,7 @@
 
 <div class="relative overflow-hidden">
   <input
-    class="input border border-gray-400 shadow-md appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
+    class="input border border-gray-400 shadow-md appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
     bind:value
     class:filled={value}
     {id}
@@ -23,7 +23,7 @@
   />
   <span
     on:click={labelHandler}
-    class="label absolute mb-0 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text whitespace-nowrap"
+    class="label absolute mb-0 pt-4 pl-3 top-[-0.8rem] leading-tighter text-gray-400 text-base mt-2 cursor-text whitespace-nowrap"
     id="{id}-label"
     >{label}
   </span>

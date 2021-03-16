@@ -19,7 +19,7 @@
 
 <style>
   .outline {
-    @apply bg-transparent hover:bg-indigo-500;
+    @apply bg-transparent hover:bg-indigo-50;
   }
   .filled {
     @apply hover:bg-indigo-400 hover:border-indigo-400 bg-indigo-500 text-white;

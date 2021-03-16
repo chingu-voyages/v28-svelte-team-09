@@ -25,7 +25,7 @@
             Add new Employee
           </h3>
           <div class="mt-2">
-            <p class="text-sm font-main text-indigo-400">
+            <p class="text-sm font-main text-indigo-400 mb-6">
               Add as many new people as you want by typing their names and email
               addresses. You can always edit someone's details later, under
               People tab.

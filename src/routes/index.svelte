@@ -21,11 +21,4 @@
   <div style="display:none;">
     {(location.pathname = "/schedule")}
   </div>
-{:else}
-  <section>
-    <div>Welcome to DSHIFT</div>
-    <a href="/signin" target="_self" class="link">Sign in</a>
-    <a href="/signup" target="_self" class="link">Sign up</a>
-  </section>
-  <Input id="example" label="Some input" bind:value />
 {/if}

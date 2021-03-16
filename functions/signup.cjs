@@ -1,4 +1,4 @@
-const { createUser, login } = require("./utils/auth");
+const { createUser, login } = require("./utils/auth.cjs");
 
 exports.handler = async ({ body }) => {
   // Signs up then logs in and responds with a token for the client to consume.

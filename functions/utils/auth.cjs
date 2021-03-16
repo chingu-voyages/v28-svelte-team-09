@@ -1,4 +1,4 @@
-const { query } = require("./db");
+const { query } = require("./db.cjs");
 const {
   Login,
   Match,

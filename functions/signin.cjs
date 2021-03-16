@@ -1,4 +1,4 @@
-const { login } = require("./utils/auth");
+const { login } = require("./utils/auth.cjs");
 
 exports.handler = async ({ body }) => {
   var { name, password } = JSON.parse(body);

@@ -8,4 +8,5 @@
   command = "npm run dev"
   port = 8888
   targetPort = 3000
+  publish = "build"
   framework = "#custom"

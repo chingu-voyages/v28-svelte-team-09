@@ -1,7 +1,8 @@
 <script>
   import { authStore } from "$stores/auth";
   import Button from "$lib/Button.svelte";
-
+  import {clickOutside} from '$lib/clickOutside.cjs';
+  
   let name = "";
   let password = "";
   let confirm = "";
@@ -30,7 +31,7 @@
   }
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form use:clickOutside={{ enabled: true, cb: () => location.pathname = "/" }} on:submit|preventDefault={handleSubmit}>
   <div class="shadow-xl p-10 bg-white max-w-xl rounded">
     {#if !login}
       <h1 class="text-4xl font-black mb-4">

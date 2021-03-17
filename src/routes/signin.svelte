@@ -3,7 +3,7 @@
 </script>
 
 <main>
-  <AuthForm login={true} />
+    <AuthForm login={true} />
 </main>
 
 <style>

@@ -1,8 +1,8 @@
 <script>
   import Button from "$lib/Button.svelte";
-  import Input from "$lib/Input.svelte";
   import { authStore } from "$stores/auth";
-  let value = "";
+
+  let open = true;
 </script>
 
 <header class="flex row items-center justify-between px-4 lg:px-20 pt-4">

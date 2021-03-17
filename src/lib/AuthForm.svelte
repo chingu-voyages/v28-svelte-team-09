@@ -1,5 +1,7 @@
 <script>
   import { authStore } from "$stores/auth";
+  import Button from "$lib/dev/Button.svelte";
+
   let name = "";
   let password = "";
   let confirm = "";
@@ -30,11 +32,15 @@
 
 <form on:submit|preventDefault={handleSubmit}>
   <div class="shadow-xl p-10 bg-white max-w-xl rounded">
-    <h1 class="text-4xl font-black mb-4">{!login ? "Register" : " Login"}</h1>
+    {#if !login}
+      <h1 class="text-4xl font-black mb-4">Start using <span class="font-logo font-normal">DShift</span> today!</h1>
+    {:else}
+      <h1 class="text-4xl font-black mb-4">We are glad you are back!</h1>
+    {/if}
     <div class="mb-4 relative">
       <input
         autofocus
-        class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
+        class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
         bind:value={name}
         class:filled={name}
         id="email"
@@ -50,7 +56,7 @@
     </div>
     <div class="mb-4 relative">
       <input
-        class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
+        class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
         bind:value={password}
         class:filled={password}
         id="password"
@@ -68,7 +74,7 @@
     {#if !login}
       <div class="mb-4 relative">
         <input
-          class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
+          class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
           bind:value={confirm}
           class:filled={password}
           id="password"
@@ -85,32 +91,29 @@
       </div>
     {/if}
     <div>
-      <button
-        class="bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded mb-4"
-        >Submit</button
-      >
+      <Button>Submit</Button>
       {#if !login}
-        <span class="ml-6">
-          <span class="mt-6 text-center  text-gray-900"> or </span>
-          <span class="mt-2 text-center text-sm text-gray-600">
+        <div class="my-2">
+          <span class="mt-6 text-center text-gray-900"> Already a member? </span>
+          <span class="mt-2 text-center text-gray-600">
             <a
               href="/signin"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
+              class="font-medium text-indigo-500 hover:text-indigo-400"
             >
-              Login
+              Login here
             </a>
           </span>
-        </span>
+        </div>
       {/if}
     </div>
 
     {#if login}
-      <div>
-        <span class="mt-6 text-center  text-gray-900"> Not a member yet? </span>
-        <span class="mt-2 text-center text-sm text-gray-600">
+      <div class="my-2">
+        <span class="mt-6 text-center text-gray-900"> Not a member yet? </span>
+        <span class="mt-2 text-center text-gray-600">
           <a
             href="/signup"
-            class="font-medium text-indigo-600 hover:text-indigo-500"
+            class="text-indigo-500 hover:text-indigo-400"
           >
             Register now!
           </a>

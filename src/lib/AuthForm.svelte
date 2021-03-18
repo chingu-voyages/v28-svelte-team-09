@@ -1,7 +1,7 @@
 <script>
   import { authStore } from "$stores/auth";
   import Button from "$lib/Button.svelte";
-  
+
   let name = "";
   let password = "";
   let confirm = "";
@@ -44,7 +44,7 @@
     <div class="mb-4 relative">
       <input
         autofocus
-        class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
+        class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
         bind:value={name}
         class:filled={name}
         id="email"
@@ -60,7 +60,7 @@
     </div>
     <div class="mb-4 relative">
       <input
-        class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
+        class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
         bind:value={password}
         class:filled={password}
         id="password"
@@ -78,7 +78,7 @@
     {#if !login}
       <div class="mb-4 relative">
         <input
-          class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
+          class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
           bind:value={confirm}
           class:filled={password}
           id="password"

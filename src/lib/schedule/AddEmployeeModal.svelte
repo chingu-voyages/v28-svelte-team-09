@@ -2,7 +2,7 @@
   import Button from "$lib/Button.svelte";
   import Input from "$lib/Input.svelte";
   import ModalBox from "$lib/ModalBox.svelte";
-  let open = true;
+  export let open = false;
 </script>
 
 <ModalBox {open}>

@@ -15,7 +15,6 @@
     class="fixed z-10 inset-0 overflow-y-auto"
     in:fade={{ duration: 300 }}
     out:fade={{ duration: 200 }}
-    use:clickOutsideAction={{ enabled: clickOutside, cb: () => (open = false) }}
   >
     <div
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
@@ -35,6 +34,7 @@
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-headline"
+        use:clickOutsideAction={{ enabled: clickOutside, cb: () => (open = false) }}
       >
         <slot />
       </div>

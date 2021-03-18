@@ -2,7 +2,6 @@ const { login } = require("./utils/auth.cjs");
 
 exports.handler = async ({ body }) => {
   var { name, password } = JSON.parse(body);
-
   try {
     var { secret = "", instance = "" } = await login(name, password);
   } catch (error) {

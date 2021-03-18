@@ -3,7 +3,8 @@
   import { fade } from "svelte/transition";
   export let open = false;
   export let clickOutside = false;
-  let ready = false;
+  let outReady = false;
+  $: open ? setTimeout(() => (outReady = true)) : (outReady = false);
 </script>
 
 <!-- @component
@@ -16,8 +17,6 @@
     class="fixed z-10 inset-0 overflow-y-auto"
     in:fade={{ duration: 300 }}
     out:fade={{ duration: 200 }}
-    on:introstart={() => (ready = false)}
-    on:introend={() => (ready = true)}
   >
     <div
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
@@ -39,7 +38,7 @@
         aria-labelledby="modal-headline"
         use:clickOutsideAction={{
           enabled: clickOutside,
-          cb: () => ready && (open = false),
+          cb: () => outReady && (open = false),
         }}
       >
         <slot />

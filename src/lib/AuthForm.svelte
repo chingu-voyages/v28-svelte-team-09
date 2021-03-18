@@ -19,13 +19,15 @@
         body: JSON.stringify({ name, password }),
       }
     );
-    var { secret = "", instance: { "@ref": { id } } = "" } = await res.json();
-    if (secret) {
-      var authData = { secret, id };
+    const data = await res.json()
+    const{ secret, instance } = data
+    if (data.secret) {
+      var authData = { secret, id : instance['@ref'].id };
       localStorage.setItem("auth", JSON.stringify(authData));
       location.pathname = "/schedule";
     } else {
       // You can deal w/ errors here, likely password invalid or network error.
+      
     }
   }
 </script>

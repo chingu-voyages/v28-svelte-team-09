@@ -1,3 +1,14 @@
 type User {
   name: String! @unique
+	employees: [Employee]! @relation
 }
+
+type Employee {
+	name: String!
+	email: String
+	phone: String
+	manager: User!
+}
+
+
+

@@ -9,7 +9,12 @@ function checkPaths(arr) {
 }
 
 /** Initializes with auth details. Redirect check is only performed once for the app's init. */
+// export const authStore = writable(
+//   (typeof window != "undefined" && JSON.parse(localStorage.getItem("auth"))) ||
+//     checkPaths(["signin", "signup"])
+// );
+
 export const authStore = writable(
-  (typeof window != "undefined" && JSON.parse(localStorage.getItem("auth"))) ||
-    checkPaths(["signin", "signup"])
+  (typeof window != "undefined" && JSON.parse(localStorage.getItem("auth")))
 );
+

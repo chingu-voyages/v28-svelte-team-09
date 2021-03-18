@@ -30,6 +30,8 @@
       
     }
   }
+
+  $: console.log(login);
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
@@ -103,7 +105,7 @@
           </span>
           <span class="mt-2 text-center text-gray-600">
             <a
-              href="/signin"
+              on:click={() => login = true}
               class="font-medium text-indigo-500 hover:text-indigo-400"
             >
               Login here
@@ -117,7 +119,7 @@
       <div class="my-2">
         <span class="mt-6 text-center text-gray-900"> Not a member yet? </span>
         <span class="mt-2 text-center text-gray-600">
-          <a href="/signup" class="text-indigo-500 hover:text-indigo-400">
+          <a on:click={() => login = false} class="text-indigo-500 hover:text-indigo-400">
             Register now!
           </a>
         </span>

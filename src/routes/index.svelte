@@ -3,18 +3,20 @@
   import ModalBox from "$lib/ModalBox.svelte";
   import AuthForm from "$lib/AuthForm.svelte";
   import { authStore } from "$stores/auth";
+
+  let open = false;
 </script>
 
 <header class="flex row items-center justify-between px-4 lg:px-20 pt-4">
   <h2 class="justify-self-start font-logo text-2xl font-semibold">DShift</h2>
   <nav>
-      <Button>Login</Button>
-      <Button type="outline">Register</Button>
+    <Button on:click={() => (open = true)}>Login</Button>
+    <Button type="outline">Register</Button>
   </nav>
 </header>
 
 <main>
-  <ModalBox clickOutside={true} open={true}>
+  <ModalBox clickOutside={true} bind:open>
     <AuthForm login={true} />
   </ModalBox>
 </main>

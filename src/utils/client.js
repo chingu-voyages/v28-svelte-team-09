@@ -26,7 +26,7 @@ export const initClient = (secret) =>
  * @param {object} [variables]
  */
 export const queryOp = (gqlQuery, variables) =>
-  query(operationStore(gqlQuery, variables));
+  typeof window != "undefined" && query(operationStore(gqlQuery, variables));
 
 /** Creates a mutation for a component to consume.
  * @param {function} [cbVarsObj] Callback that de+restructures the query variables object passed in.
@@ -44,6 +44,7 @@ export const queryOp = (gqlQuery, variables) =>
  * ```
  */
 export function mutationOp(gqlMutation, cbVarsObj = (variables) => variables) {
+  if (typeof window == "undefined") return;
   const mutationStore = operationStore(gqlMutation);
   const mutateOp = mutation(mutationStore);
   /** Runs GQL mutation.

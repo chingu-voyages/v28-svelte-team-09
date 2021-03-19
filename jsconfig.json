@@ -9,5 +9,5 @@
 			"$gql/*": ["src/gql/*"]
 		}
 	},
-	"include": ["src/**/*.js", "src/**/*.svelte", "src/lib/functions/clickOutside.cjs"]
+	"include": ["src/**/*.js", "src/**/*.svelte"]
 }

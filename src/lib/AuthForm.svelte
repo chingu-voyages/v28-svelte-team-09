@@ -19,29 +19,25 @@
         body: JSON.stringify({ name, password }),
       }
     );
-    const data = await res.json()
-    const{ secret, instance } = data
-    if (data.secret) {
-      var authData = { secret, id : instance['@ref'].id };
+    var { secret = "", instance: { "@ref": { id } } = "" } = await res.json();
+    if (secret) {
+      var authData = { secret, id };
       localStorage.setItem("auth", JSON.stringify(authData));
       location.pathname = "/schedule";
     } else {
       // You can deal w/ errors here, likely password invalid or network error.
-      
     }
   }
-
-  $: console.log(login);
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
-  <div class="shadow-xl p-10 bg-white max-w-xl rounded">
+  <div class="shadow-xl text-center p-10 bg-white max-w-xl rounded">
     {#if !login}
-      <h1 class="text-4xl font-black mb-4">
-        Start using <span class="font-logo font-normal">DShift</span> today!
+      <h1 class="text-4xl text-center font-black mb-4">
+        Try <span class="font-logo font-normal">DShift</span> today!
       </h1>
     {:else}
-      <h1 class="text-4xl font-black mb-4">We are glad you are back!</h1>
+      <h1 class="text-4xl text-center font-black mb-4">Glad you are back!</h1>
     {/if}
     <div class="mb-4 relative">
       <input
@@ -106,6 +102,7 @@
           <span class="mt-2 text-center text-gray-600">
             <a
               on:click={() => login = true}
+              href="#"
               class="font-medium text-indigo-500 hover:text-indigo-400"
             >
               Login here
@@ -119,7 +116,11 @@
       <div class="my-2">
         <span class="mt-6 text-center text-gray-900"> Not a member yet? </span>
         <span class="mt-2 text-center text-gray-600">
-          <a on:click={() => login = false} class="text-indigo-500 hover:text-indigo-400">
+          <a 
+            on:click={() => login = false}
+            href="#"
+            class="text-indigo-500 hover:text-indigo-400"
+          >
             Register now!
           </a>
         </span>

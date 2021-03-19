@@ -7,6 +7,7 @@ exports.handler = async ({ body }) => {
   try {
     var { ref = null } = await createUser(name, password);
   } catch (error) {
+
     return {
       statusCode: 400,
       body: "Account already exists.",

@@ -1,11 +1,28 @@
 <script>
+  // import { authStore } from "$stores/auth"
   import Button from "$lib/Button.svelte";
   import Input from "$lib/Input.svelte";
   import ModalBox from "$lib/ModalBox.svelte";
+  import { useCreateEmployee } from "../../gql/employee"
+
+  let name, email, phone
   export let open = false;
+ 
+
+  const [ createEmployee, res ] = useCreateEmployee()
+
+
+  function handleSubmit(){
+    //TODO: fix query handling:
+    //ERR: cannot read property mutation of undefined cleient.js:54 
+    // createEmployee({
+    //   name, email, phone, id: $authStore.id
+    // })
+  }
 </script>
 
 <ModalBox {open}>
+  <form on:submit|preventDefault={handleSubmit}>
   <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
     <div class="sm:flex sm:items-start">
       <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -18,11 +35,13 @@
             addresses. You can always edit someone's details later, under People
             tab.
           </p>
-          <div class="input-box flex justify-between">
-            <Input id="name" label="Name*" />
-            <Input id="email" label="Email" />
-            <Input id="phone" label="Phone #" />
-          </div>
+          
+            <div class="input-box flex justify-between">
+              <Input id="name" label="Name*" bind:value={name} />
+              <Input id="email" label="Email" bind:value={email}/>
+              <Input id="phone" label="Phone #" bind:value={phone} />
+            </div>
+                
         </div>
       </div>
     </div>
@@ -30,8 +49,8 @@
   <div
     class="bg-gray-50 px-4 py-3 grid gap-2 sm:px-6 sm:flex sm:flex-row-reverse"
   >
-    <Button>Save</Button>
-    <Button type="outline" on:click={() => (open = !open)}>Cancel</Button>
+    <Button type="submit">Save</Button>
+    <Button type="reset" on:click={() => (open = !open)}>Cancel</Button>
     <!-- <button
         class="mx-2 bg-transparent shadow cursor-pointer hover:bg-indigo-500 focus:outline-none text-indigo-500 focus:border-indigo-500 font-main font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
         type="button"
@@ -40,6 +59,7 @@
         Cancel
       </button> -->
   </div>
+</form>
 </ModalBox>
 
 <style>

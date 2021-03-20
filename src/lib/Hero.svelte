@@ -31,31 +31,31 @@
   </div>
 </header>
 
-<main class="text-center bg-white relative">
-  <div class="flex  p-10">  
-    <div class="max-w-sm rounded overflow-hidden border-indigo-500 border-2 shadow-lg mx-5">
-      <img class="mx-auto pt-4" src="/images/minutes.svg" alt="Mountain">
+<main class="text-center bg-white">
+  <div class="flex justify-center p-10">  
+    <div class="max-w-sm rounded overflow-hidden border-indigo-500 border-2 shadow-lg mx-5 card">
+      <img class="mx-auto pt-4" src="/images/minutes.svg" alt="Schedule">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Schedule in minutes</div>
-        <p class="text-gray-700 text-base">
+        <p>
           Create the best schedule for your team, fast
         </p>
       </div>
     </div>
-    <div class="max-w-sm rounded overflow-hidden border-indigo-500 border-2 shadow-lg mx-5">
-      <img class="mx-auto pt-4" src="/images/mail.svg" alt="Mountain">
+    <div class="max-w-sm rounded overflow-hidden border-indigo-500 border-2 shadow-lg mx-5 card">
+      <img class="mx-auto pt-4" src="/images/mail.svg" alt="Mail">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Send it to team</div>
-        <p class="text-gray-700 text-base">
+        <p>
           Share the schedule you created in one click
         </p>
       </div>
     </div>
-    <div class="max-w-sm rounded overflow-hidden border-indigo-500 border-2 shadow-lg mx-5">
-      <img class="mx-auto pt-4" src="/images/person.svg" alt="Mountain">
+    <div class="max-w-sm rounded overflow-hidden border-indigo-500 border-2 shadow-lg mx-5 card">
+      <img class="mx-auto pt-4" src="/images/person.svg" alt="Person">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Create staff profiles</div>
-        <p class="text-gray-700 text-base">
+        <p>
           Add icon, position, and other team member info
         </p>
       </div>
@@ -76,13 +76,16 @@
 
 <style>
   svg {
-  position: absolute;
-  width: 100%;
-  height: 10vw;
-  /* set height to pixels if you want angle to change with screen width */
-}
+    position: absolute;
+    width: 100%;
+    height: 10vw;
+    /* set height to pixels if you want angle to change with screen width */
+  }
+  img {
+    width: 30%;
+  }
 
-img {
-  width: 30%;
-}
+  .card {
+    width: 30%;
+  }
 </style>

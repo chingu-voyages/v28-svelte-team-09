@@ -4,6 +4,7 @@
   import Button from "$lib/Button.svelte";
   import { employeesByUserID } from "$gql/employee";
   import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
+  import AppHeader from "$lib/AppHeader.svelte";
 
   let addEmployee = false;
   const employeesOp = employeesByUserID({ id: $authStore.id });
@@ -16,27 +17,10 @@
   $: console.log($employeesData);
 </script>
 
-<header class="flex row items-center justify-between px-4 lg:px-20 my-1">
-  <div class="flex items-center">
-    <img src="/images/logo.webp" alt="DShift logo" class="h-16" />
-    <h2 class="justify-self-start font-logo text-2xl font-medium">DShift</h2>
-  </div>
-  <nav>
-    <!--TODO:remove button. test button to try the add employee query -->
-    <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
+<AppHeader />
 
-    <Button>
-      <a
-        href="/"
-        on:click={() => {
-          localStorage.removeItem("auth");
-          $authStore = null;
-        }}
-      >
-        Logout</a
-      >
-    </Button>
-  </nav>
-</header>
-<!-- <Devmodal /> -->
-<AddEmployeeModal open={addEmployee} />
+<main>
+  <!--TODO:remove button. test button to try the add employee query -->
+  <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
+  <AddEmployeeModal open={addEmployee} />
+</main>

@@ -101,7 +101,7 @@
           </span>
           <span class="mt-2 text-center text-gray-600">
             <a
-              on:click={() => login = true}
+              on:click={() => (login = true)}
               href="#"
               class="font-medium text-indigo-500 hover:text-indigo-400"
             >
@@ -116,8 +116,8 @@
       <div class="my-2">
         <span class="mt-6 text-center text-gray-900"> Not a member yet? </span>
         <span class="mt-2 text-center text-gray-600">
-          <a 
-            on:click={() => login = false}
+          <a
+            on:click={() => (login = false)}
             href="#"
             class="text-indigo-500 hover:text-indigo-400"
           >
@@ -140,13 +140,13 @@
   .input.filled + .label {
     font-size: 0.75rem;
     transition: all 0.2s ease-out;
-    top: -1.6rem;
+    top: -1.4rem;
     color: #667eea;
   }
 
   .label {
     transition: all 0.2s ease-out;
-    top: -0.8rem;
+    top: -0.5rem;
     left: 0;
   }
 </style>

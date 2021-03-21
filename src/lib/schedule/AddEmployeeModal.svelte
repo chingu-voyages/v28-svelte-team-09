@@ -3,20 +3,18 @@
   import Button from "$lib/Button.svelte";
   import Input from "$lib/Input.svelte";
   import ModalBox from "$lib/ModalBox.svelte";
-  import { useCreateEmployee } from "../../gql/employee"
+  import { useCreateEmployee } from "$gql/employee.js"
 
   let name, email, phone
   export let open = false;
  
 
-  const [ createEmployee, res ] = useCreateEmployee()
-
+  $:  [ createEmployee, employeeStore ] = useCreateEmployee()
+  $: console.log($employeeStore)
 
   function handleSubmit(){
-    //TODO: fix query handling:
-    //ERR: cannot read property mutation of undefined client.js:54 
     createEmployee({
-      name, email, phone, id: $authStore.id
+      name, phone, email, id: $authStore.id
     })
   }
 </script>

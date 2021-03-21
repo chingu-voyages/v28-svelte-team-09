@@ -1,15 +1,16 @@
 <script>
-  // import { onMount } from "svelte"
   import { authStore } from "$stores/auth";
   import { employeesData  } from "$stores/employee";
   import Button from "$lib/Button.svelte";
   import { employeesByUserID } from "$gql/employee";
   import AddEmployeeModal from  "$lib/schedule/AddEmployeeModal.svelte"
 
-  let addEmployee
-  let employees = typeof window != "undefined" && employeesByUserID({id: $authStore.id})
-  employeesData.set(employees)
+  let addEmployee = false
+  const employeesQuery = employeesByUserID({id: $authStore.id})
   let src = "/images/1.png";
+
+  $: employeesQuery.data && employeesData.set(employeesQuery.data.result.employees)
+  $: console.log($employeesData)
 
 </script>
 

@@ -6,11 +6,16 @@
   import AddEmployeeModal from  "$lib/schedule/AddEmployeeModal.svelte"
 
   let addEmployee = false
+  let fetchedEmployees;
   const employeesQuery = employeesByUserID({id: $authStore.id})
-
+  console.log(employeesQuery)
   let src = "/images/logo.webp";
 
-  $: employeesQuery.data && employeesData.set(employeesQuery.data.result.employees)
+  $: if (employeesQuery.data) {
+    fetchedEmployees = [...employeesQuery.data.result.employees.data]
+    console.log("fetched", fetchedEmployees)
+    employeesData.set(fetchedEmployees)
+  }
   $: console.log($employeesData)
 
 </script>

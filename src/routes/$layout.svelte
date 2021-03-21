@@ -1,8 +1,9 @@
 <script>
   import "../global.css";
-  // import { initClient } from "$utils/client";
+  import { authStore } from "$stores/auth.js"
+  import { initClient } from "$utils/client";
   // TODO: init client w/ secret
-  // secret && initClient(secret)
+  $: $authStore.secret && initClient($authStore.secret)
 </script>
 
 <slot />

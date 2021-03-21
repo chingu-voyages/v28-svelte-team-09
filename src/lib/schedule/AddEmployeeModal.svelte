@@ -6,16 +6,25 @@
   import { useCreateEmployee } from "$gql/employee.js"
 
   let name, email, phone
+  let employeeAddError
   export let open = false;
  
 
   $:  [ createEmployee, employeeStore ] = useCreateEmployee()
   $: console.log($employeeStore)
+  $: if($employeeStore.error){
+    employeeAddError = $employeeStore.error
+  }
 
   function handleSubmit(){
     createEmployee({
       name, phone, email, id: $authStore.id
     })
+    
+    //TREAT CREATION ERR IF NECESSARY
+    if(employeeAddError) console.log("ERR: error creating employee")
+
+    open = !open
   }
 </script>
 

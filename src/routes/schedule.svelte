@@ -7,7 +7,8 @@
 
   let addEmployee = false
   const employeesQuery = employeesByUserID({id: $authStore.id})
-  let src = "/images/1.png";
+
+  let src = "/images/logo.webp";
 
   $: employeesQuery.data && employeesData.set(employeesQuery.data.result.employees)
   $: console.log($employeesData)

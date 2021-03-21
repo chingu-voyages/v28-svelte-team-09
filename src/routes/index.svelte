@@ -4,7 +4,6 @@
   import AuthForm from "$lib/AuthForm.svelte";
   import { authStore } from "$stores/auth";
   import Hero from "$lib/Hero.svelte";
-  let src = "/images/logo.webp";
 
   let open = false;
   let login = false;
@@ -15,7 +14,7 @@
 
 <header class="flex row items-center justify-between px-4 lg:px-20 my-1">
   <div class="flex items-center">
-    <img {src} alt="DShift logo" class="h-16" />
+    <img src="/images/logo.webp" alt="DShift logo" class="h-16" />
     <h2 class="justify-self-start font-logo text-2xl font-medium">DShift</h2>
   </div>
   <nav>

@@ -9,7 +9,7 @@
   let addEmployee
   // let employees = employeesByUserID({id: $authStore.id})
   // employeesData.set(employees)
-  let src = "/images/1.png";
+  let src = "/images/logo.webp";
 
 </script>
 

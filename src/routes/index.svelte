@@ -4,7 +4,7 @@
   import AuthForm from "$lib/AuthForm.svelte";
   import { authStore } from "$stores/auth";
   import Hero from "$lib/Hero.svelte";
-  let src = "/images/logo.png";
+  let src = "/images/logo.webp";
 
   let open = false;
   let login = false;

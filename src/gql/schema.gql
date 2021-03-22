@@ -1,14 +1,38 @@
 type User {
   name: String! @unique
-	employees: [Employee]! @relation
+  employees: [Employee]! @relation
+  areas: [Area] @relation
+  shifts: [Shift] @relation
+  companyName: String
 }
 
 type Employee {
-	name: String!
-	email: String
-	phone: String
-	manager: User!
+  name: String!
+  email: String
+  phone: String
+  address: String
+  manager: User!
+  hourlyWage: Int!
+  emergencyContact: EmergencyContact
 }
 
+type EmergencyContact @embedded {
+  name: String
+  phone: String
+}
 
+type Shift {
+  start: Date!
+  finish: Date!
+  creator: User!
+  break: Int
+  assignedTo: Employee # If null, default to open shift on client
+  notes: String
+  area: Area!
+}
 
+type Area {
+  name: String! @unique
+  company: User! @unique
+  color: String!
+}

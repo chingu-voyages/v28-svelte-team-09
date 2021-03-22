@@ -8,7 +8,6 @@
   let addEmployee = false
   let fetchedEmployees;
   const employeesQuery = employeesByUserID({id: $authStore.id})
-  console.log(employeesQuery)
   let src = "/images/logo.webp";
 
   $: if (employeesQuery.data) {

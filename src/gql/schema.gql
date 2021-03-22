@@ -8,7 +8,30 @@ type Employee {
 	email: String
 	phone: String
 	manager: User!
+	hourlyWage: Int!
 }
+
+type Area {
+  name: String!
+  color: String!
+}
+
+
+type Shift {
+	start: Date!
+	end: Date!
+	break: Int
+	notes: String
+	creator: User!
+	assignedTo: Employee!
+	area: Area!
+}
+
+
+
+
+
+
 
 
 

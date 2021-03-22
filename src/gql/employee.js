@@ -22,7 +22,7 @@ export const employeesByUserID = ({ id }) =>
        }
      }
     `,
-    { id }
+    { id },
   )
 
 export const  useCreateEmployee = () => 

@@ -1,4 +1,4 @@
-const { createUser, login } = require("./utils/auth.cjs");
+const { createUser, login } = require("./utils/auth");
 
 exports.handler = async ({ body }) => {
   // Signs up then logs in and responds with a token for the client to consume.
@@ -7,7 +7,6 @@ exports.handler = async ({ body }) => {
   try {
     var { ref = null } = await createUser(name, password);
   } catch (error) {
-
     return {
       statusCode: 400,
       body: "Account already exists.",

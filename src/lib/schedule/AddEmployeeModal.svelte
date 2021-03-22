@@ -8,23 +8,23 @@
   let name, email, phone;
   export let open = false;
 
-  $: [createEmployee, employeeOp] = useCreateEmployee();
-  $: console.log($employeeOp);
+  // $: [createEmployee, employeeOp] = useCreateEmployee();
+  // $: console.log($employeeOp);
 
-  $: if ($employeeOp.error) {
-    //TREAT CREATION ERR IF NECESSARY
-    // Handle errors here! Or you can move this entire block into handleSubmit
-    console.log("ERR: error creating employee");
-    open = !open;
-  }
+  // $: if ($employeeOp.error) {
+  //   //TREAT CREATION ERR IF NECESSARY
+  //   // Handle errors here! Or you can move this entire block into handleSubmit
+  //   console.log("ERR: error creating employee");
+  //   open = !open;
+  // }
 
   function handleSubmit() {
-    createEmployee({
-      name,
-      phone,
-      email,
-      id: $authStore.id,
-    });
+    // createEmployee({
+    //   name,
+    //   phone,
+    //   email,
+    //   id: $authStore.id,
+    // });
   }
 </script>
 

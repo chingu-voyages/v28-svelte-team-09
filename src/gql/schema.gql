@@ -32,7 +32,7 @@ type Shift {
 }
 
 type Area {
-  name: String! @unique
-  company: User! @unique
+  name: String!
+  company: User!
   color: String!
 }

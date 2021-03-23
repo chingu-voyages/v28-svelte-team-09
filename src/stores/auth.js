@@ -8,12 +8,7 @@ function checkPaths(arr) {
     location.pathname = `/signin`;
 }
 
-/** Initializes with auth details. Redirect check is only performed once for the app's init. */
-// export const authStore = writable(
-//   (typeof window != "undefined" && JSON.parse(localStorage.getItem("auth"))) ||
-//     checkPaths(["signin", "signup"])
-// );
-
+/** Initializes with auth details. */
 export const authStore = writable(
   (typeof window != "undefined" && JSON.parse(localStorage.getItem("auth")))
 );

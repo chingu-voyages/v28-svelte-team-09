@@ -4,19 +4,19 @@
   import Input from "$lib/Input.svelte";
   import ModalBox from "$lib/ModalBox.svelte";
   import { useCreateEmployee } from "$gql/employee.js";
-import { onMount } from "svelte";
 
-  let name, email, phone;
+
+  let name, email, phone, hourlyWage = 15;
   export let open = false;
 
   const [createEmployee, employeeOp] = useCreateEmployee();
-  console.log(employeeOp);
+  
 
-   if (employeeOp.error) {
+   if (employeeOp && employeeOp.error) {
     //TREAT CREATION ERR IF NECESSARY
     // Handle errors here! Or you can move this entire block into handleSubmit
     console.log("ERR: error creating employee");
-    open = !open;
+    
   }
 
   function handleSubmit() {
@@ -24,8 +24,10 @@ import { onMount } from "svelte";
       name,
       phone,
       email,
-      id: $authStore.id,
+      hourlyWage,
+      manager: $authStore.id,
     });
+    open = false;
   }
 </script>
 

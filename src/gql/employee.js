@@ -29,23 +29,36 @@ export const useCreateEmployee = () =>
       mutation CreateEmployee(
         $name: String!
         $phone: String
-        $email: String!
-        $id: ID!
+        $email: String
+        $manager: ID!
+        $hourlyWage: Int!
+        $contactName: String
+        $contactPhone: String
       ) {
         result: createEmployee(
           data: {
             name: $name
             phone: $phone
             email: $email
-            manager: { connect: $id }
+            manager: { connect: $manager }
+            hourlyWage: $hourlyWage
+            emergencyContact: {
+              name:  $contactName 
+              phone:  $contactPhone 
+            }
           }
         ) {
           _id
           name
           phone
           email
+          hourlyWage
           manager {
             name
+          }
+          emergencyContact{
+            name
+            phone
           }
         }
       }

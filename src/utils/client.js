@@ -44,7 +44,7 @@ export const queryOp = (gqlQuery, variables) =>
  * ```
  */
 export function mutationOp(gqlMutation, cbVarsObj = (variables) => variables) {
-  if (typeof window == "undefined") return;
+  if (typeof window == "undefined") return [null, null];
   const mutationStore = operationStore(gqlMutation);
   const mutateOp = mutation(mutationStore);
   /** Runs GQL mutation.

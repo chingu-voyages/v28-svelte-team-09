@@ -23,7 +23,7 @@
 <main class="text-center bg-white">
   <!--TODO:remove button. test button to try the add employee query -->
   <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
-  <AddEmployeeModal open={addEmployee} />
+  <AddEmployeeModal show={addEmployee} />
   <div><h1 class="my-44">Spacer</h1></div>
 </main>
 

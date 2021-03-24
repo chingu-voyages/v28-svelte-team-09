@@ -7,14 +7,12 @@
   import AppHeader from "$lib/AppHeader.svelte";
 
   let addEmployee = false;
-  let fetchedEmployees;
 
   //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
-  $: if (employeesOp.data) {
-    fetchedEmployees = [...employeesOp.data.result.employees.data];
-    employeesData.set([...employeesOp.data.result.employees.data]);
-    console.log("fetched", fetchedEmployees);
+  $: if ($employeesOp.data?.result != null) {
+    $employeesData = [...employeesOp.data.result.employees.data];
+    console.log("fetched", $employeesData);
   }
 </script>
 

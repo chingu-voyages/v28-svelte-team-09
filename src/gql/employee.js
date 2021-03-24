@@ -1,6 +1,23 @@
 import { queryOp, mutationOp } from "$utils/client";
 import { gql } from "@urql/svelte";
 
+const EMPLOYEE_FIELDS = gql`
+  fragment employeeFields on Employee {
+    _id
+    name
+    phone
+    email
+    hourlyWage
+    manager {
+      name
+    }
+    emergencyContact {
+      name
+      phone
+    }
+  }
+`;
+
 export const employeesByUserID = ({ id }) =>
   queryOp(
     gql`
@@ -8,17 +25,12 @@ export const employeesByUserID = ({ id }) =>
         result: findUserByID(id: $id) {
           employees {
             data {
-              _id
-              name
-              manager {
-                name
-              }
-              email
-              phone
+             ...employeeFields
             }
           }
         }
       }
+      ${EMPLOYEE_FIELDS}
     `,
     { id }
   );
@@ -42,25 +54,12 @@ export const useCreateEmployee = () =>
             email: $email
             manager: { connect: $manager }
             hourlyWage: $hourlyWage
-            emergencyContact: {
-              name:  $contactName 
-              phone:  $contactPhone 
-            }
+            emergencyContact: { name: $contactName, phone: $contactPhone }
           }
         ) {
-          _id
-          name
-          phone
-          email
-          hourlyWage
-          manager {
-            name
-          }
-          emergencyContact{
-            name
-            phone
-          }
+         ...employeeFields
         }
       }
+      ${EMPLOYEE_FIELDS}
     `
   );

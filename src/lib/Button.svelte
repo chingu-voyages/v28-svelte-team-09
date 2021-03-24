@@ -1,7 +1,8 @@
 <script>
-  export let shadow = false,
-    variant = "filled",
-    type = false;
+  export let variant = "filled",
+    shadow = false,
+    type = false,
+    className = "styled-btn";
 </script>
 
 <!--@component
@@ -11,7 +12,7 @@
 
 <!-- TODO: Add styles for input submit type if needed based on conditions -->
 <button
-  class="rounded font-semibold py-2 px-4 border border-indigo-500"
+  class="[ {className} ] rounded font-semibold py-2 px-4 border border-indigo-500"
   {type}
   class:filled={variant == "filled"}
   class:outline={variant == "outline"}

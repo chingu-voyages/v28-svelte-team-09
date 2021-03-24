@@ -64,13 +64,6 @@
     >
       <Button type="submit">Save</Button>
       <Button type="reset" on:click={() => (open = !open)}>Cancel</Button>
-      <!-- <button
-        class="mx-2 bg-transparent shadow cursor-pointer hover:bg-indigo-500 focus:outline-none text-indigo-500 focus:border-indigo-500 font-main font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
-        type="button"
-        on:click={() => (open = !open)}
-      >
-        Cancel
-      </button> -->
     </div>
   </form>
 </ModalBox>

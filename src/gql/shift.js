@@ -1,6 +1,32 @@
 import { queryOp, mutationOp } from "$utils/client";
 import { gql } from "@urql/svelte";
 
+const SHIFT_FIELDS = gql`
+  fragment shiftFields on Shift {
+    _id
+    start
+    finish
+    creator {
+      name
+    }
+    break
+    assignedTo {
+      name
+      emergencyContact {
+        name
+        phone
+      }
+    }
+    notes
+    area {
+      name
+      company {
+        name
+      }
+      color
+    }
+  }
+`;
 
 export const createShift = () => {
   mutationOp(
@@ -14,7 +40,7 @@ export const createShift = () => {
         $notes: String
         $areaName: String!
         $color: String!
-      ){
+      ) {
         createShift(
           data: {
             start: $start
@@ -25,37 +51,42 @@ export const createShift = () => {
             notes: $notes
             area: {
               create: {
-                name:  $areaName
+                name: $areaName
                 company: { connect: $creator }
                 color: $color
               }
             }
           }
-        ){
-          _id
-          start
-          finish
-          creator{
-            name
-          }
-          break
-          assignedTo{
-            name
-            emergencyContact{
-              name
-              phone
-            }
-          }
-          notes
-          area{
-            name
-            company {
-              name
-            }
-            color
-          }
+        ) {
+          ...shiftFields
         }
       }
+      ${SHIFT_FIELDS}
     `
-  )
-}
+  );
+};
+
+export const assignShift = () => {
+  mutationOp(
+    gql`
+      mutation UpdateShift(
+        $employeeID: ID!
+        $shiftID: ID!
+        $start: Date!
+        $finish: Date!
+      ) {
+        result: updateShift(
+          id: $shiftID
+          data: {
+            start: $start
+            finish: $finish
+            assignedTo: { connect: $employeeID }
+          }
+        ) {
+          ...shiftFields
+        }
+      }
+      ${SHIFT_FIELDS}
+    `
+  );
+};

@@ -56,6 +56,6 @@ export function mutationOp(gqlMutation, cbVarsObj = (variables) => variables) {
   const setMutation =
     typeof window != "undefined" // fix: SSR env errors, mutation cannot run in SSR
       ? (variables) => mutateOp(cbVarsObj(variables))
-      : () => {};
+      : () => new Promise((resolve) => resolve(mutationStore));
   return [setMutation, mutationStore];
 }

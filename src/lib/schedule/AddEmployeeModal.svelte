@@ -8,6 +8,7 @@
 
   let name, email, phone, hourlyWage = 15;
   export let open = false;
+  let clickOutside = true;
 
   const [createEmployee, employeeOp] = useCreateEmployee();
   
@@ -31,7 +32,7 @@
   }
 </script>
 
-<ModalBox {open}>
+<ModalBox {open} {clickOutside}>
   <form on:submit|preventDefault={handleSubmit}>
     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
       <div class="sm:flex sm:items-start">

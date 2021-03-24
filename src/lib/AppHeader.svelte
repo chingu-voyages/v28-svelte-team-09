@@ -1,13 +1,18 @@
 <script>
   import Button from "$lib/Button.svelte";
   import { authStore } from "$stores/auth";
+  import { page } from "$stores/pages";
 </script>
 
-<header class="flex row items-center justify-between px-4 lg:px-20 my-1">
+<header class="flex row items-center justify-between px-4 lg:px-20">
   <!-- Logo -->
   <div class="flex items-center">
     <img src="/images/logo.webp" alt="DShift logo" class="h-16" />
-    <h2 class="justify-self-start font-logo text-2xl font-medium">DShift</h2>
+    <h2 class="font-logo text-2xl font-medium">DShift</h2>
+    <div class="mx-5">
+      <a class="text-lg font-semibold p-5" class:selected="{$page === '/schedule' ? 'selected' : ''}" on:click={() => page.update(() => '/schedule')} href="/schedule">Schedule</a>
+      <a class="text-lg font-semibold p-5" class:selected="{$page === '/people' ? 'selected' : ''}" on:click={() => page.update(() => '/people')} href="/people">People</a>
+    </div>
   </div>
 
   <nav>
@@ -24,3 +29,11 @@
     </Button>
   </nav>
 </header>
+
+<style>
+  .selected {
+		background-color: #a3bffa;
+		color: white;
+    padding: 1.25rem;
+	}
+</style>

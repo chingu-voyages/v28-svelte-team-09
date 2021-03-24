@@ -32,7 +32,7 @@
   }
 </script>
 
-<ModalBox {open} {clickOutside}>
+<ModalBox bind:open {clickOutside}>
   <form on:submit|preventDefault={handleSubmit}>
     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
       <div class="sm:flex sm:items-start">

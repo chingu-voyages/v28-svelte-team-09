@@ -39,6 +39,6 @@
 
   <!--TODO:remove button. test button to try the add employee query -->
   <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
-  <AddEmployeeModal show={addEmployee} />
+  <AddEmployeeModal bind:open={addEmployee} />
   <div><h1 class="my-44">Spacer</h1></div>
 </main>

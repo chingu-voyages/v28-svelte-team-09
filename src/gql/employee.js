@@ -25,7 +25,7 @@ export const employeesByUserID = ({ id }) =>
         result: findUserByID(id: $id) {
           employees {
             data {
-             ...employeeFields
+              ...employeeFields
             }
           }
         }
@@ -57,9 +57,22 @@ export const useCreateEmployee = () =>
             emergencyContact: { name: $contactName, phone: $contactPhone }
           }
         ) {
-         ...employeeFields
+          ...employeeFields
         }
       }
       ${EMPLOYEE_FIELDS}
     `
   );
+
+export const useDeleteEmployee = () => {
+  mutationOp(
+    gql`
+      mutation DeleteEmployee($id: ID!) {
+        deleteEmployee(id: $id) {
+          _id
+          name
+        }
+      }
+    `
+  );
+};

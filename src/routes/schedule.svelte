@@ -25,11 +25,16 @@
       Nemesis Coffee
     </h3>
     <!-- TODO: Styles and date picker (?) -->
-    <div class="space-x-4">
-      <button>{"<"}</button><button>
+    <div class="space-x-2">
+      <button class="bg-indigo-100 px-5 py-1 rounded-l-md font-semibold text-lg"
+        >{"<"}</button
+      ><button class="bg-indigo-100 px-5 py-1 font-semibold text-lg">
         <!-- TODO: {curDay} -->
         01 Mar</button
-      ><button>{">"}</button>
+      ><button
+        class="bg-indigo-100 px-5 py-1 rounded-r-md font-semibold text-lg"
+        >{">"}</button
+      >
     </div>
     <Button
       >Publish Shifts

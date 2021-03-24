@@ -14,7 +14,7 @@
 
   const [createEmployee, employeeOp] = useCreateEmployee();
 
-  if ($employeeOp.error) {
+  $: if ($employeeOp.error) {
     //TREAT CREATION ERR IF NECESSARY
     // Handle errors here! Or you can move this entire block into handleSubmit
     console.log("ERR: error creating employee");

@@ -19,31 +19,45 @@
 <AppHeader />
 
 <main class="text-center bg-white">
-  <section class="m-3 flex flex-col items-center space-y-3">
-    <h3 class="bg-indigo-100 w-1/2 font-semibold p-2 text-lg rounded-md">
+  <section
+    class="m-3 flex flex-col items-center space-y-2 md:grid md:space-y-0 md:grid-cols-3 md:justify-items-start"
+  >
+    <h3
+      class="bg-indigo-100 w-11/12 font-semibold p-2 text-lg rounded-md md:px-8 md:whitespace-nowrap md:w-auto"
+    >
       <!-- TODO: {companyName} -->
       Nemesis Coffee
     </h3>
     <!-- TODO: Styles and date picker (?) -->
-    <div class="space-x-2">
-      <button class="bg-indigo-100 px-5 py-1 rounded-l-md font-semibold text-lg"
+    <div class="space-x-2 w-11/12 md:w-auto flex m-auto">
+      <button
+        class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"
         >{"<"}</button
-      ><button class="bg-indigo-100 px-5 py-1 font-semibold text-lg">
+      ><button
+        class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto"
+      >
         <!-- TODO: {curDay} -->
         01 Mar</button
       ><button
-        class="bg-indigo-100 px-5 py-1 rounded-r-md font-semibold text-lg"
+        class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
         >{">"}</button
       >
     </div>
-    <Button
+    <Button className="publish-btn"
       >Publish Shifts
       <!-- TODO: {numShifts}, disabled styles & state -->
     </Button>
   </section>
+  <section />
 
   <!--TODO:remove button. test button to try the add employee query -->
   <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
   <AddEmployeeModal bind:open={addEmployee} />
   <div><h1 class="my-44">Spacer</h1></div>
 </main>
+
+<style>
+  section :global(.publish-btn) {
+    @apply w-11/12 md:ml-auto md:w-auto;
+  }
+</style>

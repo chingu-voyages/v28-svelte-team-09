@@ -26,7 +26,7 @@ export const initClient = (secret) =>
  * @param {object} [variables]
  */
 export const queryOp = (gqlQuery, variables) =>
-  typeof window != "undefined"
+  typeof window != "undefined" // fix: SSR env errors
     ? query(operationStore(gqlQuery, variables))
     : operationStore(gqlQuery, variables);
 
@@ -47,14 +47,11 @@ export const queryOp = (gqlQuery, variables) =>
  */
 export function mutationOp(gqlMutation, cbVarsObj = (variables) => variables) {
   const mutationStore = operationStore(gqlMutation);
-  if (typeof window == "undefined") return [null, mutationStore];
   const mutateOp = mutation(mutationStore);
   /** Runs GQL mutation.
    * @param {object} variables GraphQL variables. Passed through cbVarsObj() for restructuring.
+   * * Must be called in browser env, errors in SSR
    */
-  function setMutation(variables) {
-    return mutateOp(cbVarsObj(variables));
-  }
-
-  return [setMutation, mutationStore];
+  const setMutation = (variables) => mutateOp(cbVarsObj(variables));
+  return [typeof window == "undefined" && setMutation, mutationStore];
 }

@@ -4,8 +4,7 @@
 
 @layer base {
   body {
-    @apply font-main text-indigo-500;
-    letter-spacing: 1px;
+    @apply font-main text-indigo-500 tracking-wide;
   }
   input[type="text"],
   input[type="password"] {

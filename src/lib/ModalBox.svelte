@@ -8,7 +8,7 @@
 </script>
 
 <!-- @component
-@open Modal open or closed. Decided internally with `clickOutside`, use `bind` to stay synced.
+@open Modal open or closed. Decided internally w/ `clickOutside`, remember to use `bind` to stay synced.
 @clickOutside enable closing on clickOutside
 -->
 

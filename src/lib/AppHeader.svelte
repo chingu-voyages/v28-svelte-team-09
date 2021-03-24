@@ -32,8 +32,7 @@
 
 <style>
   .selected {
-		background-color: #a3bffa;
-		color: white;
+		background-color: #e0e7ff;
     padding: 1.25rem;
 	}
 </style>

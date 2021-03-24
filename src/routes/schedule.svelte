@@ -7,22 +7,38 @@
   import AppHeader from "$lib/AppHeader.svelte";
 
   let addEmployee = false;
-  let fetchedEmployees;
 
   //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
-  $: if (employeesOp.data) {
-    fetchedEmployees = [...employeesOp.data.result.employees.data];
-    employeesData.set([...employeesOp.data.result.employees.data]);
-    console.log("fetched", fetchedEmployees);
+  $: if ($employeesOp.data?.result != null) {
+    $employeesData = [...$employeesOp.data.result.employees.data];
+    console.log("fetched", $employeesData);
   }
 </script>
 
 <AppHeader />
 
 <main class="text-center bg-white">
+  <section class="m-3 flex flex-col items-center space-y-3">
+    <h3 class="bg-indigo-100 w-1/2 font-semibold p-2 text-lg rounded-md">
+      <!-- TODO: {companyName} -->
+      Nemesis Coffee
+    </h3>
+    <!-- TODO: Styles and date picker (?) -->
+    <div class="space-x-4">
+      <button>{"<"}</button><button>
+        <!-- TODO: {curDay} -->
+        01 Mar</button
+      ><button>{">"}</button>
+    </div>
+    <Button
+      >Publish Shifts
+      <!-- TODO: {numShifts}, disabled styles & state -->
+    </Button>
+  </section>
+
   <!--TODO:remove button. test button to try the add employee query -->
   <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
-  <AddEmployeeModal show={addEmployee} />
+  <AddEmployeeModal bind:open={addEmployee} />
   <div><h1 class="my-44">Spacer</h1></div>
 </main>

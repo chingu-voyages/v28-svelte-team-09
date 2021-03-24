@@ -3,22 +3,18 @@
   import { authStore } from "$stores/auth";
   import { employeesData } from "$stores/employee";
   import { employeesByUserID } from "$gql/employee";
-  import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
-
-  let fetchedEmployees;
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
-  $: if (employeesOp.data) {
-    fetchedEmployees = [...employeesOp.data.result.employees.data];
-    employeesData.set([...employeesOp.data.result.employees.data]);
+  $: if ($employeesOp.data) {
+    $employeesData = [...$employeesOp.data.result.employees.data];
   }
 </script>
 
 <AppHeader />
 
 <main class="text-center bg-white">
-  {#if fetchedEmployees}
-    {#each fetchedEmployees as employee}
+  {#if $employeesData}
+    {#each $employeesData as employee}
       <div>
         <h1 class="my-12 text-xl">{employee.name}</h1>
         <p>{employee.email}</p>

@@ -22,11 +22,13 @@ export const initClient = (secret) =>
     },
   });
 
+// * @urql/svelte runs in browser env by default, below funcs bypass SSR env errors w/ `query` / `mutation`
+
 /** Creates a query for a component to consume, fires as soon as the component mounts.
  * @param {object} [variables]
  */
 export const queryOp = (gqlQuery, variables) =>
-  typeof window != "undefined"
+  typeof window != "undefined" // fix: SSR env errors, query cannot run in SSR
     ? query(operationStore(gqlQuery, variables))
     : operationStore(gqlQuery, variables);
 
@@ -47,14 +49,13 @@ export const queryOp = (gqlQuery, variables) =>
  */
 export function mutationOp(gqlMutation, cbVarsObj = (variables) => variables) {
   const mutationStore = operationStore(gqlMutation);
-  if (typeof window == "undefined") return [null, mutationStore];
   const mutateOp = mutation(mutationStore);
   /** Runs GQL mutation.
    * @param {object} variables GraphQL variables. Passed through cbVarsObj() for restructuring.
    */
-  function setMutation(variables) {
-    return mutateOp(cbVarsObj(variables));
-  }
-
+  const setMutation =
+    typeof window != "undefined" // fix: SSR env errors, mutation cannot run in SSR
+      ? (variables) => mutateOp(cbVarsObj(variables))
+      : () => new Promise((resolve) => resolve(mutationStore));
   return [setMutation, mutationStore];
 }

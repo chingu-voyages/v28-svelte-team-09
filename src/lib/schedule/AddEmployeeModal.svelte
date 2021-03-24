@@ -5,19 +5,19 @@
   import ModalBox from "$lib/ModalBox.svelte";
   import { useCreateEmployee } from "$gql/employee.js";
 
-
-  let name, email, phone, hourlyWage = 15;
   export let open = false;
+  let name,
+    email,
+    phone,
+    hourlyWage = 15;
   let clickOutside = true;
 
   const [createEmployee, employeeOp] = useCreateEmployee();
-  
 
-   if (employeeOp && employeeOp.error) {
+  if ($employeeOp.error) {
     //TREAT CREATION ERR IF NECESSARY
     // Handle errors here! Or you can move this entire block into handleSubmit
     console.log("ERR: error creating employee");
-    
   }
 
   function handleSubmit() {
@@ -32,7 +32,7 @@
   }
 </script>
 
-<ModalBox {open} {clickOutside}>
+<ModalBox bind:open {clickOutside}>
   <form on:submit|preventDefault={handleSubmit}>
     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
       <div class="sm:flex sm:items-start">
@@ -50,7 +50,7 @@
               People tab.
             </p>
 
-            <div class="input-box flex justify-between">
+            <div class="[ input-box ] flex justify-between">
               <Input id="name" label="Name*" bind:value={name} />
               <Input id="email" label="Email" bind:value={email} />
               <Input id="phone" label="Phone #" bind:value={phone} />
@@ -64,13 +64,6 @@
     >
       <Button type="submit">Save</Button>
       <Button type="reset" on:click={() => (open = !open)}>Cancel</Button>
-      <!-- <button
-        class="mx-2 bg-transparent shadow cursor-pointer hover:bg-indigo-500 focus:outline-none text-indigo-500 focus:border-indigo-500 font-main font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
-        type="button"
-        on:click={() => (open = !open)}
-      >
-        Cancel
-      </button> -->
     </div>
   </form>
 </ModalBox>

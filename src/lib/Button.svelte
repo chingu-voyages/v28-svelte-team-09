@@ -2,7 +2,7 @@
   export let variant = "filled",
     shadow = false,
     type = false,
-    className = "styled-btn";
+    className = "theme-btn";
 </script>
 
 <!--@component
@@ -11,6 +11,7 @@
 -->
 
 <!-- TODO: Add styles for input submit type if needed based on conditions -->
+<!-- TODO: Disabled styles -->
 <button
   class="[ {className} ] rounded font-semibold py-2 px-4 border border-indigo-500"
   {type}

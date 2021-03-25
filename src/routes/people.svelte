@@ -4,11 +4,21 @@
   import { employeesData } from "$stores/employee";
   import { employeesByUserID } from "$gql/employee";
   import Button from "$lib/Button.svelte";
+  import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
+  import ViewEmployeeModal from "$lib/people/ViewEmployeeModal.svelte";
+  import ModalBox from "$lib/ModalBox.svelte";
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: if ($employeesOp.data) {
     $employeesData = [...$employeesOp.data.result.employees.data];
-  }
+  };
+
+  let addEmployee = false;
+  let viewEmployee = false;
+  let clickOutside = true;
+  $: if (open == true && typeof login)
+    !(clickOutside = false) && setTimeout(() => (clickOutside = true));
+
 </script>
 
 <AppHeader />
@@ -25,10 +35,11 @@
       People
     </h3>
     <!-- add search on keyUp functionality -->
-    <input class="border border-gray-400 appearance-none rounded px-2 my-2 mr-2 py-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500" placeholder="Search People ...">
-    <Button
+    <input class="border border-gray-400 appearance-none rounded w-5/8 px-2 my-2 mr-2 py-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500" placeholder="Search People ...">
+    <Button on:click={() => (addEmployee = true)}
       >Add People
     </Button>
+    <AddEmployeeModal bind:open={addEmployee} />
   </div>
   <div class="flex justify-between px-3 md:px-0">
     <h3 class="font-semibold text-lg">
@@ -49,9 +60,16 @@
         </div>
         <div class="flex items-center">
           <div class="mx-3">
-            <Button variant="outline"
-            >View
-          </Button>
+            <Button variant="outline" on:click={() => (viewEmployee = true)}
+              >View
+            </Button>
+            <!-- Need to work on it -->
+            <ModalBox {clickOutside} bind:open={viewEmployee}>
+              <!-- Add from ViewEmployeeModal -->
+              <ViewEmployeeModal />
+              <h1 class=" px-3 text-md">{employee.name}</h1>
+              <h1 class=" px-3 text-md">{employee.email}</h1>
+            </ModalBox>
           </div>
           <Button variant="outline"
             >Edit

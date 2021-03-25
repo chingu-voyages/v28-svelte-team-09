@@ -12,14 +12,14 @@
   const [createEmployee, employeeOp] = useCreateEmployee();
   let employeesToAdd = [newEmployee()];
 
+  //TREAT CREATION ERR IF NECESSARY
+  $: if ($employeeOp.error)
+    console.log("ERR: error creating employee", $employeeOp.error);
+
   $: clickFix = employeesToAdd.length;
   $: clickFix && // fix: clickOutside bug when removing an employee
     !(clickOutside = false) &&
     setTimeout(() => (clickOutside = true));
-
-  //TREAT CREATION ERR IF NECESSARY
-  $: if ($employeeOp.error)
-    console.log("ERR: error creating employee", $employeeOp.error);
 
   function newEmployee() {
     return {

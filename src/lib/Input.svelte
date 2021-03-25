@@ -1,7 +1,8 @@
 <script>
-  export let id = "";
-  export let label = "";
-  export let value = "";
+  export let id = "",
+    label = "",
+    value = "",
+    required = false;
 
   const labelHandler = (e) => e.target.previousElementSibling.focus();
 </script>
@@ -20,6 +21,7 @@
     {id}
     type="text"
     aria-labelledby="{id}-label"
+    {required}
   />
   <span
     on:click={labelHandler}

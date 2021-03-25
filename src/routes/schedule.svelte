@@ -48,7 +48,35 @@
       <!-- TODO: {numShifts}, disabled styles & state -->
     </Button>
   </section>
-  <section />
+
+  <!-- TODO: Desktop grid & each block + shift display -->
+  <section
+    class="grid grid-cols-2 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
+  >
+    <div class="flex space-x-5 justify-center items-center bg-white p-4">
+      <img
+        class="rounded-full shadow-md"
+        src="/images/icons/themed-user-circle-solid.svg"
+        width="55"
+        alt="default user"
+      />
+      <div>
+        <h3 class="font-semibold">Open/Empty Shifts</h3>
+        <!-- TODO: {openTime}Hrs-->
+        <p class="text-indigo-100">7.00Hrs</p>
+      </div>
+    </div>
+    <div class="bg-white p-2 flex items-center justify-center">
+      <button class="rounded-sm focus:transition-colors px-1"
+        ><img
+          src="/images/icons/themed-plus-solid.svg"
+          width="40"
+          height="40"
+          alt="plus icon"
+        /></button
+      >
+    </div>
+  </section>
 
   <!--TODO:remove button. test button to try the add employee query -->
   <Button on:click={() => (addEmployee = true)}>Add Employee</Button>

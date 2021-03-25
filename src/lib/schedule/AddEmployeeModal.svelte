@@ -72,8 +72,18 @@
                 class="[ input-box ] flex justify-between items-center mb-4"
               >
                 <Input required id="name" label="Name*" bind:value={name} />
-                <Input id="email" label="Email" bind:value={email} />
-                <Input id="phone" label="Phone #" bind:value={phone} />
+                <Input
+                  id="email"
+                  label="Email"
+                  type="email"
+                  bind:value={email}
+                />
+                <Input
+                  id="phone"
+                  label="Phone #"
+                  type="tel"
+                  bind:value={phone}
+                />
                 <button
                   type="button"
                   class="h-4 focus:ring-red-500 rounded"
@@ -82,7 +92,8 @@
                       ? (employeesToAdd = employeesToAdd.splice(i, 1) && [
                           ...employeesToAdd,
                         ])
-                      : employeesToAdd[0].name && reset()}
+                      : Object.values(employeesToAdd[i]).some((v) => v) &&
+                        reset()}
                 >
                   <img
                     width="15"

@@ -90,3 +90,27 @@ export const assignShift = () => {
     `
   );
 };
+
+export const updateArea = () => {
+  mutationOp(
+    gql`
+      mutation UpdateArea(
+        $areaId: ID!
+        $name: String!
+        $color: String!
+        $company: ID
+      ) {
+        updateArea(
+          id: $areaId
+          data: { name: $name, color: $color, company: { connect: $company } }
+        ) {
+          name
+          color
+          company {
+            name
+          }
+        }
+      }
+    `
+  );
+};

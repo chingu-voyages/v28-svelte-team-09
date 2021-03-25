@@ -1,8 +1,16 @@
 <script>
+  import { onMount } from "svelte";
+
   export let id = "",
     label = "",
     value = "",
-    required = false;
+    required = false,
+    type = "text";
+
+  let inputEl;
+  onMount(() => {
+    inputEl.type = type; // dynamically set input type
+  });
 
   const labelHandler = (e) => e.target.previousElementSibling.focus();
 </script>
@@ -15,6 +23,7 @@
 
 <div class="relative overflow-hidden">
   <input
+    bind:this={inputEl}
     class="[ input ] border border-gray-400 shadow-md appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
     bind:value
     class:filled={value}

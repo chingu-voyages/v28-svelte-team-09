@@ -19,7 +19,7 @@
   </div>
   <nav>
     <Button on:click={() => (open = true) && (login = true)}>Login</Button>
-    <Button on:click={() => (open = true) && (login = false)} type="outline"
+    <Button on:click={() => (open = true) && (login = false)} variant="outline"
       >Register</Button
     >
   </nav>

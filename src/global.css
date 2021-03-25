@@ -10,4 +10,7 @@
   input[type="password"] {
     color: black;
   }
+  button {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all;
+  }
 }

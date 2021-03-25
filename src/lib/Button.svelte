@@ -1,18 +1,22 @@
 <script>
-  export let shadow = false;
-  export let type = "filled";
+  export let variant = "filled",
+    shadow = false,
+    type = false,
+    className = "theme-btn";
 </script>
 
 <!--@component
-@type ="outline" for variant
+@variant `="outline"` for variant
 @shadow box-shadow
 -->
 
 <!-- TODO: Add styles for input submit type if needed based on conditions -->
+<!-- TODO: Disabled styles -->
 <button
-  class="rounded font-semibold py-2 px-4 border border-indigo-500 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-  class:filled={type == "filled"}
-  class:outline={type == "outline"}
+  class="[ {className} ] rounded font-semibold py-2 px-4 border border-indigo-500"
+  {type}
+  class:filled={variant == "filled"}
+  class:outline={variant == "outline"}
   class:shadow-md={shadow}
   on:click><slot /></button
 >

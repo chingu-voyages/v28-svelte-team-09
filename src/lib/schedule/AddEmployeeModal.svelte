@@ -63,7 +63,9 @@
       class="bg-gray-50 px-4 py-3 grid gap-2 sm:px-6 sm:flex sm:flex-row-reverse"
     >
       <Button type="submit">Save</Button>
-      <Button type="reset" on:click={() => (open = !open)}>Cancel</Button>
+      <Button type="reset" variant="outline" on:click={() => (open = !open)}
+        >Cancel</Button
+      >
     </div>
   </form>
 </ModalBox>

@@ -16,11 +16,6 @@
   $: if ($employeeOp.error)
     console.log("ERR: error creating employee", $employeeOp.error);
 
-  $: clickFix = employeesToAdd.length;
-  $: clickFix && // fix: clickOutside bug when removing an employee
-    !(clickOutside = false) &&
-    setTimeout(() => (clickOutside = true));
-
   function newEmployee() {
     return {
       name: "",

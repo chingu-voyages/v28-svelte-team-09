@@ -1,4 +1,5 @@
 <script>
+  import { clickOutside } from "$utils/actions";
   import { fade } from "svelte/transition";
 
   export let open;
@@ -7,6 +8,10 @@
   let selectedIndex;
   let highlighted = 0;
   $: if (open) selectedIndex && (highlighted = selectedIndex); // highlight last selected item
+  let listboxEl;
+  let outside = false;
+  $: if (open) setTimeout(() => (outside = true));
+  else outside = false;
 </script>
 
 <div>
@@ -28,12 +33,14 @@
         if (open) {
           switch (key) {
             case "ArrowDown":
-              highlighted == employees.length
+              highlighted == employees.length - 1
                 ? (highlighted = 0)
                 : ++highlighted;
               break;
             case "ArrowUp":
-              highlighted ? --highlighted : (highlighted = 0);
+              highlighted
+                ? --highlighted
+                : (highlighted = employees.length - 1);
               break;
             case "Escape":
               open = !open;
@@ -44,6 +51,7 @@
           }
         }
       }}
+      bind:this={listboxEl}
     >
       <span class="flex items-center">
         <span class="ml-3 block truncate">
@@ -74,7 +82,8 @@
 
     {#if open}
       <ul
-        on:click|stopPropagation
+        use:clickOutside={{ enabled: outside, cb: () => (open = false) }}
+        on:click|stopPropagation={() => listboxEl.focus()}
         transition:fade={{ duration: 100 }}
         class="absolute mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
         tabindex="-1"

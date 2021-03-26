@@ -3,8 +3,7 @@
     shadow = false,
     type = false,
     className = "";
-  let tw;
-  export { tw as class };
+  export { className as class };
 </script>
 
 <!--@component
@@ -16,7 +15,7 @@ Our themed button. Able to pass in classes including Tailwind.
 <!-- TODO: Add styles for input submit type if needed based on conditions -->
 <!-- TODO: Disabled styles -->
 <button
-  class="[ {className} themed-btn ] {tw}"
+  class="{className} themed-btn"
   {type}
   class:themed-btn-filled={variant == "filled"}
   class:themed-btn-outline={variant == "outline"}

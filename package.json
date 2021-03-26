@@ -7,13 +7,13 @@
     "start": "svelte-kit start"
   },
   "dependencies": {
-    "@urql/svelte": "^1.2.0"
+    "@urql/svelte": "^1.2.0",
+    "dayjs": "^1.10.4"
   },
   "devDependencies": {
     "@sveltejs/adapter-netlify": "1.0.0-next.3",
     "@sveltejs/kit": "1.0.0-next.49",
     "@tailwindcss/jit": "^0.1.10",
-    "dayjs": "^1.10.4",
     "faunadb": "^4.1.1",
     "graphql": "^15.5.0",
     "postcss-load-config": "^3.0.1",

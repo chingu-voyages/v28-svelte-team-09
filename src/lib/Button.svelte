@@ -8,6 +8,7 @@
 </script>
 
 <!--@component
+Our themed button. Able to pass in classes including Tailwind.
 @variant `="outline"` for variant
 @shadow box-shadow
 -->

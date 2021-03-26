@@ -94,7 +94,6 @@
       <Button type="reset" variant="outline" on:click={() => (open = !open)}
         >Cancel</Button
       >
-
     </div>
 </ModalBox>
 <EditEmployeeModal bind:open={editEmployee} />

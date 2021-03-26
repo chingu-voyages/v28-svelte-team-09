@@ -8,6 +8,7 @@ const EMPLOYEE_FIELDS = gql`
     phone
     email
     hourlyWage
+    address
     manager {
       name
     }
@@ -42,6 +43,7 @@ export const useCreateEmployee = () =>
         $name: String!
         $phone: String
         $email: String
+        $address: String
         $manager: ID!
         $hourlyWage: Int!
         $contactName: String
@@ -54,6 +56,7 @@ export const useCreateEmployee = () =>
             email: $email
             manager: { connect: $manager }
             hourlyWage: $hourlyWage
+            address: $address
             emergencyContact: { name: $contactName, phone: $contactPhone }
           }
         ) {

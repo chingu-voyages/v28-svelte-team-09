@@ -4,9 +4,9 @@
   import { employeesData } from "$stores/employee";
   import { employeesByUserID } from "$gql/employee";
   import Button from "$lib/Button.svelte";
-  import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
+  import AddPeopleModal from "$lib/people/AddPeopleModal.svelte";
   import ViewEmployeeModal from "$lib/people/ViewEmployeeModal.svelte";
-  import ModalBox from "$lib/ModalBox.svelte";
+  import EditEmployeeModal from "$lib/people/EditEmployeeModal.svelte";
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: if ($employeesOp.data) {
@@ -15,10 +15,8 @@
 
   let addEmployee = false;
   let viewEmployee = false;
-  let clickOutside = true;
-  $: if (open == true && typeof login)
-    !(clickOutside = false) && setTimeout(() => (clickOutside = true));
-
+  let editEmployee = false;
+  let employeeNum;
 </script>
 
 <AppHeader />
@@ -39,7 +37,7 @@
     <Button on:click={() => (addEmployee = true)}
       >Add People
     </Button>
-    <AddEmployeeModal bind:open={addEmployee} />
+    <AddPeopleModal bind:open={addEmployee} />
   </div>
   <div class="flex justify-between px-3 md:px-0">
     <h3 class="font-semibold text-lg">
@@ -50,7 +48,7 @@
     </h3>
   </div>
 
-  {#each $employeesData as employee}
+  {#each $employeesData as employee, i}
     <div class="px-3 md:px-0">
       <hr class="my-3 border-indigo-500	border-1" />
       <div class="flex justify-between">
@@ -60,22 +58,17 @@
         </div>
         <div class="flex items-center">
           <div class="mx-3">
-            <Button variant="outline" on:click={() => (viewEmployee = true)}
+            <Button variant="outline" on:click={() => {viewEmployee = true; employeeNum = i}}
               >View
             </Button>
-            <!-- Need to work on it -->
-            <ModalBox {clickOutside} bind:open={viewEmployee}>
-              <!-- Add from ViewEmployeeModal -->
-              <ViewEmployeeModal />
-              <h1 class=" px-3 text-md">{employee.name}</h1>
-              <h1 class=" px-3 text-md">{employee.email}</h1>
-            </ModalBox>
           </div>
-          <Button variant="outline"
+          <Button variant="outline" on:click={() => (editEmployee = true)}
             >Edit
           </Button>
         </div>
       </div>
     </div>
   {/each}
+  <ViewEmployeeModal bind:open={viewEmployee} data={$employeesData[employeeNum]} />
+  <EditEmployeeModal bind:open={editEmployee} />
 </main>

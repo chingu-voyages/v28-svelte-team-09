@@ -45,7 +45,7 @@ export const useCreateEmployee = () =>
         $email: String
         $address: String
         $manager: ID!
-        $hourlyWage: Int!
+        $hourlyWage: Int
         $contactName: String
         $contactPhone: String
       ) {

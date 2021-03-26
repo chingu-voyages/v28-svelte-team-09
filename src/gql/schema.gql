@@ -12,7 +12,7 @@ type Employee {
   phone: String
   address: String
   manager: User!
-  hourlyWage: Int!
+  hourlyWage: Int
   emergencyContact: EmergencyContact
 }
 

@@ -48,22 +48,24 @@
           >
             Add new Person
           </h3>
-          <div class="mt-2">
+          <div>
+            <h3 class="mt-3">Name and Rate</h3>
             <div class="[ input-box ] flex justify-between">
               <Input id="name" label="Name" bind:value={name} />
-              <Input id="email" label="Email" bind:value={email} />
+              <Input id="hourlyWage" label="Hourly rate" bind:value={hourlyWage} />
             </div>
-            <div class="[ input-box ] flex justify-between mt-3">
-              <Input id="address" label="Address" bind:value={address} />
+            <h3 class="mt-3">Contact Information</h3>
+            <div class="[ input-box ] flex justify-between">
+              <Input id="email" label="Email" bind:value={email} />
               <Input id="phone" label="Phone #" bind:value={phone} />
             </div>
-            <h3 class="mt-3">Emergency Contacts</h3>
-            <div class="[ input-box ] flex justify-between mt-3">
+            <div class="[ input-box-full ] flex justify-between mt-3">
+              <Input id="address" label="Address" bind:value={address} />
+            </div>
+            <h3 class="mt-3">Emergency Contact</h3>
+            <div class="[ input-box ] flex justify-between">
               <Input id="contactName" label="Name" bind:value={contactName} />
               <Input id="contactPhone" label="Phone #" bind:value={contactPhone} />
-            </div>
-            <div class="[ input-box ] flex justify-between mt-3">
-              <Input id="hourlyWage" label="Hourly rate" bind:value={hourlyWage} />
             </div>
           </div>
         </div>
@@ -83,6 +85,9 @@
 <style>
   .input-box > :global(div) {
     width: 37%;
+  }
+  .input-box-full > :global(div) {
+    width: 100%;
   }
   .input-box > :global(div:first-child) {
     width: 60%;

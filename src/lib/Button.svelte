@@ -2,7 +2,9 @@
   export let variant = "filled",
     shadow = false,
     type = false,
-    className = "theme-btn";
+    className = "themed-btn";
+  let tw;
+  export { tw as class };
 </script>
 
 <!--@component
@@ -13,19 +15,10 @@
 <!-- TODO: Add styles for input submit type if needed based on conditions -->
 <!-- TODO: Disabled styles -->
 <button
-  class="[ {className} ] rounded font-semibold py-2 px-4 border border-indigo-500"
+  class="[ {className} ] btn [ {tw} ]"
   {type}
-  class:filled={variant == "filled"}
-  class:outline={variant == "outline"}
+  class:btn-filled={variant == "filled"}
+  class:btn-outline={variant == "outline"}
   class:shadow-md={shadow}
   on:click><slot /></button
 >
-
-<style>
-  .outline {
-    @apply bg-transparent hover:bg-indigo-50;
-  }
-  .filled {
-    @apply hover:bg-indigo-400 hover:border-indigo-400 bg-indigo-500 text-white;
-  }
-</style>

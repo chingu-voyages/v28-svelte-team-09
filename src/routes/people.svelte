@@ -7,16 +7,30 @@
   import AddPeopleModal from "$lib/people/AddPeopleModal.svelte";
   import ViewEmployeeModal from "$lib/people/ViewEmployeeModal.svelte";
   import EditEmployeeModal from "$lib/people/EditEmployeeModal.svelte";
+  import { useDeleteEmployee } from "$gql/employee.js";
+
+  let addEmployee = false;
+  let viewEmployee = false;
+  let editEmployee = false;
+  let employeeNum;
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: if ($employeesOp.data) {
     $employeesData = [...$employeesOp.data.result.employees.data];
   };
 
-  let addEmployee = false;
-  let viewEmployee = false;
-  let editEmployee = false;
-  let employeeNum;
+  const [deleteEmployee, employeeOp] = useDeleteEmployee();
+
+  //TREAT DELETION ERR IF NECESSARY
+    $: if ($employeeOp.error)
+      console.log("ERR: error deleting employee", $employeeOp.error);
+
+
+  function handleDelete(i) {
+    deleteEmployee({
+      id: $employeesData[i]._id
+    });
+  }
 </script>
 
 <AppHeader />
@@ -57,13 +71,16 @@
           <h1 class=" px-3 text-xl">{employee.name}</h1>
         </div>
         <div class="flex items-center">
+          <Button variant="outline" on:click={() => {viewEmployee = true; employeeNum = i}}
+            >View
+          </Button>
           <div class="mx-3">
-            <Button variant="outline" on:click={() => {viewEmployee = true; employeeNum = i}}
-              >View
+            <Button variant="outline" on:click={() => (editEmployee = true)}
+              >Edit
             </Button>
           </div>
-          <Button variant="outline" on:click={() => (editEmployee = true)}
-            >Edit
+          <Button variant="delete" on:click={() => handleDelete(i)}
+            >Delete
           </Button>
         </div>
       </div>

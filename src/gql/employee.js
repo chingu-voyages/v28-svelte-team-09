@@ -67,7 +67,7 @@ export const useCreateEmployee = () =>
     `
   );
 
-export const useDeleteEmployee = () => {
+export const useDeleteEmployee = () => 
   mutationOp(
     gql`
       mutation DeleteEmployee($id: ID!) {
@@ -78,4 +78,4 @@ export const useDeleteEmployee = () => {
       }
     `
   );
-};
+

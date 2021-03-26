@@ -6,27 +6,32 @@
   import { useCreateEmployee } from "$gql/employee.js";
 
   export let open = false;
+  let clickOutside = true;
+
   let name,
     email,
     phone,
-    hourlyWage = 15;
-  let clickOutside = true;
-
+    hourlyWage,
+    address,
+    contactName,
+    contactPhone;
+  
   const [createEmployee, employeeOp] = useCreateEmployee();
-
-  $: if ($employeeOp.error) {
-    //TREAT CREATION ERR IF NECESSARY
-    // Handle errors here! Or you can move this entire block into handleSubmit
-    console.log("ERR: error creating employee");
-  }
+  
+  //TREAT CREATION ERR IF NECESSARY
+  $: if ($employeeOp.error)
+    console.log("ERR: error creating employee", $employeeOp.error);
 
   function handleSubmit() {
     createEmployee({
       name,
       phone,
       email,
-      hourlyWage,
+      hourlyWage: parseInt(hourlyWage),
+      address,
       manager: $authStore.id,
+      contactName,
+      contactPhone
     });
     open = false;
   }
@@ -38,22 +43,29 @@
       <div class="sm:flex sm:items-start">
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3
-            class="text-lg font-main leading-6 font-medium"
+            class="text-2xl font-main leading-6 font-medium mb-6"
             id="modal-headline"
           >
-            Add new Employee
+            Add new Person
           </h3>
-          <div class="mt-2">
-            <p class="text-sm font-main text-indigo-400 mb-6">
-              Add as many new people as you want by typing their names and email
-              addresses. You can always edit someone's details later, under
-              People tab.
-            </p>
-
+          <div>
+            <h3 class="mt-3">Name and Rate</h3>
             <div class="[ input-box ] flex justify-between">
-              <Input id="name" label="Name*" bind:value={name} />
+              <Input required id="name" label="Name*" bind:value={name} />
+              <Input id="hourlyWage" label="Hourly rate" bind:value={hourlyWage} />
+            </div>
+            <h3 class="mt-3">Contact Information</h3>
+            <div class="[ input-box ] flex justify-between">
               <Input id="email" label="Email" bind:value={email} />
               <Input id="phone" label="Phone #" bind:value={phone} />
+            </div>
+            <div class="[ input-box-full ] flex justify-between mt-3">
+              <Input id="address" label="Address" bind:value={address} />
+            </div>
+            <h3 class="mt-3">Emergency Contact</h3>
+            <div class="[ input-box ] flex justify-between">
+              <Input id="contactName" label="Name" bind:value={contactName} />
+              <Input id="contactPhone" label="Phone #" bind:value={contactPhone} />
             </div>
           </div>
         </div>
@@ -72,9 +84,12 @@
 
 <style>
   .input-box > :global(div) {
-    width: 23%;
+    width: 37%;
+  }
+  .input-box-full > :global(div) {
+    width: 100%;
   }
   .input-box > :global(div:first-child) {
-    width: 50%;
+    width: 60%;
   }
 </style>

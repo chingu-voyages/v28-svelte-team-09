@@ -1,9 +1,11 @@
 <script>
   import Button from "$lib/Button.svelte";
   import ModalBox from "$lib/ModalBox.svelte";
+  import EditEmployeeModal from "$lib/people/EditEmployeeModal.svelte";
   export let data;
   export let open = false;
   let clickOutside = true;
+  let editEmployee = false;
 </script>
 
 <ModalBox bind:open {clickOutside}>
@@ -88,9 +90,11 @@
     <div
       class="bg-gray-50 px-4 py-3 grid gap-2 sm:px-6 sm:flex sm:flex-row-reverse"
     >
-      <Button>Edit</Button>
+      <Button on:click={() => {editEmployee = true;open = !open}}>Edit</Button>
       <Button type="reset" variant="outline" on:click={() => (open = !open)}
         >Cancel</Button
       >
+
     </div>
 </ModalBox>
+<EditEmployeeModal bind:open={editEmployee} />

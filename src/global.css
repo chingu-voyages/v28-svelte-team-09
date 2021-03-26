@@ -24,6 +24,9 @@
   .themed-btn-filled {
     @apply hover:bg-indigo-400 hover:border-indigo-400 bg-indigo-500 text-white;
   }
+  .themed-btn-delete {
+    @apply hover:bg-red-400 hover:border-red-400 bg-red-500 text-white border-red-500 focus:ring-red-500;
+  }
   .themed-btn-outline {
     @apply bg-transparent hover:bg-indigo-50;
   }

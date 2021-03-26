@@ -51,7 +51,7 @@
           <div>
             <h3 class="mt-3">Name and Rate</h3>
             <div class="[ input-box ] flex justify-between">
-              <Input id="name" label="Name" bind:value={name} />
+              <Input required id="name" label="Name*" bind:value={name} />
               <Input id="hourlyWage" label="Hourly rate" bind:value={hourlyWage} />
             </div>
             <h3 class="mt-3">Contact Information</h3>

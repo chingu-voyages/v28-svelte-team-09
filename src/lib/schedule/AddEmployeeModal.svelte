@@ -29,12 +29,11 @@
   }
 
   async function handleSubmit() {
-    let promises = [];
-    for (let employee of employeesToAdd)
-      promises.push(
+    await Promise.allSettled(
+      employeesToAdd.map((employee) =>
         createEmployee({ ...employee, hourlyWage: 15, manager: $authStore.id })
-      );
-    await Promise.allSettled(promises);
+      )
+    );
     open = false;
     reset();
   }

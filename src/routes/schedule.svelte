@@ -42,7 +42,7 @@
         >{">"}</button
       >
     </div>
-    <Button className="publish-btn"
+    <Button class="w-11/12 md:ml-auto md:w-auto"
       >Publish Shifts
       <!-- TODO: {numShifts}, disabled styles & state -->
     </Button>
@@ -82,9 +82,3 @@
   <AddEmployeeModal bind:open={addEmployee} />
   <div><h1 class="my-44">Spacer</h1></div>
 </main>
-
-<style>
-  section :global(.publish-btn) {
-    @apply w-11/12 md:ml-auto md:w-auto;
-  }
-</style>

@@ -31,7 +31,7 @@
   async function handleSubmit() {
     await Promise.allSettled(
       employeesToAdd.map((employee) =>
-        createEmployee({ ...employee, hourlyWage: 15, manager: $authStore.id })
+        createEmployee({ ...employee, manager: $authStore.id })
       )
     );
     open = false;

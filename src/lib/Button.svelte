@@ -15,10 +15,10 @@
 <!-- TODO: Add styles for input submit type if needed based on conditions -->
 <!-- TODO: Disabled styles -->
 <button
-  class="[ {className} ] btn [ {tw} ]"
+  class="[ {className} ] themed-btn [ {tw} ]"
   {type}
-  class:btn-filled={variant == "filled"}
-  class:btn-outline={variant == "outline"}
+  class:themed-btn-filled={variant == "filled"}
+  class:themed-btn-outline={variant == "outline"}
   class:shadow-md={shadow}
   on:click><slot /></button
 >

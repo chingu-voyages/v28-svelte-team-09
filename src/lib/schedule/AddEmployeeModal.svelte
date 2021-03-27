@@ -21,6 +21,9 @@
       name: "",
       email: "",
       phone: "",
+      address: "",
+      contactName: "",
+      contactPhone: ""
     };
   }
 

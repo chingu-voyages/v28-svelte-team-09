@@ -62,7 +62,7 @@
             src="/images/icons/themed-user-solid.svg"
             alt="user icon"
           />
-          <p class="p-2">{data.emergencyContact ? data.emergencyContact.name : 'n/a'}</p>
+          <p class="p-2">{data.emergencyContact.name ? data.emergencyContact.name : 'n/a'}</p>
         </div>
         <div class="flex">
           <img
@@ -70,7 +70,7 @@
             src="/images/icons/themed-phone-alt-solid.svg"
             alt="phone icon"
           />
-          <p class="p-2">{data.emergencyContact ? data.emergencyContact.phone : 'n/a'}</p>
+          <p class="p-2">{data.emergencyContact.name ? data.emergencyContact.phone : 'n/a'}</p>
         </div>
         <h3
           class="text-xl leading-6 font-medium mt-3"

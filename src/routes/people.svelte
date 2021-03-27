@@ -75,7 +75,7 @@
             >View
           </Button>
           <div class="mx-3">
-            <Button variant="outline" on:click={() => (editEmployee = true)}
+            <Button variant="outline" on:click={() => {editEmployee = true; employeeNum = i}}
               >Edit
             </Button>
           </div>
@@ -87,5 +87,5 @@
     </div>
   {/each}
   <ViewEmployeeModal bind:open={viewEmployee} data={$employeesData[employeeNum]} />
-  <EditEmployeeModal bind:open={editEmployee} />
+  <EditEmployeeModal bind:open={editEmployee} data={$employeesData[employeeNum]} />
 </main>

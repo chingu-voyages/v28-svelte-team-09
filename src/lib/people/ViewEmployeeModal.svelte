@@ -96,4 +96,4 @@
       >
     </div>
 </ModalBox>
-<EditEmployeeModal bind:open={editEmployee} />
+<EditEmployeeModal bind:open={editEmployee} {data} />

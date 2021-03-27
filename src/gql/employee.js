@@ -67,6 +67,39 @@ export const useCreateEmployee = () =>
     `
   );
 
+  export const useUpdateEmployee = () =>
+  mutationOp(
+    gql`
+      mutation UpdateEmployee(
+        $id: ID!
+        $name: String!
+        $phone: String
+        $email: String
+        $address: String
+        $manager: ID!
+        $hourlyWage: Int
+        $contactName: String
+        $contactPhone: String
+      ) {
+        result: updateEmployee(
+          id: $id,
+          data: {
+            name: $name
+            phone: $phone
+            email: $email
+            manager: { connect: $manager }
+            hourlyWage: $hourlyWage
+            address: $address
+            emergencyContact: { name: $contactName, phone: $contactPhone }
+          }
+        ) {
+          ...employeeFields
+        }
+      }
+      ${EMPLOYEE_FIELDS}
+    `
+  );
+
 export const useDeleteEmployee = () => 
   mutationOp(
     gql`

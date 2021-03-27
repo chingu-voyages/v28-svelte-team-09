@@ -12,7 +12,6 @@
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: if ($employeesOp.data?.result != null) {
     $employeesData = [...$employeesOp.data.result.employees.data];
-    console.log("fetched", $employeesData);
   }
 </script>
 

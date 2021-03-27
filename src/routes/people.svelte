@@ -13,6 +13,9 @@
   let viewEmployee = false;
   let editEmployee = false;
   let employeeNum;
+  let searchTerm = "";
+
+  $: filteredList = $employeesData.filter(employee => employee.name.toLowerCase().indexOf(searchTerm) !== -1);
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: if ($employeesOp.data) {
@@ -22,9 +25,8 @@
   const [deleteEmployee, employeeOp] = useDeleteEmployee();
 
   //TREAT DELETION ERR IF NECESSARY
-    $: if ($employeeOp.error)
-      console.log("ERR: error deleting employee", $employeeOp.error);
-
+  $: if ($employeeOp.error)
+    console.log("ERR: error deleting employee", $employeeOp.error);
 
   function handleDelete(i) {
     deleteEmployee({
@@ -46,8 +48,7 @@
     <h3 class="font-semibold text-2xl w-3/8">
       People
     </h3>
-    <!-- add search on keyUp functionality -->
-    <input class="border border-gray-400 appearance-none rounded w-5/8 px-2 my-2 mr-2 py-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500" placeholder="Search People ...">
+    <input class="border border-gray-400 appearance-none rounded w-5/8 px-2 my-2 mr-2 py-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500" placeholder="Search People ..." bind:value={searchTerm}>
     <Button on:click={() => (addEmployee = true)}
       >Add People
     </Button>
@@ -62,7 +63,7 @@
     </h3>
   </div>
 
-  {#each $employeesData as employee, i}
+  {#each filteredList as employee, i}
     <div class="px-3 md:px-0">
       <hr class="my-3 border-indigo-500	border-1" />
       <div class="flex justify-between">

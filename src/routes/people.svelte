@@ -67,22 +67,41 @@
     <div class="px-3 md:px-0">
       <hr class="my-3 border-indigo-500	border-1" />
       <div class="flex justify-between">
-        <div class="flex items-center">
+        <div class="flex items-center cursor-pointer	" on:click={() => {viewEmployee = true; employeeNum = i}}>
           <div class="p-3 bg-indigo-300 icon rounded-full w-12 h-12 text-white font-semibold">{employee.name.match(/[A-Z]/g).join('')}</div>
           <h1 class=" px-3 text-xl">{employee.name}</h1>
         </div>
         <div class="flex items-center">
-          <Button variant="outline" on:click={() => {viewEmployee = true; employeeNum = i}}
-            >View
+          <Button variant="outline" class="hidden md:block mx-3" on:click={() => {editEmployee = true; employeeNum = i}}
+            >Edit
           </Button>
-          <div class="mx-3">
-            <Button variant="outline" on:click={() => {editEmployee = true; employeeNum = i}}
-              >Edit
-            </Button>
-          </div>
-          <Button variant="delete" on:click={() => handleDelete(i)}
+          <Button variant="delete" class="hidden md:block" on:click={() => handleDelete(i)}
             >Delete
           </Button>
+          <button
+            type="button"
+            class="h-6 focus:ring-indigo-500 rounded md:hidden mx-3"
+            on:click={() => {editEmployee = true; employeeNum = i}}
+              
+          >
+            <img
+              width="27"
+              src="/images/icons/themed-edit-solid.svg"
+              alt="edit icon"
+            />
+          </button>
+          <button
+            type="button"
+            class="h-6 focus:ring-red-500 rounded md:hidden"
+            on:click={() => handleDelete(i)}
+              
+          >
+            <img
+              width="21"
+              src="/images/icons/themed-trash-alt-solid.svg"
+              alt="trash icon"
+            />
+          </button>
         </div>
       </div>
     </div>

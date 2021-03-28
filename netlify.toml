@@ -4,6 +4,8 @@
   functions = "functions"
 [build.environment]
   NODE_VERSION = "14"
+  # pnpm package.json prebuild compat
+  NPM_FLAGS="--prefix=/"
 [dev]
   command = "pnpm run dev"
   port = 8888

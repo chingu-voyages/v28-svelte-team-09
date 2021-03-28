@@ -5,7 +5,7 @@
 [build.environment]
   NODE_VERSION = "14"
 [dev]
-  command = "npm run dev"
+  command = "pnpm run dev"
   port = 8888
   targetPort = 3000
   publish = "build"

@@ -20,4 +20,7 @@ export default {
   optimizeDeps: {
     exclude: ["@urql/svelte"],
   },
+  build: {
+    target: "esnext", // maximum minification
+  },
 };

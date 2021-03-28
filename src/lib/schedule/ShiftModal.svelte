@@ -16,6 +16,9 @@
     open = false;
     reset();
   }
+
+  let employeeOpts = [{ name: "Moo" }, { name: "Wee" }];
+  let areaOpts = [{ name: "Default", color: "green" }];
 </script>
 
 <ModalBox bind:open {clickOutside}>
@@ -32,16 +35,59 @@
           >
             Shift: Tue 02 Mar
           </h3>
-          <div class="mt-2">
-            <Select label="Assigned to" class="w-52"
-              >Select an employee...</Select
+          <div class="mt-4 flex space-x-4">
+            <Select
+              label="Assigned to"
+              options={employeeOpts}
+              class="w-52"
+              let:selectedIndex
             >
-            <Select label="Area" class="w-24"
-              ><div
-                class="w-4 h-4 rounded-full border border-white"
-                style="background: blue"
-              /></Select
+              <span class="ml-3 block truncate"> Select an employee... </span>
+              <div slot="item" class="contents" let:option={{ name }} let:i>
+                <span
+                  class="{selectedIndex == i
+                    ? 'font-semibold'
+                    : 'font-normal'} ml-3 block truncate"
+                >
+                  {name}
+                </span>
+              </div>
+            </Select>
+            <Select
+              label="Area"
+              options={areaOpts}
+              class="w-52"
+              let:selectedIndex
             >
+              <span class="ml-3 block truncate"> No areas yet... </span>
+              <div
+                slot="item"
+                class="contents"
+                let:option={{ color, name }}
+                let:i
+              >
+                <span
+                  class="{selectedIndex == i
+                    ? 'font-semibold'
+                    : 'font-normal'} ml-3 truncate flex items-center"
+                >
+                  <div
+                    class="w-4 h-4 rounded-full border border-white"
+                    style="background: {color}"
+                  />
+                  <span class="ml-4">
+                    {name}
+                  </span>
+                </span>
+              </div>
+            </Select>
+          </div>
+
+          <div class="mt-4 space-x-4 flex">
+            <input
+              class="border border-gray-400 appearance-none p-2 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded"
+              type="time"
+            />
           </div>
         </div>
       </div>

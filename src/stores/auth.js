@@ -1,15 +1,16 @@
 import { writable } from "svelte/store";
 
-/** Redirect if at a path that requires login and user is not logged in. */
-function checkPaths(arr) {
-  if (typeof window == "undefined") return;
+/** Redirect if at a path that requires login and user is not logged in.
+ * @param {Array.<string>} excludedPaths - Paths that don't require login (index page included by default)
+ */
+function checkPaths(excludedPaths = []) {
   var curPath = location.pathname;
-  if (!arr.filter((v) => curPath.includes(v) || curPath == "/").length)
-    location.pathname = `/signin`;
+  if (!excludedPaths.some((v) => curPath.includes(v)) && curPath != "/")
+    location.pathname = `/`; // login page path
 }
 
 /** Initializes with auth details. */
 export const authStore = writable(
-  (typeof window != "undefined" && JSON.parse(localStorage.getItem("auth")))
+  typeof window != "undefined" &&
+    (JSON.parse(localStorage.getItem("auth")) || checkPaths())
 );
-

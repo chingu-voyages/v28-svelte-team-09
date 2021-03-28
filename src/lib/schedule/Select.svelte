@@ -2,45 +2,46 @@
   import { clickOutside } from "$utils/actions";
   import { fade } from "svelte/transition";
 
-  export let open;
+  let className = "";
+  export let open = false,
+    label = "",
+    options = [{ name: "Moo" }, { name: "Wee" }];
+  export { className as class };
 
-  let employees = [{ name: "Wade Cooper" }, { name: "Moo" }, { name: "Wee" }];
   let selectedIndex;
   let highlighted = 0;
   $: if (open) selectedIndex && (highlighted = selectedIndex); // highlight last selected item
-  let listboxEl;
   let outside = false;
   $: if (open) setTimeout(() => (outside = true));
   else outside = false;
+  let listboxEl;
 </script>
 
-<div>
+<div class={className}>
   <label
     id="listbox-label"
     for="listbox"
-    class="block text-sm font-medium text-gray-700"
+    class="block text-sm font-medium text-indigo-400"
   >
-    Assigned to
+    {label}
   </label>
   <div class="mt-1 relative" on:click={() => (open = !open)}>
     <button
       type="button"
       class="relative w-full focus:ring-offset-0 bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       aria-haspopup="listbox"
-      aria-expanded="true"
+      aria-expanded={open}
       aria-labelledby="listbox-label"
       on:keydown={({ key }) => {
         if (open) {
           switch (key) {
             case "ArrowDown":
-              highlighted == employees.length - 1
+              highlighted == options.length - 1
                 ? (highlighted = 0)
                 : ++highlighted;
               break;
             case "ArrowUp":
-              highlighted
-                ? --highlighted
-                : (highlighted = employees.length - 1);
+              highlighted ? --highlighted : (highlighted = options.length - 1);
               break;
             case "Escape":
               open = !open;
@@ -53,11 +54,13 @@
       }}
       bind:this={listboxEl}
     >
-      <span class="flex items-center">
+      <span class="flex items-center ">
         <span class="ml-3 block truncate">
-          {!Object.is(selectedIndex, undefined)
-            ? employees[selectedIndex].name
-            : "Select an employee"}
+          {#if !Object.is(selectedIndex, undefined)}
+            {options[selectedIndex].name}
+          {:else}
+            <slot />
+          {/if}
         </span>
       </span>
       <span
@@ -65,7 +68,7 @@
       >
         <!-- Heroicon name: solid/selector -->
         <svg
-          class="h-5 w-5 text-gray-400"
+          class="h-5 w-5 text-indigo-400"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -85,23 +88,32 @@
         use:clickOutside={{ enabled: outside, cb: () => (open = false) }}
         on:click|stopPropagation={() => listboxEl.focus()}
         transition:fade={{ duration: 100 }}
-        class="absolute mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+        class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
         tabindex="-1"
         role="listbox"
         aria-labelledby="listbox-label"
         aria-activedescendant="listbox-option-3"
       >
-        {#each employees as { name }, i}
+        {#each options as { name, color }, i}
           <li
             class="{highlighted == i
               ? 'text-white bg-indigo-500'
-              : 'text-gray-900'} cursor-default select-none relative py-2 pl-3 pr-9"
+              : 'text-indigo-500'} cursor-default select-none relative py-2 pl-3 pr-9"
             id="listbox-option-0"
             role="option"
             on:mouseenter={() => (highlighted = i)}
-            on:click={() => (selectedIndex = i)}
+            on:click={() => {
+              selectedIndex = i;
+              open = false;
+            }}
           >
             <div class="flex items-center">
+              {#if color}
+                <div
+                  class="w-4 h-4 rounded-full border border-white"
+                  style="background: {color}"
+                />
+              {/if}
               <span
                 class="{selectedIndex == i
                   ? 'font-semibold'

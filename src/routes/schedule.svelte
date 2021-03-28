@@ -5,13 +5,17 @@
   import { employeesByUserID } from "$gql/employee";
   import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
   import AppHeader from "$lib/AppHeader.svelte";
+  import ShiftModal from "$lib/schedule/ShiftModal.svelte";
 
   let addEmployee = false;
+  let shiftOpen = false;
+  let employees = [];
 
   //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: if ($employeesOp.data?.result != null) {
-    $employeesData = [...$employeesOp.data.result.employees.data];
+    employees = [...$employeesOp.data.result.employees.data];
+    $employeesData = [...employees];
   }
 </script>
 
@@ -66,7 +70,9 @@
       </div>
     </div>
     <div class="bg-white p-2 flex items-center justify-center">
-      <button class="rounded-sm focus:transition-colors px-1"
+      <button
+        class="rounded-sm focus:transition-colors px-1"
+        on:click={() => (shiftOpen = !shiftOpen)}
         ><img
           src="/images/icons/themed-plus-solid.svg"
           width="40"
@@ -79,6 +85,8 @@
 
   <!--TODO:remove button. test button to try the add employee query -->
   <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
+
   <AddEmployeeModal bind:open={addEmployee} />
+  <ShiftModal bind:open={shiftOpen} />
   <div><h1 class="my-44">Spacer</h1></div>
 </main>

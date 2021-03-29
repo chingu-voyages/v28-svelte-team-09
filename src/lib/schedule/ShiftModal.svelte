@@ -118,10 +118,8 @@
             </Select>
           </div>
 
-          <div
-            class="grid grid-cols-2 gap-4 place-items-start sm:space-x-4 sm:flex"
-          >
-            <div>
+          <div class="flex flex-wrap space-y-4">
+            <div class="mr-4 mt-4">
               <label
                 for="start"
                 class="block text-sm font-medium text-indigo-400">Start</label
@@ -133,7 +131,7 @@
                 type="time"
               />
             </div>
-            <div>
+            <div class="mr-4">
               <label
                 for="finish"
                 class="block text-sm font-medium text-indigo-400">Finish</label
@@ -161,7 +159,7 @@
               />
             </div>
           </div>
-          <div>
+          <div class="!mt-8">
             <label
               for="notes"
               class="block text-sm font-medium text-indigo-400"

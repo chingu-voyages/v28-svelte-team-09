@@ -81,7 +81,7 @@
         class:2xl:flex={i >= 5}
       >
         <button
-          class="rounded-sm focus:transition-colors px-1"
+          class="rounded-sm focus:transition-colors px-1 w-full h-full grid place-items-center"
           on:click={() => (shiftOpen = !shiftOpen)}
           ><img
             src="/images/icons/themed-plus-solid.svg"

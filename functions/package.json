@@ -1,6 +1,7 @@
 {
   "type": "commonjs",
   "devDependencies": {
-    "faunadb": "^4.1.1"
+    "faunadb": "^4.1.1",
+    "abort-controller": "3.0.0"
   }
 }

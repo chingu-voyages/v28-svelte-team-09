@@ -25,13 +25,15 @@
 
 <div class={className}>
   <div class="flex justify-between items-center">
-    <label
-      id="listbox-label"
-      for="listbox"
-      class="block text-sm font-medium text-indigo-400"
-    >
-      {label}
-    </label>
+    {#if label}
+      <label
+        id="listbox-label"
+        for="listbox"
+        class="block text-sm font-medium text-indigo-400"
+      >
+        {label}
+      </label>
+    {/if}
     <slot name="area" />
   </div>
   <div class="mt-1 relative" on:click={() => (open = !open)}>
@@ -96,7 +98,7 @@
         use:clickOutside={{ enabled: outside, cb: () => (open = false) }}
         on:click|stopPropagation={() => listboxEl.focus()}
         transition:fade={{ duration: 100 }}
-        class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+        class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-28 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
         tabindex="-1"
         role="listbox"
         aria-labelledby="listbox-label"

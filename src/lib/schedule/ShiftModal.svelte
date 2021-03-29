@@ -45,7 +45,7 @@
       <div class="sm:flex sm:items-start">
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3
-            class="text-lg font-main leading-6 font-medium"
+            class="text-lg font-main leading-6 font-medium mb-4"
             id="modal-headline"
           >
             Shift: Tue 02 Mar

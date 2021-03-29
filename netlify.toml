@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && cd functions && npx pnpm i -r --store=node_modules/.pnpm-store || echo skiping pnpm install"
+  command = "npm run build && cd functions && npm i"
   publish = "build"
   functions = "functions"
 [build.environment]

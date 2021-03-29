@@ -12,3 +12,5 @@
   targetPort = 3000
   publish = "build"
   framework = "#custom"
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"

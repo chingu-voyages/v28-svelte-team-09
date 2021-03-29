@@ -6,6 +6,8 @@
     value = "",
     required = false,
     type = "text";
+  let className = "";
+  export { className as class };
 
   let inputEl;
   onMount(() => {
@@ -21,11 +23,13 @@
 @value `bind:value` for input value
 -->
 
-<div class="relative overflow-hidden">
+<div class="relative overflow-hidden {className}">
   <input
     bind:this={inputEl}
     class="[ input ] border border-gray-400 shadow-md appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
     bind:value
+    on:change
+    on:blur
     class:filled={value}
     {id}
     type="text"

@@ -5,10 +5,10 @@
   let className = "";
   export let open = false,
     label = "",
+    selectedIndex = -1,
     options = [{ name: "Moo" }, { name: "Wee" }];
   export { className as class };
 
-  let selectedIndex;
   let highlighted = 0;
   $: if (open) selectedIndex && (highlighted = selectedIndex); // highlight last selected item
   let outside = false;
@@ -17,18 +17,29 @@
   let listboxEl;
 </script>
 
+<!-- @component
+@slot default - Placeholder if none selected
+@slot selected - Currently selected item
+@slot item - Each select item
+-->
+
 <div class={className}>
-  <label
-    id="listbox-label"
-    for="listbox"
-    class="block text-sm font-medium text-indigo-400"
-  >
-    {label}
-  </label>
+  <div class="flex justify-between items-center">
+    {#if label}
+      <label
+        id="listbox-label"
+        for="listbox"
+        class="block text-sm font-medium text-indigo-400"
+      >
+        {label}
+      </label>
+    {/if}
+    <slot name="area" />
+  </div>
   <div class="mt-1 relative" on:click={() => (open = !open)}>
     <button
       type="button"
-      class="relative w-full focus:ring-offset-0 bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      class="relative w-full transition-none focus:ring-offset-0 bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
       aria-haspopup="listbox"
       aria-expanded={open}
       aria-labelledby="listbox-label"
@@ -55,13 +66,12 @@
       bind:this={listboxEl}
     >
       <span class="flex items-center ">
-        <span class="ml-3 block truncate">
-          {#if !Object.is(selectedIndex, undefined)}
-            {options[selectedIndex].name}
-          {:else}
-            <slot />
-          {/if}
-        </span>
+        <!-- Currently shown item -->
+        {#if selectedIndex >= 0}
+          <slot name="selected">{options[selectedIndex].name}</slot>
+        {:else}
+          <slot {selectedIndex}>Select...</slot>
+        {/if}
       </span>
       <span
         class="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
@@ -88,13 +98,13 @@
         use:clickOutside={{ enabled: outside, cb: () => (open = false) }}
         on:click|stopPropagation={() => listboxEl.focus()}
         transition:fade={{ duration: 100 }}
-        class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+        class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-28 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
         tabindex="-1"
         role="listbox"
         aria-labelledby="listbox-label"
         aria-activedescendant="listbox-option-3"
       >
-        {#each options as { name, color }, i}
+        {#each options as option, i}
           <li
             class="{highlighted == i
               ? 'text-white bg-indigo-500'
@@ -108,19 +118,7 @@
             }}
           >
             <div class="flex items-center">
-              {#if color}
-                <div
-                  class="w-4 h-4 rounded-full border border-white"
-                  style="background: {color}"
-                />
-              {/if}
-              <span
-                class="{selectedIndex == i
-                  ? 'font-semibold'
-                  : 'font-normal'} ml-3 block truncate"
-              >
-                {name}
-              </span>
+              <slot name="item" {i} {option} />
             </div>
 
             {#if selectedIndex == i}

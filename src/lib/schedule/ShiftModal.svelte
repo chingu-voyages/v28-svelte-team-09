@@ -28,18 +28,20 @@
   >
     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
       <div class="sm:flex sm:items-start">
-        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+        <div class="mt-3 space-y-4 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3
             class="text-lg font-main leading-6 font-medium"
             id="modal-headline"
           >
             Shift: Tue 02 Mar
           </h3>
-          <div class="mt-4 flex space-x-4">
+          <div
+            class="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 justify-between"
+          >
             <Select
               label="Assigned to"
               options={employeeOpts}
-              class="w-52"
+              class="w-full sm:w-52"
               let:selectedIndex
             >
               <span class="ml-3 block truncate"> Select an employee... </span>
@@ -56,7 +58,7 @@
             <Select
               label="Area"
               options={areaOpts}
-              class="w-52"
+              class="w-full sm:w-52"
               let:selectedIndex
             >
               <span class="ml-3 block truncate"> No areas yet... </span>
@@ -83,10 +85,59 @@
             </Select>
           </div>
 
-          <div class="mt-4 space-x-4 flex">
-            <input
-              class="border border-gray-400 appearance-none p-2 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded"
-              type="time"
+          <div
+            class="grid grid-cols-2 gap-4 place-items-start sm:space-x-4 sm:flex"
+          >
+            <div>
+              <label
+                for="start"
+                class="block text-sm font-medium text-indigo-400">Start</label
+              >
+              <input
+                id="start"
+                class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
+                type="time"
+              />
+            </div>
+            <div>
+              <label
+                for="finish"
+                class="block text-sm font-medium text-indigo-400">Finish</label
+              >
+              <input
+                id="finish"
+                class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
+                type="time"
+              />
+            </div>
+            <div>
+              <label
+                for="break"
+                class="block text-sm font-medium text-indigo-400"
+                title="mins">Break</label
+              >
+              <input
+                id="break"
+                class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
+                type="number"
+                max="60"
+                min="0"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              for="notes"
+              class="block text-sm font-medium text-indigo-400"
+              title="mins">Notes</label
+            >
+            <textarea
+              class="w-full border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded placeholder-indigo-200"
+              name="Notes"
+              id="notes"
+              cols=""
+              rows="4"
+              placeholder="Add a note to this shift, the employee will be able to see your notes when schedule is published"
             />
           </div>
         </div>

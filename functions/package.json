@@ -1,3 +1,6 @@
 {
-  "type": "commonjs"
+  "type": "commonjs",
+  "devDependencies": {
+    "faunadb": "^4.1.1"
+  }
 }

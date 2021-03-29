@@ -4,7 +4,7 @@
   import ModalBox from "$lib/ModalBox.svelte";
   import { slide } from "svelte/transition";
   import Select from "./Select.svelte";
-  export let open = true;
+  export let open = false;
   export let queriedAreas = []; // TODO: Add queried areas
 
   let areasToAdd = [{ name: "Some Area Name", color: "green" }];

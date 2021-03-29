@@ -21,8 +21,8 @@
     notes,
   };
 
-  let areaOpen;
-  $: !areaOpen && (open = true);
+  let areaOpen = null;
+  $: !(areaOpen === null) && !areaOpen && (open = true);
 
   function reset() {
     ({ employeeIndex, areaIndex, start, finish, breakMins, notes } = init);

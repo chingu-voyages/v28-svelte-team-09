@@ -81,6 +81,38 @@
         /></button
       >
     </div>
+    <!-- demo for added shift -->
+    <div class="flex space-x-5 justify-center items-center bg-white p-4">
+      <img
+        class="rounded-full shadow-md"
+        src="/images/icons/themed-user-circle-solid.svg"
+        width="55"
+        alt="default user"
+      />
+      <div>
+        <h3 class="font-semibold">Open/Empty Shifts</h3>
+        <!-- TODO: {openTime}Hrs-->
+        <p class="text-indigo-100">7.00Hrs</p>
+      </div>
+    </div>
+    <div class="bg-white p-2 flex items-center justify-center">
+      <button
+        class="font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-indigo-500"
+        on:click={() => (shiftOpen = !shiftOpen)}
+      >
+        <span> 9am - 4:30pm </span>
+        <div>
+          <span
+            class="font-semibold text-indigo-500 bg-yellow-300 rounded-2xl px-4 py-1"
+            >Kitchen</span
+          >
+          <span
+            class="font-semibold text-white bg-yellow-600 rounded-md py-1 px-3"
+            >Open</span
+          >
+        </div>
+      </button>
+    </div>
   </section>
 
   <!--TODO:remove button. test button to try the add employee query -->

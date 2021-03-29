@@ -127,7 +127,8 @@
   </section>
 
   <!--TODO:remove button. test button to try the add employee query -->
-  <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
+  <Button class="m-8" on:click={() => (addEmployee = true)}>Add Employee</Button
+  >
 
   <AddEmployeeModal bind:open={addEmployee} />
   <ShiftModal bind:open={shiftOpen} />

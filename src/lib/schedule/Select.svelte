@@ -60,6 +60,12 @@
             case "Enter":
               selectedIndex = highlighted;
               break;
+            case "Home":
+              selectedIndex = 0;
+              break;
+            case "End":
+              selectedIndex = options.length - 1;
+              break;
           }
         }
       }}

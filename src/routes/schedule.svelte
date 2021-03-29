@@ -54,7 +54,7 @@
 
   <!-- TODO: Desktop grid & each block + shift display -->
   <section
-    class="grid grid-cols-2 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
   >
     <div class="flex space-x-5 justify-center items-center bg-white p-4">
       <img
@@ -69,18 +69,32 @@
         <p class="text-indigo-100">7.00Hrs</p>
       </div>
     </div>
-    <div class="bg-white p-2 flex items-center justify-center">
-      <button
-        class="rounded-sm focus:transition-colors px-1"
-        on:click={() => (shiftOpen = !shiftOpen)}
-        ><img
-          src="/images/icons/themed-plus-solid.svg"
-          width="40"
-          height="40"
-          alt="plus icon"
-        /></button
+    {#each [0, 1, 2, 3, 4, 5, 6] as _, i}
+      <div
+        class="bg-white p-2 {i != 0 && 'hidden'} {i == 0
+          ? 'flex'
+          : i < 2
+          ? 'sm:flex'
+          : i < 3
+          ? 'md:flex'
+          : i < 4
+          ? 'lg:flex'
+          : i < 5
+          ? 'xl:flex'
+          : '2xl:flex'} items-center justify-center"
       >
-    </div>
+        <button
+          class="rounded-sm focus:transition-colors px-1"
+          on:click={() => (shiftOpen = !shiftOpen)}
+          ><img
+            src="/images/icons/themed-plus-solid.svg"
+            width="40"
+            height="40"
+            alt="plus icon"
+          /></button
+        >
+      </div>
+    {/each}
     <!-- demo for added shift -->
     <div class="flex space-x-5 justify-center items-center bg-white p-4">
       <img
@@ -103,7 +117,7 @@
         <span> 9am - 4:30pm </span>
         <div>
           <span
-            class="font-semibold text-indigo-500 bg-yellow-300 rounded-2xl px-4 py-1"
+            class="font-semibold text-indigo-500 bg-yellow-300 rounded-2xl px-4 py-1 truncate"
             >Kitchen</span
           >
           <span

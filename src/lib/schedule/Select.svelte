@@ -21,6 +21,7 @@
 @slot default - Placeholder if none selected
 @slot selected - Currently selected item
 @slot item - Each select item
+@slot area - specific slot for area opening button
 -->
 
 <div class={className}>

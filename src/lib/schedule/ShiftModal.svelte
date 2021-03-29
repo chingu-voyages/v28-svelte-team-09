@@ -3,6 +3,7 @@
   import ModalBox from "$lib/ModalBox.svelte";
   import Button from "$lib/Button.svelte";
   import Select from "./Select.svelte";
+  import AreaModal from "./AreaModal.svelte";
 
   export let open = false;
   let clickOutside = true;
@@ -19,6 +20,10 @@
     breakMins,
     notes,
   };
+
+  let areaOpen;
+  $: !areaOpen && (open = true);
+
   function reset() {
     ({ employeeIndex, areaIndex, start, finish, breakMins, notes } = init);
   }
@@ -68,11 +73,27 @@
             </Select>
             <Select
               label="Area"
+              area
               options={areaOpts}
               class="w-full sm:w-52"
               bind:selectedIndex={areaIndex}
               let:selectedIndex
             >
+              <button
+                slot="area"
+                class="flex rounded items-center"
+                on:click={() => !(open = false) && (areaOpen = !areaOpen)}
+              >
+                <img
+                  class="mr-1"
+                  src="/images/icons/themed-edit-solid.svg"
+                  width="15"
+                  alt="Edit Area"
+                />
+                <span class="block text-sm font-medium text-indigo-400"
+                  >Edit area details</span
+                >
+              </button>
               <span class="ml-3 block truncate"> No areas yet... </span>
               <div
                 slot="item"
@@ -167,3 +188,5 @@
     </div>
   </form>
 </ModalBox>
+
+<AreaModal bind:open={areaOpen} />

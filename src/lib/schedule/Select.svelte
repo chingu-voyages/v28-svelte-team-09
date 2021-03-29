@@ -24,13 +24,16 @@
 -->
 
 <div class={className}>
-  <label
-    id="listbox-label"
-    for="listbox"
-    class="block text-sm font-medium text-indigo-400"
-  >
-    {label}
-  </label>
+  <div class="flex justify-between items-center">
+    <label
+      id="listbox-label"
+      for="listbox"
+      class="block text-sm font-medium text-indigo-400"
+    >
+      {label}
+    </label>
+    <slot name="area" />
+  </div>
   <div class="mt-1 relative" on:click={() => (open = !open)}>
     <button
       type="button"

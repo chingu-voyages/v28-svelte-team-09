@@ -5,7 +5,7 @@
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "start": "svelte-kit start",
-    "prebuild": "\"$CI\" = true && npx pnpm i -r --store=node_modules/.pnpm-store || echo skiping pnpm install"
+    "prebuild": "\"$CI\" = true && npx pnpm i -r --store=node_modules/.pnpm-store --frozen-lockfile=false || echo skiping pnpm install"
   },
   "dependencies": {
     "@urql/svelte": "^1.2.0"

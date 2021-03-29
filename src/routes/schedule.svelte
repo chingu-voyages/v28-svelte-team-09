@@ -131,5 +131,4 @@
 
   <AddEmployeeModal bind:open={addEmployee} />
   <ShiftModal bind:open={shiftOpen} />
-  <div><h1 class="my-44">Spacer</h1></div>
 </main>

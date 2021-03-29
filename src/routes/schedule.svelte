@@ -71,17 +71,14 @@
     </div>
     {#each [0, 1, 2, 3, 4, 5, 6] as _, i}
       <div
-        class="bg-white p-2 {i != 0 && 'hidden'} {i == 0
-          ? 'flex'
-          : i < 2
-          ? 'sm:flex'
-          : i < 3
-          ? 'md:flex'
-          : i < 4
-          ? 'lg:flex'
-          : i < 5
-          ? 'xl:flex'
-          : '2xl:flex'} items-center justify-center"
+        class="bg-white p-2 {i != 0 && 'hidden'}  items-center justify-center"
+        class:flex={i == 0}
+        class:hidden={i != 0}
+        class:sm:flex={i < 2}
+        class:md:flex={i < 3}
+        class:lg:flex={i < 4}
+        class:xl:flex={i < 5}
+        class:2xl:flex={i >= 5}
       >
         <button
           class="rounded-sm focus:transition-colors px-1"

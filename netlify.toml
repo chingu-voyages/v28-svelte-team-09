@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && cd functions && npm i"
   publish = "build"
   functions = "functions"
 [build.environment]
@@ -12,5 +12,3 @@
   targetPort = 3000
   publish = "build"
   framework = "#custom"
-[[plugins]]
-  package = "@netlify/plugin-functions-install-core"

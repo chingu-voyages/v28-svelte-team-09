@@ -54,8 +54,45 @@
 
   <!-- TODO: Desktop grid & each block + shift display -->
   <section
-    class="grid grid-cols-2 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
   >
+    <div class="flex space-x-5 justify-center items-center bg-white p-4">
+      <img
+        class="rounded-full shadow-md"
+        src="/images/icons/themed-user-circle-solid.svg"
+        width="55"
+        alt="default user"
+      />
+      <div>
+        <h3 class="font-semibold">Open/Empty Shifts</h3>
+        <!-- TODO: {openTime}Hrs-->
+        <p class="text-indigo-100">7.00Hrs</p>
+      </div>
+    </div>
+    {#each [0, 1, 2, 3, 4, 5, 6] as _, i}
+      <div
+        class="bg-white p-2 {i != 0 && 'hidden'}  items-center justify-center"
+        class:flex={i == 0}
+        class:hidden={i != 0}
+        class:sm:flex={i < 2}
+        class:md:flex={i < 3}
+        class:lg:flex={i < 4}
+        class:xl:flex={i < 5}
+        class:2xl:flex={i >= 5}
+      >
+        <button
+          class="rounded-sm focus:transition-colors px-1 w-full h-full grid place-items-center"
+          on:click={() => (shiftOpen = !shiftOpen)}
+          ><img
+            src="/images/icons/themed-plus-solid.svg"
+            width="40"
+            height="40"
+            alt="plus icon"
+          /></button
+        >
+      </div>
+    {/each}
+    <!-- demo for added shift -->
     <div class="flex space-x-5 justify-center items-center bg-white p-4">
       <img
         class="rounded-full shadow-md"
@@ -71,22 +108,28 @@
     </div>
     <div class="bg-white p-2 flex items-center justify-center">
       <button
-        class="rounded-sm focus:transition-colors px-1"
+        class="font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-indigo-500"
         on:click={() => (shiftOpen = !shiftOpen)}
-        ><img
-          src="/images/icons/themed-plus-solid.svg"
-          width="40"
-          height="40"
-          alt="plus icon"
-        /></button
       >
+        <span> 9am - 4:30pm </span>
+        <div>
+          <span
+            class="font-semibold text-indigo-500 bg-yellow-300 rounded-2xl px-4 py-1 truncate"
+            >Kitchen</span
+          >
+          <span
+            class="font-semibold text-white bg-yellow-600 rounded-md py-1 px-3"
+            >Open</span
+          >
+        </div>
+      </button>
     </div>
   </section>
 
   <!--TODO:remove button. test button to try the add employee query -->
-  <Button on:click={() => (addEmployee = true)}>Add Employee</Button>
+  <Button class="m-8" on:click={() => (addEmployee = true)}>Add Employee</Button
+  >
 
   <AddEmployeeModal bind:open={addEmployee} />
   <ShiftModal bind:open={shiftOpen} />
-  <div><h1 class="my-44">Spacer</h1></div>
 </main>

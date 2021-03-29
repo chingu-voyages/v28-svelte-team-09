@@ -3,6 +3,7 @@
   import ModalBox from "$lib/ModalBox.svelte";
   import Button from "$lib/Button.svelte";
   import Select from "./Select.svelte";
+  import AreaModal from "./AreaModal.svelte";
 
   export let open = false;
   let clickOutside = true;
@@ -19,6 +20,10 @@
     breakMins,
     notes,
   };
+
+  let areaOpen = null;
+  $: !(areaOpen === null) && !areaOpen && (open = true);
+
   function reset() {
     ({ employeeIndex, areaIndex, start, finish, breakMins, notes } = init);
   }
@@ -38,9 +43,9 @@
   >
     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
       <div class="sm:flex sm:items-start">
-        <div class="mt-3 space-y-4 text-center sm:mt-0 sm:ml-4 sm:text-left">
+        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3
-            class="text-lg font-main leading-6 font-medium"
+            class="text-lg font-main leading-6 font-medium mb-4"
             id="modal-headline"
           >
             Shift: Tue 02 Mar
@@ -68,11 +73,27 @@
             </Select>
             <Select
               label="Area"
+              area
               options={areaOpts}
               class="w-full sm:w-52"
               bind:selectedIndex={areaIndex}
               let:selectedIndex
             >
+              <button
+                slot="area"
+                class="flex rounded items-center"
+                on:click={() => !(open = false) && (areaOpen = !areaOpen)}
+              >
+                <img
+                  class="mr-1"
+                  src="/images/icons/themed-edit-solid.svg"
+                  width="15"
+                  alt="Edit Area"
+                />
+                <span class="block text-sm font-medium text-indigo-400"
+                  >Edit area details</span
+                >
+              </button>
               <span class="ml-3 block truncate"> No areas yet... </span>
               <div
                 slot="item"
@@ -97,10 +118,8 @@
             </Select>
           </div>
 
-          <div
-            class="grid grid-cols-2 gap-4 place-items-start sm:space-x-4 sm:flex"
-          >
-            <div>
+          <div class="flex flex-wrap space-y-4">
+            <div class="mr-4 mt-4">
               <label
                 for="start"
                 class="block text-sm font-medium text-indigo-400">Start</label
@@ -112,7 +131,7 @@
                 type="time"
               />
             </div>
-            <div>
+            <div class="mr-4">
               <label
                 for="finish"
                 class="block text-sm font-medium text-indigo-400">Finish</label
@@ -140,7 +159,7 @@
               />
             </div>
           </div>
-          <div>
+          <div class="mt-4">
             <label
               for="notes"
               class="block text-sm font-medium text-indigo-400"
@@ -167,3 +186,5 @@
     </div>
   </form>
 </ModalBox>
+
+<AreaModal bind:open={areaOpen} />

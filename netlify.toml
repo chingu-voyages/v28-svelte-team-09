@@ -5,10 +5,12 @@
 [build.environment]
   NODE_VERSION = "14"
   # pnpm package.json prebuild compat https://answers.netlify.com/t/using-pnpm-and-pnpm-workspaces/2759/4
-  NPM_FLAGS="--prefix=/"
+  NPM_FLAGS="--prefix=/dev/null"
 [dev]
   command = "pnpm run dev"
   port = 8888
   targetPort = 3000
   publish = "build"
   framework = "#custom"
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"

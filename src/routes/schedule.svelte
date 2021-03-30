@@ -6,10 +6,16 @@
   import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
   import AppHeader from "$lib/AppHeader.svelte";
   import ShiftModal from "$lib/schedule/ShiftModal.svelte";
+  import DatePicker from "$lib/calendar/DatePicker.svelte";
 
   let addEmployee = false;
   let shiftOpen = false;
   let employees = [];
+  let currentDate = new Date();
+
+  const onDateChange = d => {
+    currentDate = d.detail;
+  };
 
   //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
@@ -39,8 +45,10 @@
       ><button
         class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto"
       >
-        <!-- TODO: {curDay} -->
-        01 Mar</button
+        <DatePicker
+        on:datechange={onDateChange}
+        selected={currentDate}
+      /></button
       ><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
         >{">"}</button

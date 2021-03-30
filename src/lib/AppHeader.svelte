@@ -16,21 +16,15 @@
   </div>
 
   <nav class="flex items-center">
-    <div class="flex items-center cursor-pointer">
-      <!-- <div class="p-3 bg-indigo-300 icon rounded-full w-12 h-12 text-white font-semibold">{manager.name.match(/[A-Z]/g).join('')}</div>
-      <h1 class=" px-3 text-xl">{manager.name}</h1> -->
-    </div>
-    <Button>
       <a
         href="/"
         on:click={() => {
           localStorage.removeItem("auth");
           $authStore = null;
         }}
+      ><Button>Logout</Button>
+        </a
       >
-        Logout</a
-      >
-    </Button>
   </nav>
 </header>
 

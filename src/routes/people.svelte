@@ -1,7 +1,6 @@
 <script>
   import AppHeader from "$lib/AppHeader.svelte";
   import { authStore } from "$stores/auth";
-  import { employeesData } from "$stores/employee";
   import { employeesByUserID } from "$gql/employee";
   import Button from "$lib/Button.svelte";
   import AddPeopleModal from "$lib/people/AddPeopleModal.svelte";
@@ -16,13 +15,15 @@
   let employeeNum;
   let searchTerm = "";
 
-  $: filteredList = $employeesData.filter(
+  let employees = [];
+
+  $: filteredList = employees.filter(
     (employee) => employee.name.toLowerCase().indexOf(searchTerm) !== -1
   );
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: if ($employeesOp.data) {
-    $employeesData = [...$employeesOp.data.result.employees.data];
+    employees = [...$employeesOp.data.result.employees.data];
   }
 
   const [deleteEmployee, employeeOp] = useDeleteEmployee();
@@ -33,7 +34,7 @@
 
   function handleDelete(i) {
     deleteEmployee({
-      id: $employeesData[i]._id,
+      id: employees[i]._id,
     });
   }
 </script>
@@ -82,7 +83,7 @@
           >
             {employee.name?.match(/\b[A-Za-z]/g)?.join("") ?? ""}
           </div>
-          <h1 class=" px-3 text-xl">{employee.name}</h1>
+          <h1 class="px-3 text-xl">{employee.name}</h1>
         </div>
         <div class="flex items-center">
           <Button
@@ -129,12 +130,6 @@
       </div>
     </div>
   {/each}
-  <ViewEmployeeModal
-    bind:open={viewEmployee}
-    data={$employeesData[employeeNum]}
-  />
-  <EditEmployeeModal
-    bind:open={editEmployee}
-    data={$employeesData[employeeNum]}
-  />
+  <ViewEmployeeModal bind:open={viewEmployee} data={employees[employeeNum]} />
+  <EditEmployeeModal bind:open={editEmployee} data={employees[employeeNum]} />
 </main>

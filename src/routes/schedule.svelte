@@ -1,6 +1,5 @@
 <script>
   import { authStore } from "$stores/auth";
-  import { employeesData } from "$stores/employee";
   import Button from "$lib/Button.svelte";
   import { employeesByUserID } from "$gql/employee";
   import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
@@ -32,7 +31,6 @@
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: if ($employeesOp.data?.result != null) {
     employees = [...$employeesOp.data.result.employees.data];
-    $employeesData = [...employees];
   }
 </script>
 

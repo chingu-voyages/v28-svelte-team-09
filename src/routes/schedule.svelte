@@ -108,7 +108,7 @@
     </div>
     <div class="bg-white p-2 flex items-center justify-center">
       <button
-        class="font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-indigo-500"
+        class="font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-indigo-500 space-y-2"
         on:click={() => (shiftOpen = !shiftOpen)}
       >
         <span> 9am - 4:30pm </span>

@@ -1,5 +1,5 @@
 <script>
-  export let open,
+  export let open = false,
     title = open ? "Open Shifts" : "N/A",
     timeRate = open ? "7.00Hrs" : "",
     src = "/images/icons/themed-user-circle-solid.svg";

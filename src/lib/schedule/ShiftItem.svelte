@@ -1,10 +1,10 @@
 <script>
   export let i = 0;
   // TODO: reset defaults when unnecessary
-  export let shift,
+  export let shift = false,
     time = "9am - 4:30pm",
     area = "Kitchen",
-    open;
+    open = false;
 </script>
 
 <div

@@ -1,4 +1,5 @@
 dependencies:
+  '@tailwindcss/line-clamp': 0.2.0
   '@urql/svelte': 1.2.0_graphql@15.5.0+svelte@3.35.0
 devDependencies:
   '@sveltejs/adapter-netlify': 1.0.0-next.3
@@ -140,6 +141,10 @@ packages:
       tailwindcss: ^2.0.3
     resolution:
       integrity: sha512-Of3NbM2Peex6iPkOap5JBmAPq6oVjKEKMysy6iH/9Vl0TjuEuB094Uc7yzJz8q6j6AQEImlaOGxwF+sdBlG2pw==
+  /@tailwindcss/line-clamp/0.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-+jXSdRK3/9V/BCPCr+iNpMMhxWMMv62vn/AS2b3/ClmueGuhCijW3bUwO1IiHnE7uCaF74Sli8jUCv9djwvpLg==
   /@types/node/14.14.37:
     dev: true
     resolution:
@@ -1292,6 +1297,7 @@ specifiers:
   '@sveltejs/adapter-netlify': 1.0.0-next.3
   '@sveltejs/kit': 1.0.0-next.49
   '@tailwindcss/jit': ^0.1.17
+  '@tailwindcss/line-clamp': ^0.2.0
   '@urql/svelte': ^1.2.0
   dayjs: ^1.10.4
   faunadb: ^4.1.1

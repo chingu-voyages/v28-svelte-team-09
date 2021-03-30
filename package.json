@@ -8,20 +8,21 @@
     "prebuild": "\"$CI\" = true && npx pnpm i --store=node_modules/.pnpm-store --frozen-lockfile=false || echo skiping pnpm install"
   },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.2.0",
     "@urql/svelte": "^1.2.0"
   },
   "devDependencies": {
-    "dayjs": "^1.10.4",
     "@sveltejs/adapter-netlify": "1.0.0-next.3",
     "@sveltejs/kit": "1.0.0-next.49",
     "@tailwindcss/jit": "^0.1.17",
+    "dayjs": "^1.10.4",
+    "faunadb": "^4.1.1",
     "graphql": "^15.5.0",
     "postcss-load-config": "^3.0.1",
     "svelte": "^3.35.0",
     "svelte-preprocess": "^4.7.0",
     "tailwindcss": "^2.0.4",
-    "vite": "2.1.0",
-    "faunadb": "^4.1.1"
+    "vite": "2.1.0"
   },
   "type": "module",
   "engines": {

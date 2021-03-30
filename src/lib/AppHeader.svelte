@@ -15,18 +15,16 @@
     </div>
   </div>
 
-  <nav>
-    <Button>
+  <nav class="flex items-center">
       <a
         href="/"
         on:click={() => {
           localStorage.removeItem("auth");
           $authStore = null;
         }}
+      ><Button>Logout</Button>
+        </a
       >
-        Logout</a
-      >
-    </Button>
   </nav>
 </header>
 

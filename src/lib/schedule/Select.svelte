@@ -62,10 +62,10 @@
               selectedIndex = highlighted;
               break;
             case "Home":
-              selectedIndex = 0;
+              highlighted = 0;
               break;
             case "End":
-              selectedIndex = options.length - 1;
+              highlighted = options.length - 1;
               break;
           }
         }

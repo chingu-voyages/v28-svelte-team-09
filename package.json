@@ -5,7 +5,7 @@
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "start": "svelte-kit start",
-    "prebuild": "\"$CI\" = true && npx pnpm i -r --store=node_modules/.pnpm-store --frozen-lockfile=false || echo skiping pnpm install"
+    "prebuild": "\"$CI\" = true && npx pnpm i --store=node_modules/.pnpm-store --frozen-lockfile=false || echo skiping pnpm install"
   },
   "dependencies": {
     "@urql/svelte": "^1.2.0"
@@ -20,7 +20,8 @@
     "svelte": "^3.35.0",
     "svelte-preprocess": "^4.7.0",
     "tailwindcss": "^2.0.4",
-    "vite": "2.1.0"
+    "vite": "2.1.0",
+    "faunadb": "^4.1.1"
   },
   "type": "module",
   "engines": {

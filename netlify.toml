@@ -2,6 +2,8 @@
   command = "npm run build"
   publish = "build"
   functions = "functions"
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
 [build.environment]
   NODE_VERSION = "14"
   # pnpm package.json prebuild compat https://answers.netlify.com/t/using-pnpm-and-pnpm-workspaces/2759/4
@@ -12,5 +14,3 @@
   targetPort = 3000
   publish = "build"
   framework = "#custom"
-[[plugins]]
-  package = "@netlify/plugin-functions-install-core"

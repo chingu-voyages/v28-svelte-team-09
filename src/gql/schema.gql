@@ -12,7 +12,7 @@ type Employee {
   phone: String
   address: String
   manager: User!
-  hourlyWage: Int!
+  hourlyWage: Int
   emergencyContact: EmergencyContact
 }
 
@@ -32,7 +32,7 @@ type Shift {
 }
 
 type Area {
-  name: String! @unique
-  company: User! @unique
+  name: String!
+  company: User!
   color: String!
 }

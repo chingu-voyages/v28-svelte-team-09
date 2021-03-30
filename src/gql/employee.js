@@ -1,6 +1,24 @@
 import { queryOp, mutationOp } from "$utils/client";
 import { gql } from "@urql/svelte";
 
+const EMPLOYEE_FIELDS = gql`
+  fragment employeeFields on Employee {
+    _id
+    name
+    phone
+    email
+    hourlyWage
+    address
+    manager {
+      name
+    }
+    emergencyContact {
+      name
+      phone
+    }
+  }
+`;
+
 export const employeesByUserID = ({ id }) =>
   queryOp(
     gql`
@@ -8,17 +26,12 @@ export const employeesByUserID = ({ id }) =>
         result: findUserByID(id: $id) {
           employees {
             data {
-              _id
-              name
-              manager {
-                name
-              }
-              email
-              phone
+              ...employeeFields
             }
           }
         }
       }
+      ${EMPLOYEE_FIELDS}
     `,
     { id }
   );
@@ -29,25 +42,73 @@ export const useCreateEmployee = () =>
       mutation CreateEmployee(
         $name: String!
         $phone: String
-        $email: String!
-        $id: ID!
+        $email: String
+        $address: String
+        $manager: ID!
+        $hourlyWage: Int
+        $contactName: String
+        $contactPhone: String
       ) {
         result: createEmployee(
           data: {
             name: $name
             phone: $phone
             email: $email
-            manager: { connect: $id }
+            manager: { connect: $manager }
+            hourlyWage: $hourlyWage
+            address: $address
+            emergencyContact: { name: $contactName, phone: $contactPhone }
           }
         ) {
+          ...employeeFields
+        }
+      }
+      ${EMPLOYEE_FIELDS}
+    `
+  );
+
+  export const useUpdateEmployee = () =>
+  mutationOp(
+    gql`
+      mutation UpdateEmployee(
+        $id: ID!
+        $name: String!
+        $phone: String
+        $email: String
+        $address: String
+        $manager: ID!
+        $hourlyWage: Int
+        $contactName: String
+        $contactPhone: String
+      ) {
+        result: updateEmployee(
+          id: $id,
+          data: {
+            name: $name
+            phone: $phone
+            email: $email
+            manager: { connect: $manager }
+            hourlyWage: $hourlyWage
+            address: $address
+            emergencyContact: { name: $contactName, phone: $contactPhone }
+          }
+        ) {
+          ...employeeFields
+        }
+      }
+      ${EMPLOYEE_FIELDS}
+    `
+  );
+
+export const useDeleteEmployee = () => 
+  mutationOp(
+    gql`
+      mutation DeleteEmployee($id: ID!) {
+        deleteEmployee(id: $id) {
           _id
           name
-          phone
-          email
-          manager {
-            name
-          }
         }
       }
     `
   );
+

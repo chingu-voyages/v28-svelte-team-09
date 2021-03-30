@@ -1,27 +1,25 @@
 <script>
-  export let shadow = false;
-  export let type = "filled";
+  export let variant = "filled",
+    shadow = false,
+    type = false,
+    className = "";
+  export { className as class };
 </script>
 
 <!--@component
-@type ="outline" for variant
+Our themed button. Able to pass in classes including Tailwind.
+@variant `="outline"` for variant
 @shadow box-shadow
 -->
 
 <!-- TODO: Add styles for input submit type if needed based on conditions -->
+<!-- TODO: Disabled styles -->
 <button
-  class="rounded font-semibold py-2 px-4 border border-indigo-500 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-  class:filled={type == "filled"}
-  class:outline={type == "outline"}
+  class="themed-btn {className}"
+  {type}
+  class:themed-btn-filled={variant == "filled"}
+  class:themed-btn-delete={variant == "delete"}
+  class:themed-btn-outline={variant == "outline"}
   class:shadow-md={shadow}
   on:click><slot /></button
 >
-
-<style>
-  .outline {
-    @apply bg-transparent hover:bg-indigo-50;
-  }
-  .filled {
-    @apply hover:bg-indigo-400 hover:border-indigo-400 bg-indigo-500 text-white;
-  }
-</style>

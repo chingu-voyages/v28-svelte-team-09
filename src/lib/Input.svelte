@@ -1,7 +1,18 @@
 <script>
-  export let id = "";
-  export let label = "";
-  export let value = "";
+  import { onMount } from "svelte";
+
+  export let id = "",
+    label = "",
+    value = "",
+    required = false,
+    type = "text";
+  let className = "";
+  export { className as class };
+
+  let inputEl;
+  onMount(() => {
+    inputEl.type = type; // dynamically set input type
+  });
 
   const labelHandler = (e) => e.target.previousElementSibling.focus();
 </script>
@@ -12,14 +23,18 @@
 @value `bind:value` for input value
 -->
 
-<div class="relative overflow-hidden">
+<div class="relative overflow-hidden {className}">
   <input
+    bind:this={inputEl}
     class="[ input ] border border-gray-400 shadow-md appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
     bind:value
+    on:change
+    on:blur
     class:filled={value}
     {id}
     type="text"
     aria-labelledby="{id}-label"
+    {required}
   />
   <span
     on:click={labelHandler}

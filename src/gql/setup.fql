@@ -1,0 +1,15 @@
+# Database Setup Script
+
+CreateIndex({
+  name: "unique_Area",
+  unique: true,
+  source: Collection("Area"),
+  terms: [
+    {
+      field: ["data", "name"]
+    },
+    {
+      field: ["data", "company"]
+    }
+  ]
+})

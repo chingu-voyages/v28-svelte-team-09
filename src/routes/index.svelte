@@ -12,14 +12,14 @@
     !(clickOutside = false) && setTimeout(() => (clickOutside = true));
 </script>
 
-<header class="flex row items-center justify-between px-4 lg:px-20 my-1">
+<header class="flex row items-center justify-between px-4 lg:px-20">
   <div class="flex items-center">
     <img src="/images/logo.webp" alt="DShift logo" class="h-16" />
     <h2 class="justify-self-start font-logo text-2xl font-medium">DShift</h2>
   </div>
   <nav>
     <Button on:click={() => (open = true) && (login = true)}>Login</Button>
-    <Button on:click={() => (open = true) && (login = false)} type="outline"
+    <Button on:click={() => (open = true) && (login = false)} variant="outline"
       >Register</Button
     >
   </nav>

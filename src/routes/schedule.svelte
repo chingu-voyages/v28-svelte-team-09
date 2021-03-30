@@ -6,13 +6,11 @@
   import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
   import AppHeader from "$lib/AppHeader.svelte";
   import ShiftModal from "$lib/schedule/ShiftModal.svelte";
-<<<<<<< HEAD
-  import DatePicker from "$lib/calendar/DatePicker.svelte";
-=======
   import ShiftCard from "../lib/schedule/ShiftCard.svelte";
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
   import { fade } from "svelte/transition";
->>>>>>> 48e9d95df47342d9554abd24d0d917a7c8f0c8ff
+  import DatePicker from "$lib/calendar/DatePicker.svelte";
+
 
   let addEmployee = false;
   let isShiftOpen = false;
@@ -55,14 +53,11 @@
       <button
         class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"
         >{"<"}</button
-      ><button
-        class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto"
       >
         <DatePicker
         on:datechange={onDateChange}
         selected={currentDate}
-      /></button
-      ><button
+      /><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
         >{">"}</button
       >

@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import Calender from "$lib/calendar/Calender.svelte";
-  import { getMonthName } from "$lib/calendar/date-time.js";
+  import { getMonthName } from "$utils/date-time.js";
 
   const dispatch = createEventDispatcher();
 
@@ -47,43 +47,17 @@
   };
 </script>
 
-<style>
-  .relative {
-    position: relative;
-  }
-  .box {
-    position: absolute;
-    top: 40px;
-    left: 0px;
-    border: 1px solid green;
-    display: inline-block;
-  }
-
-  .month-name {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 6px 0;
-  }
-
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-</style>
-
-<div class="relative">
-  <input type="text" on:focus={onFocus} value={selected.toDateString()} />
+<div class="relative bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto">
+  <p class="cursor-pointer" on:click={onFocus}>{selected.toLocaleDateString('en-US')}</p>
   {#if showDatePicker}
-    <div class="box">
-      <div class="month-name">
-        <div class="center">
-          <button on:click={prev}>{"<"}</button>
+    <div class="absolute border-indigo-500 bg-indigo-100 top-12 pb-3 -left-16 sm:left-0 border-2 rounded">
+      <div class="flex justify-around py-2 items-center text-white bg-indigo-500">
+        <div class="flex justify-center items-center">
+          <button class="px-3" on:click={prev}>{"<"}</button>
         </div>
-        <div class="center">{getMonthName(month)} {year}</div>
-        <div class="center">
-          <button on:click={next}>{">"}</button>
+        <div class="flex justify-center items-center">{getMonthName(month)} {year}</div>
+        <div class="flex justify-center items-center">
+          <button class="px-3" on:click={next}>{">"}</button>
         </div>
       </div>
       <Calender

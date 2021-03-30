@@ -42,30 +42,29 @@ export const getMonthName = index => monthNames[index];
 // Getting days for selected month
 export const getDateRows = (monthIndex, year) => {
   const { days } = getMonthStats(monthIndex, year);
-  const { days: daysPrev } = getMonthStats(monthIndex-1, year);
+  // const { days: daysPrev } = getMonthStats(monthIndex-1, year);
 
   const rows = getEmptyRows();
   // Calculating day of the week when current month start and end
   const startIndex = new Date(year, monthIndex, 1).getDay();
-  const endIndex = new Date(year, monthIndex+1, 0).getDay();
+  // const endIndex = new Date(year, monthIndex+1, 0).getDay();
 
   // Filling rows array with days from previous, current & next month
   Array.from({ length: days }).forEach((_, i) => {
     const index = startIndex + i;
-    if (i < startIndex) {
-      rows[i] = daysPrev - startIndex + 1 + i;
-    }; 
-    if (i < 7 - endIndex -1) {
-      rows[days+startIndex+i] = i +1;
-    };
+    // Show days from prev month and next month
+    // if (i < startIndex) {
+    //   rows[i] = daysPrev - startIndex + 1 + i;
+    // }; 
+    // if (i < 7 - endIndex -1) {
+    //   rows[days+startIndex+i] = i +1;
+    // };
     rows[index] = i + 1;
   });
   
   const filled = rows.map(i => (Array.isArray(i) ? undefined : i));
   return filled[35] ? filled : filled.slice(0, -7);
 };
-
-export const noop = () => {};
 
 export const uuid = (() => {
   let id = 1;

@@ -13,7 +13,13 @@
   export let employeeOpts = [{ name: "N/A" }];
   let areaOpts = [{ name: "Default", color: "green" }];
 
-  let employeeIndex, areaIndex, start, finish, breakMins, notes;
+  let employeeIndex, areaIndex, breakMins;
+  export { breakMins as break };
+  export let start,
+    finish,
+    notes,
+    area = { name: "Default", color: "green", _id: "1" },
+    assignedTo = { name: "N/A", _id: "1" };
   const init = {
     employeeIndex: -1,
     areaIndex: -1,

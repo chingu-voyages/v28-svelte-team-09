@@ -4,11 +4,13 @@
   import Button from "$lib/Button.svelte";
   import Select from "./Select.svelte";
   import AreaModal from "./AreaModal.svelte";
+  import dayjs from "dayjs";
 
   export let open = false;
+  export let day = dayjs();
   let clickOutside = true;
 
-  let employeeOpts = [{ name: "Moo" }, { name: "Wee" }];
+  export let employeeOpts = [{ name: "N/A" }];
   let areaOpts = [{ name: "Default", color: "green" }];
 
   let employeeIndex, areaIndex, start, finish, breakMins, notes;
@@ -48,7 +50,7 @@
             class="text-lg font-main leading-6 font-medium mb-4"
             id="modal-headline"
           >
-            Shift: Tue 02 Mar
+            Shift: {day.format("ddd DD MMM")}
           </h3>
           <div
             class="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 justify-between"
@@ -73,7 +75,6 @@
             </Select>
             <Select
               label="Area"
-              area
               options={areaOpts}
               class="w-full sm:w-52"
               bind:selectedIndex={areaIndex}

@@ -14,9 +14,7 @@
   // TODO: date user input data replace here
   // demo data
   let week = [];
-  for (let i = 0; i < 7; i++) {
-    week.push(dayjs().startOf("day").add(i, "day"));
-  }
+  for (let i = 0; i < 7; i++) week.push(dayjs().startOf("day").add(i, "day"));
 
   let addEmployee = false;
   let isShiftOpen = false;

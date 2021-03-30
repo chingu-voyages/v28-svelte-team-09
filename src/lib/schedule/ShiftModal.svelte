@@ -11,13 +11,13 @@
   let clickOutside = true;
 
   export let employeeOpts = [{ name: "N/A" }];
-  let areaOpts = [{ name: "Default", color: "green" }];
+  let areaOpts = [{ name: "default", color: "green" }];
 
   let employeeIndex, areaIndex, breakMins;
   export { breakMins as break };
-  export let start,
-    finish,
-    notes,
+  export let start = null,
+    finish = null,
+    notes = null,
     area = { name: "Default", color: "green", _id: "1" },
     assignedTo = { name: "N/A", _id: "1" };
   const init = {
@@ -101,7 +101,10 @@
                   >Edit area details</span
                 >
               </button>
-              <span class="ml-3 block truncate"> No areas yet... </span>
+              <span class="ml-3 block truncate">
+                {(areaOpts.length && areaOpts?.[selectedIndex]) ||
+                  "No areas yet..."}
+              </span>
               <div
                 slot="item"
                 class="contents"

@@ -1,7 +1,7 @@
 <script>
-  export let empty,
-    title = empty ? "Open/Empty Shifts" : "N/A",
-    wageTime = empty ? "7.00Hrs" : "",
+  export let open,
+    title = open ? "Open Shifts" : "N/A",
+    wageTime = open ? "7.00Hrs" : "",
     src = "/images/icons/themed-user-circle-solid.svg";
 </script>
 

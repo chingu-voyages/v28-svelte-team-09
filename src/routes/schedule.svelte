@@ -10,14 +10,14 @@
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
 
   let addEmployee = false;
-  let shiftOpen = false;
+  let isShiftOpen = false;
   let employees = [];
 
-  let emptyShifts = [null, null, null, null, null, null, null];
+  let openShifts = [null, null, null, null, null, null, null];
 
   $: employeeShifts = employees.map((employee) => ({
     employee,
-    shifts: [...emptyShifts],
+    shifts: [...openShifts],
   }));
 
   //fetch employee data from DB
@@ -66,16 +66,16 @@
     class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
   >
     <!-- Open Shifts -->
-    <ShiftCard empty />
-    {#each emptyShifts as shift, i}
-      <ShiftItem {i} on:click={() => (shiftOpen = !shiftOpen)} />
+    <ShiftCard open />
+    {#each openShifts as shift, i}
+      <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
     {/each}
 
     <!-- Employees -->
     {#each employees as { name, hourlyWage }}
       <ShiftCard title={name} />
-      {#each emptyShifts as shift, i}
-        <ShiftItem {i} on:click={() => (shiftOpen = !shiftOpen)} />
+      {#each openShifts as shift, i}
+        <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
       {/each}
     {/each}
   </section>
@@ -85,5 +85,5 @@
   >
 
   <AddEmployeeModal bind:open={addEmployee} />
-  <ShiftModal bind:open={shiftOpen} />
+  <ShiftModal bind:open={isShiftOpen} />
 </main>

@@ -19,7 +19,6 @@
   for (let i = 0; i < 7; i++) {
     week.push(dayjs().startOf("day").add(i, "day"));
   }
-  // let week = week.map((day) => day.format("ddd DD"));
 
   let addEmployee = false;
   let isShiftOpen = false;

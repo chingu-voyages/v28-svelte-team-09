@@ -8,6 +8,7 @@
   import ShiftModal from "$lib/schedule/ShiftModal.svelte";
   import ShiftCard from "../lib/schedule/ShiftCard.svelte";
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
+  import { fade } from "svelte/transition";
 
   let addEmployee = false;
   let isShiftOpen = false;
@@ -62,23 +63,26 @@
   </section>
 
   <!-- TODO: Desktop grid & each block + shift display -->
-  <section
-    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
-  >
-    <!-- Open Shifts -->
-    <ShiftCard open />
-    {#each openShifts as shift, i}
-      <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
-    {/each}
-
-    <!-- Employees -->
-    {#each employees as { name, hourlyWage }}
-      <ShiftCard title={name} />
+  {#if employees.length}
+    <section
+      transition:fade|local
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
+    >
+      <!-- Open Shifts -->
+      <ShiftCard open />
       {#each openShifts as shift, i}
         <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
       {/each}
-    {/each}
-  </section>
+
+      <!-- Employees -->
+      {#each employees as { name, hourlyWage }}
+        <ShiftCard title={name} />
+        {#each openShifts as shift, i}
+          <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
+        {/each}
+      {/each}
+    </section>
+  {/if}
 
   <!--TODO:remove button. test button to try the add employee query -->
   <Button class="m-8" on:click={() => (addEmployee = true)}>Add Employee</Button

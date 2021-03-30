@@ -88,7 +88,7 @@
       {/each}
 
       <!-- Open Shifts -->
-      <ShiftCard open />
+      <ShiftCard vacant />
       {#each week as _, i}
         <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
       {/each}

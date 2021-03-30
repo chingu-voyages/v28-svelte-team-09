@@ -10,7 +10,6 @@
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
   import { fade } from "svelte/transition";
   import DatePicker from "$lib/calendar/DatePicker.svelte";
-
   import dayjs from "dayjs";
 
   // TODO: date user input data replace here
@@ -19,7 +18,6 @@
   for (let i = 0; i < 7; i++) {
     week.push(dayjs().startOf("day").add(i, "day"));
   }
-  // let week = week.map((day) => day.format("ddd DD"));
 
   let addEmployee = false;
   let isShiftOpen = false;
@@ -115,9 +113,20 @@
     </section>
   {/if}
 
-  <!--TODO:remove button. test button to try the add employee query -->
-  <Button class="m-8" on:click={() => (addEmployee = true)}>Add Employee</Button
+  <button
+    type="button"
+    class="rounded flex items-center {employees.length
+      ? 'ml-8'
+      : 'mx-auto'} mt-8"
+    on:click={() => (addEmployee = true)}
   >
+    <img
+      class="mr-2"
+      src="/images/icons/themed-plus-circle-solid.svg"
+      width="15"
+      alt="add more icon"
+    /> Add New Employee
+  </button>
 
   <AddEmployeeModal bind:open={addEmployee} />
   <ShiftModal bind:open={isShiftOpen} />

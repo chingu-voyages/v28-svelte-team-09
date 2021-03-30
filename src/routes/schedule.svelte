@@ -9,17 +9,19 @@
   import ShiftCard from "../lib/schedule/ShiftCard.svelte";
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
   import { fade } from "svelte/transition";
+  import dayjs from "dayjs";
+
+  // TODO: date user input data replace here
+  // demo data
+  let week = [];
+  for (let i = 0; i < 7; i++) {
+    week.push(dayjs().startOf("day").add(i, "day"));
+  }
+  // let week = week.map((day) => day.format("ddd DD"));
 
   let addEmployee = false;
   let isShiftOpen = false;
   let employees = [];
-
-  let openShifts = [null, null, null, null, null, null, null];
-
-  $: employeeShifts = employees.map((employee) => ({
-    employee,
-    shifts: [...openShifts],
-  }));
 
   //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
@@ -66,11 +68,29 @@
   {#if employees.length}
     <section
       transition:fade|local
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-[2px] bg-indigo-100 border-b-2 border-t-2"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-[2px] bg-indigo-100 border-b-2 border-t-2 sm:border-t-0"
     >
+      <div class="bg-white w-full hidden sm:block" />
+      {#each week as day, i}
+        <div
+          class="bg-white p-2 hidden items-center justify-center"
+          class:sm:flex={i < 2}
+          class:md:flex={i < 3}
+          class:lg:flex={i < 4}
+          class:xl:flex={i < 5}
+          class:2xl:flex={i >= 5}
+        >
+          <div
+            class="flex flex-col place-items-center place-content-center w-full"
+          >
+            <h3 class="font-semibold line-clamp-1">{day.format("ddd DD")}</h3>
+          </div>
+        </div>
+      {/each}
+
       <!-- Open Shifts -->
       <ShiftCard open />
-      {#each openShifts as shift, i}
+      {#each week as _, i}
         <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
       {/each}
 
@@ -85,8 +105,8 @@
               minimumFractionDigits: 2,
             }).format(hourlyWage)}
         />
-        {#each openShifts as shift, i}
-          <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
+        {#each week as _, i}
+          <ShiftItem {i} on:click={() => (isShiftOpen = true)} />
         {/each}
       {/each}
     </section>

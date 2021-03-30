@@ -10,7 +10,7 @@
   export let day = dayjs();
   let clickOutside = true;
 
-  let employeeOpts = [{ name: "Moo" }, { name: "Wee" }];
+  export let employeeOpts = [{ name: "N/A" }];
   let areaOpts = [{ name: "Default", color: "green" }];
 
   let employeeIndex, areaIndex, start, finish, breakMins, notes;
@@ -75,7 +75,6 @@
             </Select>
             <Select
               label="Area"
-              area
               options={areaOpts}
               class="w-full sm:w-52"
               bind:selectedIndex={areaIndex}

@@ -22,6 +22,7 @@
   let isShiftOpen = false;
   let employees = [];
   let currentDate = new Date();
+  let currentShift = {};
 
   const onDateChange = (d) => {
     currentDate = d.detail;
@@ -89,12 +90,20 @@
 
       <!-- Open Shifts -->
       <ShiftCard vacant />
-      {#each week as _, i}
-        <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
+      {#each week as day, i}
+        <ShiftItem
+          {i}
+          on:click={() => {
+            currentShift = {
+              day,
+            };
+            isShiftOpen = true;
+          }}
+        />
       {/each}
 
       <!-- Employees -->
-      {#each employees as { name, hourlyWage }}
+      {#each employees as { name, hourlyWage, _id }}
         <ShiftCard
           title={name}
           timeRate={hourlyWage &&
@@ -104,8 +113,17 @@
               minimumFractionDigits: 2,
             }).format(hourlyWage)}
         />
-        {#each week as _, i}
-          <ShiftItem {i} on:click={() => (isShiftOpen = true)} />
+        {#each week as day, i}
+          <ShiftItem
+            {i}
+            on:click={() => {
+              currentShift = {
+                employeeId: _id,
+                day,
+              };
+              isShiftOpen = true;
+            }}
+          />
         {/each}
       {/each}
     </section>
@@ -127,5 +145,9 @@
   </button>
 
   <AddEmployeeModal bind:open={addEmployee} />
-  <ShiftModal bind:open={isShiftOpen} />
+  <ShiftModal
+    {...currentShift}
+    employeeOpts={employees}
+    bind:open={isShiftOpen}
+  />
 </main>

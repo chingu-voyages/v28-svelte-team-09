@@ -4,8 +4,10 @@
   import Button from "$lib/Button.svelte";
   import Select from "./Select.svelte";
   import AreaModal from "./AreaModal.svelte";
+  import dayjs from "dayjs";
 
   export let open = false;
+  export let day = dayjs();
   let clickOutside = true;
 
   let employeeOpts = [{ name: "Moo" }, { name: "Wee" }];
@@ -48,7 +50,7 @@
             class="text-lg font-main leading-6 font-medium mb-4"
             id="modal-headline"
           >
-            Shift: Tue 02 Mar
+            Shift: {day.format("ddd DD MMM")}
           </h3>
           <div
             class="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 justify-between"

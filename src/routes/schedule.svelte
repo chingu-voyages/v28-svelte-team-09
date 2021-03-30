@@ -9,6 +9,7 @@
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
   import { fade } from "svelte/transition";
   import dayjs from "dayjs";
+  import { shiftsByUserID } from "$gql/shift";
 
   // TODO: date user input data replace here
   // demo data
@@ -19,14 +20,14 @@
 
   let addEmployee = false;
   let isShiftOpen = false;
-  let employees = [];
   let currentShift = {};
 
   //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
-  $: if ($employeesOp.data?.result != null) {
-    employees = [...$employeesOp.data.result.employees.data];
-  }
+  $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
+
+  const shiftsOp = shiftsByUserID({ id: $authStore.id });
+  $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
 </script>
 
 <AppHeader />

@@ -9,10 +9,8 @@
   import ShiftCard from "../lib/schedule/ShiftCard.svelte";
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
   import { fade } from "svelte/transition";
-<<<<<<< HEAD
   import DatePicker from "$lib/calendar/DatePicker.svelte";
 
-=======
   import dayjs from "dayjs";
 
   // TODO: date user input data replace here
@@ -22,14 +20,13 @@
     week.push(dayjs().startOf("day").add(i, "day"));
   }
   // let week = week.map((day) => day.format("ddd DD"));
->>>>>>> 90cdf37bea1ebd214cd6ee2b3e338c8abcdd889c
 
   let addEmployee = false;
   let isShiftOpen = false;
   let employees = [];
   let currentDate = new Date();
 
-  const onDateChange = d => {
+  const onDateChange = (d) => {
     currentDate = d.detail;
   };
 
@@ -59,10 +56,7 @@
         class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"
         >{"<"}</button
       >
-        <DatePicker
-        on:datechange={onDateChange}
-        selected={currentDate}
-      /><button
+      <DatePicker on:datechange={onDateChange} selected={currentDate} /><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
         >{">"}</button
       >

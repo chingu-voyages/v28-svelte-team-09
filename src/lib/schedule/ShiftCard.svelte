@@ -1,7 +1,7 @@
 <script>
   export let open,
     title = open ? "Open Shifts" : "N/A",
-    wageTime = open ? "7.00Hrs" : "",
+    timeRate = open ? "7.00Hrs" : "",
     src = "/images/icons/themed-user-circle-solid.svg";
 </script>
 
@@ -10,8 +10,8 @@
   <div class="flex flex-col place-items-center place-content-center w-full">
     <h3 class="font-semibold line-clamp-1">{title}</h3>
     <!-- TODO: {openTime}Hrs-->
-    {#if wageTime}
-      <p class="text-indigo-100">{wageTime}</p>
+    {#if timeRate}
+      <p class="text-indigo-100">{timeRate}</p>
     {/if}
   </div>
 </div>

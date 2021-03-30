@@ -76,7 +76,15 @@
 
       <!-- Employees -->
       {#each employees as { name, hourlyWage }}
-        <ShiftCard title={name} />
+        <ShiftCard
+          title={name}
+          timeRate={hourlyWage &&
+            new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+              minimumFractionDigits: 2,
+            }).format(hourlyWage)}
+        />
         {#each openShifts as shift, i}
           <ShiftItem {i} on:click={() => (isShiftOpen = !isShiftOpen)} />
         {/each}

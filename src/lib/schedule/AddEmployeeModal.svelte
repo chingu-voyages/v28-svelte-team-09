@@ -23,7 +23,7 @@
       phone: "",
       address: "",
       contactName: "",
-      contactPhone: ""
+      contactPhone: "",
     };
   }
 
@@ -32,12 +32,12 @@
   }
 
   async function handleSubmit() {
+    open = false;
     await Promise.allSettled(
       employeesToAdd.map((employee) =>
         createEmployee({ ...employee, manager: $authStore.id })
       )
     );
-    open = false;
     reset();
   }
 </script>

@@ -21,6 +21,7 @@
 @slot default - Placeholder if none selected
 @slot selected - Currently selected item
 @slot item - Each select item
+@slot area - specific slot for area opening button
 -->
 
 <div class={className}>
@@ -59,6 +60,12 @@
               break;
             case "Enter":
               selectedIndex = highlighted;
+              break;
+            case "Home":
+              highlighted = 0;
+              break;
+            case "End":
+              highlighted = options.length - 1;
               break;
           }
         }

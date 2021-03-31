@@ -13,24 +13,16 @@
 
   let d = 0;
   function handlePrev() {
-		d += 7;
-	}
+		return d -= 7;
+	};
   function handleNext() {
-		d -= 7;
-	}
+		return d += 7;
+	};
 
-  console.log(d);
-  // let firstDayofWeek = dayjs(d).startOf("week");
-  // letthisWeek = new Array(7).fill(firstDayofWeek)
-  //      .map((day, i) => day.add(i, "day").format("DD MMM")); 
-
-  // TODO: date user input data replace here
-  // demo data
-  let week = [];
-  for (let i = d; i < d+7; i++) {
-    week.push(dayjs().startOf("week").add(i, "day"));
-  }
-
+  $: firstDayofWeek = dayjs(dayjs().startOf("week").add(d, "day")).startOf("week");
+  $: week = new Array(7).fill(firstDayofWeek)
+       .map((day, i) => day.add(i, "day")); 
+  
   let addEmployee = false;
   let isShiftOpen = false;
   let currentShift = {};

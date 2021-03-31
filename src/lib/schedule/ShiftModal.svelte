@@ -4,12 +4,15 @@
   import Button from "$lib/Button.svelte";
   import Select from "./Select.svelte";
   import AreaModal from "./AreaModal.svelte";
+  import { useCreateShift } from "$gql/shift"
   import dayjs from "dayjs";
   import { areasByUserID } from "$gql/area";
 
   export let open = false;
   export let day = dayjs();
   let clickOutside = true;
+
+  const [createShift, shiftOp] = useCreateShift();
 
   export let employeeOpts = [{ name: "N/A" }];
   let areaOpts = [{ name: "default", color: "green" }];

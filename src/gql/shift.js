@@ -28,7 +28,7 @@ const SHIFT_FIELDS = gql`
   }
 `;
 
-export const createShift = () =>
+export const useCreateShift = () =>
   mutationOp(
     gql`
       mutation CreateShift(

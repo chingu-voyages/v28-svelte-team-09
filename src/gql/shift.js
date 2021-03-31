@@ -28,7 +28,7 @@ const SHIFT_FIELDS = gql`
   }
 `;
 
-export const createShift = () => {
+export const createShift = () =>
   mutationOp(
     gql`
       mutation CreateShift(
@@ -64,9 +64,8 @@ export const createShift = () => {
       ${SHIFT_FIELDS}
     `
   );
-};
 
-export const assignShift = () => {
+export const assignShift = () => 
   mutationOp(
     gql`
       mutation UpdateShift(
@@ -89,9 +88,9 @@ export const assignShift = () => {
       ${SHIFT_FIELDS}
     `
   );
-};
 
-export const updateArea = () => {
+
+export const updateArea = () => 
   mutationOp(
     gql`
       mutation UpdateArea(
@@ -113,7 +112,7 @@ export const updateArea = () => {
       }
     `
   );
-};
+
 
 export const shiftsByUserID = ({ id }) =>
   queryOp(

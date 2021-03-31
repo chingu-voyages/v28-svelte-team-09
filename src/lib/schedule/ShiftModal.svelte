@@ -5,6 +5,7 @@
   import Select from "./Select.svelte";
   import AreaModal from "./AreaModal.svelte";
   import dayjs from "dayjs";
+  import { areasByUserID } from "$gql/area";
 
   export let open = false;
   export let day = dayjs();
@@ -42,6 +43,10 @@
     // open = false;
     // reset();
   }
+
+  const areasOp = areasByUserID({ id: $authStore.id });
+  $: areas = $areasOp.data?.result.areas.data ?? [];
+  $: console.log(areas);
 </script>
 
 <ModalBox bind:open {clickOutside}>

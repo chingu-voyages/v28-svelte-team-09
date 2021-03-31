@@ -8,10 +8,10 @@
     "prebuild": "\"$CI\" = true && npx pnpm i --store=node_modules/.pnpm-store --frozen-lockfile=false || echo skiping pnpm install"
   },
   "dependencies": {
-    "@tailwindcss/line-clamp": "^0.2.0",
     "@urql/svelte": "^1.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.2.0 ",
     "@sveltejs/adapter-netlify": "1.0.0-next.3",
     "@sveltejs/kit": "1.0.0-next.49",
     "@tailwindcss/jit": "^0.1.17",

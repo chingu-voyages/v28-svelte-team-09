@@ -1,26 +1,78 @@
 <script>
+  import { useCreateArea, useDeleteArea, useUpdateArea } from "$gql/area";
   import Button from "$lib/Button.svelte";
   import Input from "$lib/Input.svelte";
   import ModalBox from "$lib/ModalBox.svelte";
+  import { authStore } from "$stores/auth";
   import { slide } from "svelte/transition";
   import Select from "./Select.svelte";
   export let open = false;
-  export let queriedAreas = []; // TODO: Add queried areas
+  export let areas = [];
 
-  let areasToAdd = [{ name: "Some Area Name", color: "green" }];
-  $: if (queriedAreas.length) {
-    areasToAdd = [...queriedAreas];
-  }
+  const defaultColor = "green";
+  let areasToAdd = [newArea()];
+  $: areas.length && reset();
   function newArea() {
     return {
       name: "",
-      color: "green",
+      color: defaultColor,
     };
   }
 
-  // TODO: Submit mutation
-  async function handleSubmit() {}
+  const [createArea, createAreaOp] = useCreateArea();
+  $: if ($createAreaOp.error) console.log($createAreaOp.error);
+  const [deleteArea, deleteAreaOp] = useDeleteArea();
+  $: if ($deleteAreaOp.error) console.log($deleteAreaOp.error);
+  const [updateArea, updateAreaOp] = useUpdateArea();
+  $: if ($updateAreaOp.error) console.log($updateAreaOp.error);
+
+  async function handleSubmit() {
+    // mutations all batched at the end
+
+    // separate already created and new areas
+    const [oldAreas, areasToCreate] = areasToAdd.reduce(
+      (acc, area) =>
+        area._id ? acc[0].push(area) && acc : acc[1].push(area) && acc,
+      [[], []]
+    );
+
+    const oldAreasDict = dictByID(oldAreas);
+    // get missing IDs to delete
+    const areasToDelete = areas.filter(({ _id }) => !oldAreasDict[_id]);
+
+    const areasDict = dictByID(areas);
+    // diff check areas to update
+    const areasToUpdate = oldAreas.filter(
+      ({ name, color, _id }) =>
+        areasDict[_id].name != name || areasDict[_id].color != color
+    );
+
+    open = false;
+    await Promise.allSettled([
+      ...areasToCreate.map(({ name, color }) =>
+        createArea({ name, color, id: $authStore.id })
+      ),
+      ...areasToDelete.map(({ _id }) => deleteArea({ id: _id })),
+      ...areasToUpdate.map((area) => updateArea(area)),
+    ]);
+
+    reset();
+
+    function dictByID(arr) {
+      const dict = {};
+      for (let { _id, ...rest } of arr) dict[_id] = { ...rest };
+      return dict;
+    }
+  }
+
+  function reset() {
+    areasToAdd = [...areas];
+  }
 </script>
+
+<!--@component
+@areas [] - pass in queried areas
+-->
 
 <ModalBox bind:open clickOutside>
   <form
@@ -50,7 +102,7 @@
                   bind:value={name}
                 />
                 <Select
-                  options={["blue", "red", "purple", "green"]}
+                  options={[defaultColor, "blue", "red", "purple"]}
                   label={i == 0 && "Color"}
                   class="w-[4.7rem] color-select {i == 0
                     ? 'mt-[-1.5rem]'
@@ -58,7 +110,7 @@
                   selectedIndex={0}
                   ><span slot="selected" class="block">
                     <div
-                      class="ml-1 w-5 h-5 rounded-full border border-white"
+                      class="w-5 h-5 rounded-full border border-white"
                       style="background: green"
                     />
                   </span>
@@ -79,7 +131,9 @@
                       ? (areasToAdd = areasToAdd.splice(i, 1) && [
                           ...areasToAdd,
                         ])
-                      : Object.values(areasToAdd[i]).some((v) => v) && reset()}
+                      : areasToAdd[0].name &&
+                        areasToAdd[0].color == defaultColor &&
+                        (areasToAdd = [newArea()])}
                 >
                   <img
                     width="15"

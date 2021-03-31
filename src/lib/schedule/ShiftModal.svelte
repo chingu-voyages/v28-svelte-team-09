@@ -4,7 +4,7 @@
   import Button from "$lib/Button.svelte";
   import Select from "./Select.svelte";
   import AreaModal from "./AreaModal.svelte";
-  import { useCreateShift } from "$gql/shift"
+  import { useCreateShift } from "$gql/shift";
   import dayjs from "dayjs";
   import { areasByUserID } from "$gql/area";
 
@@ -15,14 +15,15 @@
   const [createShift, shiftOp] = useCreateShift();
 
   export let employeeOpts = [{ name: "N/A" }];
-  let areaOpts = [{ name: "default", color: "green" }];
+  const defaultColor = "green";
+  let areas = [{ name: "default", color: defaultColor }];
 
   let employeeIndex, areaIndex, breakMins;
   export { breakMins as break };
   export let start = null,
     finish = null,
     notes = null,
-    area = { name: "Default", color: "green", _id: "1" },
+    area = { name: "Default", color: defaultColor, _id: "1" },
     assignedTo = { name: "N/A", _id: "1" };
   const init = {
     employeeIndex: -1,
@@ -89,7 +90,7 @@
             </Select>
             <Select
               label="Area"
-              options={areaOpts}
+              options={areas}
               class="w-full sm:w-52"
               bind:selectedIndex={areaIndex}
               let:selectedIndex
@@ -109,9 +110,16 @@
                   >Edit area details</span
                 >
               </button>
+
+              <span class="flex items-center" slot="selected">
+                <div
+                  class="ml-1 mr-3 w-4 h-4 rounded-full border border-white"
+                  style="background: {areas[selectedIndex].color}"
+                />
+                {areas[selectedIndex].name}
+              </span>
               <span class="ml-3 block truncate">
-                {(areaOpts.length && areaOpts?.[selectedIndex]) ||
-                  "No areas yet..."}
+                {areas.length ? "Select an area..." : "No areas yet..."}
               </span>
               <div
                 slot="item"
@@ -205,4 +213,4 @@
   </form>
 </ModalBox>
 
-<AreaModal bind:open={areaOpen} />
+<AreaModal bind:open={areaOpen} {areas} />

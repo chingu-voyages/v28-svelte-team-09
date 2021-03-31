@@ -11,11 +11,18 @@
   import dayjs from "dayjs";
   import { shiftsByUserID } from "$gql/shift";
 
-  // TODO: date user input data replace here
-  // demo data
-  let week = [];
-  for (let i = 0; i < 7; i++) week.push(dayjs().startOf("day").add(i, "day"));
+  let d = 0;
+  function handlePrev() {
+		return d -= 7;
+	};
+  function handleNext() {
+		return d += 7;
+	};
 
+  $: firstDayofWeek = dayjs(dayjs().startOf("week").add(d, "day")).startOf("week");
+  $: week = new Array(7).fill(firstDayofWeek)
+       .map((day, i) => day.add(i, "day")); 
+  
   let addEmployee = false;
   let isShiftOpen = false;
   let currentShift = {};
@@ -28,6 +35,7 @@
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
 </script>
 
+<!-- svelte-ignore non-top-level-reactive-declaration -->
 <AppHeader />
 
 <main class="text-center bg-white">
@@ -43,15 +51,16 @@
     <!-- TODO: Styles and date picker (?) -->
     <div class="space-x-2 w-11/12 md:w-auto flex m-auto">
       <button
-        class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"
+        class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5" 
+        on:click={handlePrev}
         >{"<"}</button
       ><button
         class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto"
       >
-        <!-- TODO: {curDay} -->
-        01 Mar</button
+        {week[0].format('DD MMM')} - {week[6].format('DD MMM')} </button
       ><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
+        on:click={handleNext}
         >{">"}</button
       >
     </div>

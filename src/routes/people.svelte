@@ -15,22 +15,17 @@
   let employeeNum;
   let searchTerm = "";
 
-  let employees = [];
-
+  const employeesOp = employeesByUserID({ id: $authStore.id });
+  $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
   $: filteredList = employees.filter(
     (employee) => employee.name.toLowerCase().indexOf(searchTerm) !== -1
   );
 
-  const employeesOp = employeesByUserID({ id: $authStore.id });
-  $: if ($employeesOp.data) {
-    employees = [...$employeesOp.data.result.employees.data];
-  }
-
   const [deleteEmployee, employeeOp] = useDeleteEmployee();
 
   //TREAT DELETION ERR IF NECESSARY
-  $: if ($employeeOp.error)
-    console.log("ERR: error deleting employee", $employeeOp.error);
+  $: if ($employeesOp.error)
+    console.log("ERR: error deleting employee", $employeesOp.error);
 
   function handleDelete(i) {
     deleteEmployee({

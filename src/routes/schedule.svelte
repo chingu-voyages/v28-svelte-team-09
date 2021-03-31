@@ -8,31 +8,24 @@
   import ShiftCard from "../lib/schedule/ShiftCard.svelte";
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
   import { fade } from "svelte/transition";
-  import DatePicker from "$lib/calendar/DatePicker.svelte";
   import dayjs from "dayjs";
+  import { shiftsByUserID } from "$gql/shift";
 
   // TODO: date user input data replace here
   // demo data
   let week = [];
-  for (let i = 0; i < 7; i++) {
-    week.push(dayjs().startOf("day").add(i, "day"));
-  }
+  for (let i = 0; i < 7; i++) week.push(dayjs().startOf("day").add(i, "day"));
 
   let addEmployee = false;
   let isShiftOpen = false;
-  let employees = [];
-  let currentDate = new Date();
   let currentShift = {};
-
-  const onDateChange = (d) => {
-    currentDate = d.detail;
-  };
 
   //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
-  $: if ($employeesOp.data?.result != null) {
-    employees = [...$employeesOp.data.result.employees.data];
-  }
+  $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
+
+  const shiftsOp = shiftsByUserID({ id: $authStore.id });
+  $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
 </script>
 
 <AppHeader />
@@ -52,8 +45,12 @@
       <button
         class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"
         >{"<"}</button
+      ><button
+        class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto"
       >
-      <DatePicker on:datechange={onDateChange} selected={currentDate} /><button
+        <!-- TODO: {curDay} -->
+        01 Mar</button
+      ><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
         >{">"}</button
       >

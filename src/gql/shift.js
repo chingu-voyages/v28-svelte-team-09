@@ -114,3 +114,33 @@ export const updateArea = () => {
     `
   );
 };
+
+export const shiftsByUserID = ({ id }) =>
+  queryOp(
+    gql`
+      query ShiftsByUserID($id: ID!) {
+        result: findUserByID(id: $id) {
+          shifts {
+            data {
+              start
+              finish
+              break
+              notes
+              assignedTo {
+                name
+                hourlyWage
+                _id
+              }
+              _id
+              area {
+                name
+                color
+                _id
+              }
+            }
+          }
+        }
+      }
+    `,
+    { id }
+  );

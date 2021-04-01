@@ -65,7 +65,7 @@ export const useCreateShift = () =>
     `
   );
 
-export const assignShift = () => 
+export const useAssignShift = () =>
   mutationOp(
     gql`
       mutation UpdateShift(
@@ -89,8 +89,7 @@ export const assignShift = () =>
     `
   );
 
-
-export const updateArea = () => 
+export const updateArea = () =>
   mutationOp(
     gql`
       mutation UpdateArea(
@@ -112,7 +111,6 @@ export const updateArea = () =>
       }
     `
   );
-
 
 export const shiftsByUserID = ({ id }) =>
   queryOp(

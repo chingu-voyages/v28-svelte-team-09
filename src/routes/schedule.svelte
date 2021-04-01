@@ -13,23 +13,21 @@
   import { shiftsByUserID } from "$gql/shift";
 
   let open = false;
-  let d = 0;
-  function handlePrev() {
-		return d -= 7;
-	};
-  function handleNext() {
-		return d += 7;
-	};
 
-  $: firstDayofWeek = dayjs(dayjs().startOf("week").add(d, "day")).startOf("week");
-  $: week = new Array(7).fill(firstDayofWeek)
-       .map((day, i) => day.add(i, "day")); 
-  
+  let innerWidth,
+    twBreakpoints = [640, 768, 1024, 1280, 1536];
+  $: incD =
+    (innerWidth && twBreakpoints.findIndex((w) => w > innerWidth) + 1) || 7;
+  let d = 0;
+  const [handlePrev, handleNext] = [() => (d -= incD), () => (d += incD)];
+
+  $: firstDayOfWeek = dayjs().startOf("week").add(d, "day");
+  $: week = Array.from({ length: 7 }, (_, i) => firstDayOfWeek.add(i, "day"));
+
   let addEmployee = false;
   let isShiftOpen = false;
   let currentShift = {};
 
-  //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
 
@@ -37,7 +35,8 @@
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
 </script>
 
-<!-- svelte-ignore non-top-level-reactive-declaration -->
+<svelte:window bind:innerWidth />
+
 <AppHeader />
 
 <main class="text-center bg-white">
@@ -53,21 +52,19 @@
     <!-- TODO: Styles and date picker (?) -->
     <div class="space-x-2 w-11/12 md:w-auto flex m-auto">
       <button
-        class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5" 
-        on:click={handlePrev}
-        >{"<"}</button
+        class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"
+        on:click={handlePrev}>{"<"}</button
       ><button
         class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto relative"
         on:click={() => (open = true)}
       >
-        {week[0].format('DD MMM')} - {week[6].format('DD MMM')}<div class="absolute w-64 left-0 top-14 bg-indigo-100">
-        <Calendar bind:open/>
-      </div> </button
-      >
-      <button
+        {week[0].format("DD MMM")} - {week[6].format("DD MMM")}
+        <div class="absolute w-64 left-0 top-14 bg-indigo-100">
+          <Calendar bind:open/>
+        </div>
+      </button><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
-        on:click={handleNext}
-        >{">"}</button
+        on:click={handleNext}>{">"}</button
       >
     </div>
     <Button class="w-11/12 md:ml-auto md:w-auto"
@@ -115,7 +112,7 @@
       {/each}
 
       <!-- Employees -->
-      {#each employees as { name, hourlyWage, _id }}
+      {#each employees as { name, hourlyWage }, employeeIndex}
         <ShiftCard
           title={name}
           timeRate={hourlyWage &&
@@ -130,7 +127,7 @@
             {i}
             on:click={() => {
               currentShift = {
-                employeeId: _id,
+                employeeIndex,
                 day,
               };
               isShiftOpen = true;

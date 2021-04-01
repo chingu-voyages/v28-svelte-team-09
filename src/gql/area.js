@@ -34,7 +34,7 @@ export const useCreateArea = () =>
 export const useUpdateArea = () =>
   mutationOp(gql`
     mutation UpdateArea($id: ID!, $name: String, $color: String) {
-      partialUpdateArea(id: $id, data: { name: $name, color: $color }) {
+      result: partialUpdateArea(id: $id, data: { name: $name, color: $color }) {
         name
         color
         _id
@@ -45,7 +45,7 @@ export const useUpdateArea = () =>
 export const useDeleteArea = () =>
   mutationOp(gql`
     mutation DeleteArea($id: ID!) {
-      deleteArea(id: $id) {
+      result: deleteArea(id: $id) {
         _id
         name
       }

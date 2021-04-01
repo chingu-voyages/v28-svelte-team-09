@@ -36,7 +36,7 @@ export const useCreateShift = () =>
         $finish: Time!
         $creator: ID!
         $break: Int
-        $assignedTo: ID
+        $assignedTo: ShiftAssignedToRelation # employee ID
         $notes: String
         $area: ID!
       ) {
@@ -46,7 +46,7 @@ export const useCreateShift = () =>
             finish: $finish
             creator: { connect: $creator }
             break: $break
-            assignedTo: { connect: $assignedTo }
+            assignedTo: $assignedTo
             notes: $notes
             area: { connect: $area }
           }
@@ -55,7 +55,11 @@ export const useCreateShift = () =>
         }
       }
       ${SHIFT_FIELDS}
-    `
+    `,
+    ({ assignedTo, ...vars }) => ({
+      assignedTo: assignedTo ? { connect: assignedTo } : undefined,
+      ...vars,
+    })
   );
 
 export const useAssignShift = () =>

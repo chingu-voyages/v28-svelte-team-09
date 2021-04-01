@@ -6,47 +6,85 @@
   import AreaModal from "./AreaModal.svelte";
   import { useCreateShift } from "$gql/shift";
   import dayjs from "dayjs";
+  import utc from "dayjs/plugin/utc";
   import { areasByUserID } from "$gql/area";
+  dayjs.extend(utc);
 
   export let open = false;
-  export let day = dayjs();
+  export let employeeOpts = [{ name: "N/A" }];
+  export let shiftParams = {};
+  let {
+    day = dayjs().startOf("day").utc(),
+    employeeIndex = -1,
+    areaIndex = -1,
+    // API data
+    start = null,
+    finish = null,
+    notes = null,
+    _id = null,
+    area = null,
+    assignedTo = null,
+    break: breakMins = null,
+  } = shiftParams;
   let clickOutside = true;
 
   const [createShift, createShiftOp] = useCreateShift();
+  $: $createShiftOp.error && console.log($createShiftOp.error);
 
-  export let employeeOpts = [{ name: "N/A" }];
   const defaultColor = "green";
   let areas = [{ name: "default", color: defaultColor }];
 
-  export let employeeIndex;
-  let areaIndex, breakMins;
-  export { breakMins as break };
-  export let start = null,
-    finish = null,
-    notes = null,
-    area = { name: "Default", color: defaultColor, _id: "1" },
-    assignedTo = { name: "N/A", _id: "1" };
-  const init = {
-    employeeIndex: -1,
-    areaIndex: -1,
-    start,
-    finish,
-    breakMins,
-    notes,
-  };
+  $: console.log(
+    start &&
+      day
+        .add(start.slice(0, 2), "hours")
+        .add(start.slice(3), "minutes")
+        .utc()
+        .format()
+  );
 
   let areaOpen = null;
   $: !(areaOpen === null) && !areaOpen && (open = true);
 
   function reset() {
-    ({ employeeIndex, areaIndex, start, finish, breakMins, notes } = init);
+    // TODO: Do something about the reset or remove it.
+    // ({
+    //   employeeIndex,
+    //   areaIndex,
+    //   start,
+    //   finish,
+    //   breakMins,
+    //   notes,
+    //   area,
+    //   assignedTo,
+    // } = init);
   }
 
   async function handleSubmit() {
-    // TODO: Wire up submit mutation here
-    console.log(employeeIndex, areaIndex, start, finish, breakMins, notes);
+    if (_id) {
+      // update shift
+    } else {
+      // create
+      createShift({
+        start: formatT(start),
+        finish: formatT(finish),
+        creator: $authStore.id,
+        area: areas?.[areaIndex]?._id,
+        assignedTo: employeeOpts?.[employeeIndex]?._id,
+        break: breakMins,
+        notes,
+      });
+    }
+
     // open = false;
     // reset();
+    function formatT(time) {
+      return day
+        .add(time.substring(0, 2), "hours")
+        .add(time.substring(3), "minutes")
+        .utc()
+        .format();
+    }
   }
 
   const areasOp = areasByUserID({ id: $authStore.id });
@@ -98,6 +136,7 @@
             >
               <button
                 slot="area"
+                type="button"
                 class="flex rounded items-center"
                 on:click={() => !(open = false) && (areaOpen = !areaOpen)}
               >
@@ -156,6 +195,7 @@
                 bind:value={start}
                 class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
                 type="time"
+                required
               />
             </div>
             <div class="mr-4">
@@ -168,6 +208,7 @@
                 bind:value={finish}
                 class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
                 type="time"
+                required
               />
             </div>
             <div>

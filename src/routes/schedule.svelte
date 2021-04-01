@@ -10,7 +10,9 @@
   import Calendar from "$lib/schedule/Calendar.svelte";
   import { fade } from "svelte/transition";
   import dayjs from "dayjs";
+  import utc from "dayjs/plugin/utc";
   import { shiftsByUserID } from "$gql/shift";
+  dayjs.extend(utc);
 
   let open = false;
 
@@ -26,7 +28,7 @@
 
   let addEmployee = false;
   let isShiftOpen = false;
-  let currentShift = {};
+  let shiftParams = {};
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
@@ -103,7 +105,7 @@
         <ShiftItem
           {i}
           on:click={() => {
-            currentShift = {
+            shiftParams = {
               day,
             };
             isShiftOpen = true;
@@ -126,7 +128,7 @@
           <ShiftItem
             {i}
             on:click={() => {
-              currentShift = {
+              shiftParams = {
                 employeeIndex,
                 day,
               };
@@ -154,9 +156,11 @@
   </button>
 
   <AddEmployeeModal bind:open={addEmployee} />
-  <ShiftModal
-    {...currentShift}
-    employeeOpts={employees}
-    bind:open={isShiftOpen}
-  />
+  {#key shiftParams}
+    <ShiftModal
+      {shiftParams}
+      employeeOpts={employees}
+      bind:open={isShiftOpen}
+    />
+  {/key}
 </main>

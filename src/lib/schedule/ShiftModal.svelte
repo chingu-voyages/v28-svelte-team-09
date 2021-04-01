@@ -6,47 +6,93 @@
   import AreaModal from "./AreaModal.svelte";
   import { useCreateShift } from "$gql/shift";
   import dayjs from "dayjs";
+  import utc from "dayjs/plugin/utc";
   import { areasByUserID } from "$gql/area";
+  dayjs.extend(utc);
 
   export let open = false;
-  export let day = dayjs();
+  export let employeeOpts = [{ name: "N/A" }];
+  export let shiftParams = {};
+  let {
+    day = dayjs().startOf("day").utc(),
+    employeeIndex = -1,
+    areaIndex = -1,
+    // API data
+    start = null,
+    finish = null,
+    notes = null,
+    _id = null,
+    area = null,
+    assignedTo = null,
+    break: breakMins = null,
+  } = shiftParams;
   let clickOutside = true;
 
   const [createShift, createShiftOp] = useCreateShift();
 
-  export let employeeOpts = [{ name: "N/A" }];
   const defaultColor = "green";
   let areas = [{ name: "default", color: defaultColor }];
 
-  export let employeeIndex;
-  let areaIndex, breakMins;
-  export { breakMins as break };
-  export let start = null,
-    finish = null,
-    notes = null,
-    area = { name: "Default", color: defaultColor, _id: "1" },
-    assignedTo = { name: "N/A", _id: "1" };
-  const init = {
-    employeeIndex: -1,
-    areaIndex: -1,
-    start,
-    finish,
-    breakMins,
-    notes,
-  };
+  $: console.log(
+    start &&
+      day
+        .add(start.slice(0, 2), "hours")
+        .add(start.slice(3), "minutes")
+        .utc()
+        .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+  );
 
   let areaOpen = null;
   $: !(areaOpen === null) && !areaOpen && (open = true);
 
   function reset() {
-    ({ employeeIndex, areaIndex, start, finish, breakMins, notes } = init);
+    // TODO: Do something about the reset or remove it.
+    // ({
+    //   employeeIndex,
+    //   areaIndex,
+    //   start,
+    //   finish,
+    //   breakMins,
+    //   notes,
+    //   area,
+    //   assignedTo,
+    // } = init);
   }
 
   async function handleSubmit() {
-    // TODO: Wire up submit mutation here
-    console.log(employeeIndex, areaIndex, start, finish, breakMins, notes);
+    if (_id) {
+      // update shift
+    } else {
+      console.log({
+        start: formatT(start),
+        finish: formatT(finish),
+        creator: $authStore.id,
+        area: area?._id,
+        assignedTo: employeeOpts?.[employeeIndex]?._id,
+        break: breakMins,
+        notes,
+      });
+      // create
+      // createShift({
+      //   start: formatT(start),
+      //   finish: formatT(finish),
+      //   creator: { connect: $authStore.id },
+      //   break: breakMins,
+      //   notes,
+      //   area: { connect: area._id },
+      //   assignedTo: employeeOpts[employeeIndex]?._id || null,
+      // });
+    }
+
     // open = false;
     // reset();
+    function formatT(time) {
+      return day
+        .add(time.substring(0, 2), "hours")
+        .add(time.substring(3), "minutes")
+        .utc()
+        .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    }
   }
 
   const areasOp = areasByUserID({ id: $authStore.id });
@@ -98,6 +144,7 @@
             >
               <button
                 slot="area"
+                type="button"
                 class="flex rounded items-center"
                 on:click={() => !(open = false) && (areaOpen = !areaOpen)}
               >

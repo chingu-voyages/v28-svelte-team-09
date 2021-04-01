@@ -11,17 +11,20 @@
   import dayjs from "dayjs";
   import { shiftsByUserID } from "$gql/shift";
 
+  let innerWidth,
+    twBreakpoints = [640, 768, 1024, 1280, 1536];
+  $: incD =
+    (innerWidth && twBreakpoints.findIndex((w) => w > innerWidth) + 1) || 7;
   let d = 0;
-  const [handlePrev, handleNext] = [() => (d -= 7), () => (d += 7)];
+  const [handlePrev, handleNext] = [() => (d -= incD), () => (d += incD)];
 
-  $: firstDayofWeek = dayjs().startOf("week").add(d, "day");
-  $: week = Array.from({ length: 7 }, (_, i) => firstDayofWeek.add(i, "day"));
+  $: firstDayOfWeek = dayjs().startOf("week").add(d, "day");
+  $: week = Array.from({ length: 7 }, (_, i) => firstDayOfWeek.add(i, "day"));
 
   let addEmployee = false;
   let isShiftOpen = false;
   let currentShift = {};
 
-  //fetch employee data from DB
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
 
@@ -29,7 +32,8 @@
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
 </script>
 
-<!-- svelte-ignore non-top-level-reactive-declaration -->
+<svelte:window bind:innerWidth />
+
 <AppHeader />
 
 <main class="text-center bg-white">

@@ -6,11 +6,12 @@
   export let open = false;
   export let firstDayOfWeek;
 
+  const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
   let outReady = false;
   $: open ? setTimeout(() => (outReady = true)) : (outReady = false);
   
   let m = 0;
-  const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   function handlePrev() {
 		return m -= 1;
 	};
@@ -44,8 +45,6 @@
       dayOfMonth: i + 1
       };
     });
-
-    $: console.log(firstDayOfWeek)
 </script>
 
 {#if open}
@@ -70,7 +69,6 @@
         >{">"}
       </button>
     </div>
-
     <div class="grid grid-cols-7">
       {#each WEEKDAYS as day}
         <p class="text-red-500">{day}</p>

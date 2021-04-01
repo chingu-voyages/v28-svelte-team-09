@@ -29,6 +29,7 @@
   let clickOutside = true;
 
   const [createShift, createShiftOp] = useCreateShift();
+  $: $createShiftOp.error && console.log($createShiftOp.error);
 
   const defaultColor = "green";
   let areas = [{ name: "default", color: defaultColor }];
@@ -63,25 +64,16 @@
     if (_id) {
       // update shift
     } else {
-      console.log({
+      // create
+      createShift({
         start: formatT(start),
         finish: formatT(finish),
         creator: $authStore.id,
-        area: area?._id,
+        area: areas?.[areaIndex]?._id,
         assignedTo: employeeOpts?.[employeeIndex]?._id,
         break: breakMins,
         notes,
       });
-      // create
-      // createShift({
-      //   start: formatT(start),
-      //   finish: formatT(finish),
-      //   creator: { connect: $authStore.id },
-      //   break: breakMins,
-      //   notes,
-      //   area: { connect: area._id },
-      //   assignedTo: employeeOpts[employeeIndex]?._id || null,
-      // });
     }
 
     // open = false;

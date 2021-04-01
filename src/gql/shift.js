@@ -32,14 +32,13 @@ export const useCreateShift = () =>
   mutationOp(
     gql`
       mutation CreateShift(
-        $start: Date!
-        $finish: Date!
+        $start: Time!
+        $finish: Time!
         $creator: ID!
         $break: Int
-        $assignedTo: ID!
+        $assignedTo: ID
         $notes: String
-        $areaName: String!
-        $color: String!
+        $area: ID!
       ) {
         createShift(
           data: {
@@ -49,13 +48,7 @@ export const useCreateShift = () =>
             break: $break
             assignedTo: { connect: $assignedTo }
             notes: $notes
-            area: {
-              create: {
-                name: $areaName
-                company: { connect: $creator }
-                color: $color
-              }
-            }
+            area: { connect: $area }
           }
         ) {
           ...shiftFields
@@ -71,8 +64,8 @@ export const useAssignShift = () =>
       mutation UpdateShift(
         $employeeID: ID!
         $shiftID: ID!
-        $start: Date!
-        $finish: Date!
+        $start: Time!
+        $finish: Time!
       ) {
         result: partialUpdateShift(
           id: $shiftID

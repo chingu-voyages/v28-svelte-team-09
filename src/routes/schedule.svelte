@@ -7,10 +7,12 @@
   import ShiftModal from "$lib/schedule/ShiftModal.svelte";
   import ShiftCard from "../lib/schedule/ShiftCard.svelte";
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
+  import Calendar from "$lib/schedule/Calendar.svelte";
   import { fade } from "svelte/transition";
   import dayjs from "dayjs";
   import { shiftsByUserID } from "$gql/shift";
 
+  let open = false;
   let d = 0;
   function handlePrev() {
 		return d -= 7;
@@ -55,10 +57,14 @@
         on:click={handlePrev}
         >{"<"}</button
       ><button
-        class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto"
+        class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto relative"
+        on:click={() => (open = true)}
       >
-        {week[0].format('DD MMM')} - {week[6].format('DD MMM')} </button
-      ><button
+        {week[0].format('DD MMM')} - {week[6].format('DD MMM')}<div class="absolute w-64 left-0 top-14 bg-indigo-100">
+        <Calendar bind:open/>
+      </div> </button
+      >
+      <button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
         on:click={handleNext}
         >{">"}</button

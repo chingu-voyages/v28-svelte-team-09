@@ -126,7 +126,6 @@
                     class="w-4 h-4 rounded-full border border-white"
                     style="background: {color}"
                     slot="item"
-                    let:i
                     let:option={color}
                   />
                 </Select>

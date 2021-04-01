@@ -22,8 +22,8 @@ type EmergencyContact @embedded {
 }
 
 type Shift {
-  start: Date!
-  finish: Date!
+  start: Time!
+  finish: Time!
   creator: User!
   break: Int
   assignedTo: Employee # If null, default to open shift on client

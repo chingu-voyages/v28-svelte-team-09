@@ -19,6 +19,8 @@
     };
   }
 
+  const colorOptions = [defaultColor, "blue", "red", "purple"];
+
   const [createArea, createAreaOp] = useCreateArea();
   $: if ($createAreaOp.error) console.log($createAreaOp.error);
   const [deleteArea, deleteAreaOp] = useDeleteArea();
@@ -53,7 +55,9 @@
         createArea({ name, color, id: $authStore.id })
       ),
       ...areasToDelete.map(({ _id }) => deleteArea({ id: _id })),
-      ...areasToUpdate.map((area) => updateArea(area)),
+      ...areasToUpdate.map(({ _id, ...area }) =>
+        updateArea({ ...area, id: _id })
+      ),
     ]);
 
     reset();
@@ -66,7 +70,8 @@
   }
 
   function reset() {
-    areasToAdd = [...areas];
+    // deep copy to avoid mutation of fetched data
+    areasToAdd = JSON.parse(JSON.stringify(areas));
   }
 </script>
 
@@ -102,16 +107,19 @@
                   bind:value={name}
                 />
                 <Select
-                  options={[defaultColor, "blue", "red", "purple"]}
+                  options={colorOptions}
                   label={i == 0 && "Color"}
                   class="w-[4.7rem] color-select {i == 0
                     ? 'mt-[-1.5rem]'
                     : 'mt-[-0.2rem]'} ml-4 mr-4"
-                  selectedIndex={0}
+                  selectedIndex={colorOptions.indexOf(areasToAdd[i].color)}
+                  let:selectedIndex
+                  on:select={({ detail: { option } }) =>
+                    (areasToAdd[i].color = option)}
                   ><span slot="selected" class="block">
                     <div
                       class="w-5 h-5 rounded-full border border-white"
-                      style="background: green"
+                      style="background: {colorOptions[selectedIndex]}"
                     />
                   </span>
                   <div

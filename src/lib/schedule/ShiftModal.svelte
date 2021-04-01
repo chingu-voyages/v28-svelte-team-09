@@ -203,6 +203,7 @@
                 bind:value={start}
                 class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
                 type="time"
+                required
               />
             </div>
             <div class="mr-4">
@@ -215,6 +216,7 @@
                 bind:value={finish}
                 class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
                 type="time"
+                required
               />
             </div>
             <div>

@@ -74,7 +74,7 @@ export const useAssignShift = () =>
         $start: Date!
         $finish: Date!
       ) {
-        result: updateShift(
+        result: partialUpdateShift(
           id: $shiftID
           data: {
             start: $start

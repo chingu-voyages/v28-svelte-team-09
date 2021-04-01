@@ -12,7 +12,7 @@
   export let day = dayjs();
   let clickOutside = true;
 
-  const [createShift, shiftOp] = useCreateShift();
+  const [createShift, createShiftOp] = useCreateShift();
 
   export let employeeOpts = [{ name: "N/A" }];
   const defaultColor = "green";

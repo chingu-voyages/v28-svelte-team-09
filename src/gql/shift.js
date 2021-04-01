@@ -32,8 +32,8 @@ export const useCreateShift = () =>
   mutationOp(
     gql`
       mutation CreateShift(
-        $start: Date!
-        $finish: Date!
+        $start: Time!
+        $finish: Time!
         $creator: ID!
         $break: Int
         $assignedTo: ID
@@ -64,8 +64,8 @@ export const useAssignShift = () =>
       mutation UpdateShift(
         $employeeID: ID!
         $shiftID: ID!
-        $start: Date!
-        $finish: Date!
+        $start: Time!
+        $finish: Time!
       ) {
         result: partialUpdateShift(
           id: $shiftID

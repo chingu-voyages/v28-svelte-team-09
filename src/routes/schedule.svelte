@@ -12,17 +12,10 @@
   import { shiftsByUserID } from "$gql/shift";
 
   let d = 0;
-  function handlePrev() {
-    return (d -= 7);
-  }
-  function handleNext() {
-    return (d += 7);
-  }
+  const [handlePrev, handleNext] = [() => (d -= 7), () => (d += 7)];
 
   $: firstDayofWeek = dayjs().startOf("week").add(d, "day");
-  $: week = new Array(7)
-    .fill(firstDayofWeek)
-    .map((day, i) => day.add(i, "day"));
+  $: week = Array.from({ length: 7 }, (_, i) => firstDayofWeek.add(i, "day"));
 
   let addEmployee = false;
   let isShiftOpen = false;

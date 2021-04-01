@@ -19,9 +19,7 @@
     return (d += 7);
   }
 
-  $: firstDayofWeek = dayjs(dayjs().startOf("week").add(d, "day")).startOf(
-    "week"
-  );
+  $: firstDayofWeek = dayjs().startOf("week").add(d, "day");
   $: week = new Array(7)
     .fill(firstDayofWeek)
     .map((day, i) => day.add(i, "day"));

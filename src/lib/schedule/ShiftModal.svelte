@@ -40,7 +40,7 @@
         .add(start.slice(0, 2), "hours")
         .add(start.slice(3), "minutes")
         .utc()
-        .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]")
+        .format()
   );
 
   let areaOpen = null;
@@ -83,7 +83,7 @@
         .add(time.substring(0, 2), "hours")
         .add(time.substring(3), "minutes")
         .utc()
-        .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+        .format();
     }
   }
 

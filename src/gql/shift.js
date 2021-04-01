@@ -36,10 +36,9 @@ export const useCreateShift = () =>
         $finish: Date!
         $creator: ID!
         $break: Int
-        $assignedTo: ID!
+        $assignedTo: ID
         $notes: String
-        $areaName: String!
-        $color: String!
+        $area: ID!
       ) {
         createShift(
           data: {
@@ -49,13 +48,7 @@ export const useCreateShift = () =>
             break: $break
             assignedTo: { connect: $assignedTo }
             notes: $notes
-            area: {
-              create: {
-                name: $areaName
-                company: { connect: $creator }
-                color: $color
-              }
-            }
+            area: { connect: $area }
           }
         ) {
           ...shiftFields

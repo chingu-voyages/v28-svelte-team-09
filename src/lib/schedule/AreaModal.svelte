@@ -124,9 +124,9 @@
                   </span>
                   <div
                     class="w-4 h-4 rounded-full border border-white"
-                    style="background: {color}"
+                    style="background: {option}"
                     slot="item"
-                    let:option={color}
+                    let:option
                   />
                 </Select>
 

@@ -60,7 +60,7 @@
       >
         {week[0].format("DD MMM")} - {week[6].format("DD MMM")}
         <div class="absolute w-64 left-0 top-14 bg-indigo-100">
-          <Calendar bind:open/>
+          <Calendar bind:open bind:firstDayOfWeek/>
         </div>
       </button><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"

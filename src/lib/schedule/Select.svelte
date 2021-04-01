@@ -1,5 +1,6 @@
 <script>
   import { clickOutside } from "$utils/actions";
+  import { createEventDispatcher } from "svelte";
   import { fade } from "svelte/transition";
 
   let className = "";
@@ -15,6 +16,13 @@
   $: if (open) setTimeout(() => (outside = true));
   else outside = false;
   let listboxEl;
+  const dispatch = createEventDispatcher();
+  $: selectedIndex > -1 && selectEvent();
+  function selectEvent() {
+    dispatch("select", {
+      option: options[selectedIndex],
+    });
+  }
 </script>
 
 <!-- @component
@@ -22,6 +30,7 @@
 @slot selected - Currently selected item
 @slot item - Each select item
 @slot area - specific slot for area opening button
+@event select {option} - selection option
 -->
 
 <div class={className}>

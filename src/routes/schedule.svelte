@@ -13,16 +13,19 @@
 
   let d = 0;
   function handlePrev() {
-		return d -= 7;
-	};
+    return (d -= 7);
+  }
   function handleNext() {
-		return d += 7;
-	};
+    return (d += 7);
+  }
 
-  $: firstDayofWeek = dayjs(dayjs().startOf("week").add(d, "day")).startOf("week");
-  $: week = new Array(7).fill(firstDayofWeek)
-       .map((day, i) => day.add(i, "day")); 
-  
+  $: firstDayofWeek = dayjs(dayjs().startOf("week").add(d, "day")).startOf(
+    "week"
+  );
+  $: week = new Array(7)
+    .fill(firstDayofWeek)
+    .map((day, i) => day.add(i, "day"));
+
   let addEmployee = false;
   let isShiftOpen = false;
   let currentShift = {};
@@ -51,17 +54,15 @@
     <!-- TODO: Styles and date picker (?) -->
     <div class="space-x-2 w-11/12 md:w-auto flex m-auto">
       <button
-        class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5" 
-        on:click={handlePrev}
-        >{"<"}</button
+        class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"
+        on:click={handlePrev}>{"<"}</button
       ><button
         class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto"
       >
-        {week[0].format('DD MMM')} - {week[6].format('DD MMM')} </button
-      ><button
+        {week[0].format("DD MMM")} - {week[6].format("DD MMM")}
+      </button><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"
-        on:click={handleNext}
-        >{">"}</button
+        on:click={handleNext}>{">"}</button
       >
     </div>
     <Button class="w-11/12 md:ml-auto md:w-auto"
@@ -109,7 +110,7 @@
       {/each}
 
       <!-- Employees -->
-      {#each employees as { name, hourlyWage, _id }}
+      {#each employees as { name, hourlyWage }, employeeIndex}
         <ShiftCard
           title={name}
           timeRate={hourlyWage &&
@@ -124,7 +125,7 @@
             {i}
             on:click={() => {
               currentShift = {
-                employeeId: _id,
+                employeeIndex,
                 day,
               };
               isShiftOpen = true;

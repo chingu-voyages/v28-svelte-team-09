@@ -18,7 +18,8 @@
   const defaultColor = "green";
   let areas = [{ name: "default", color: defaultColor }];
 
-  let employeeIndex, areaIndex, breakMins;
+  export let employeeIndex;
+  let areaIndex, breakMins;
   export { breakMins as break };
   export let start = null,
     finish = null,

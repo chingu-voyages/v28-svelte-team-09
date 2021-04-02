@@ -37,7 +37,7 @@
   const shiftsOp = shiftsByUserID({ id: $authStore.id });
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
 
-  function datedShifts(shifts) {
+  function datedShifts(shifts, week) {
     let [vacantShifts, employeeShiftsDict] = shifts.reduce(
       (acc, shift) =>
         !shift.assignedTo
@@ -62,7 +62,7 @@
       );
     }
   }
-  $: [vacantShifts, employeeShiftsDict] = datedShifts(shifts);
+  $: [vacantShifts, employeeShiftsDict] = datedShifts(shifts, week);
 </script>
 
 <svelte:window bind:innerWidth />

@@ -34,15 +34,6 @@
   const defaultColor = "green";
   let areas = [{ name: "default", color: defaultColor }];
 
-  $: console.log(
-    start &&
-      day
-        .add(start.slice(0, 2), "hours")
-        .add(start.slice(3), "minutes")
-        .utc()
-        .format()
-  );
-
   let areaOpen = null;
   $: !(areaOpen === null) && !areaOpen && (open = true);
 
@@ -89,7 +80,6 @@
 
   const areasOp = areasByUserID({ id: $authStore.id });
   $: areas = $areasOp.data?.result.areas.data ?? [];
-  $: console.log(areas);
 </script>
 
 <ModalBox bind:open {clickOutside}>

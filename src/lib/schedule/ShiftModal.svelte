@@ -26,11 +26,16 @@
     breakMins = shift?.break;
   let clickOutside = true;
 
-  const defaultColor = "green";
-  let areas = [{ name: "default", color: defaultColor }];
-
   let areaOpen = null;
   $: !(areaOpen === null) && !areaOpen && (open = true);
+
+  const areasOp = areasByUserID({ id: $authStore.id });
+  $: areas = $areasOp.data?.result.areas.data ?? [];
+
+  $: areas.length && initArea();
+  function initArea() {
+    areaIndex = areas.findIndex(({ _id }) => shift?.area?._id == _id);
+  }
 
   const [createShift, createShiftOp] = useCreateShift();
   $: $createShiftOp.error && console.log($createShiftOp.error);
@@ -38,27 +43,24 @@
   $: $assignShiftOp.error && console.log($assignShiftOp.error);
 
   async function handleSubmit() {
+    const vars = {
+      start: formatT(startValue),
+      finish: formatT(finishValue),
+      area: areas?.[areaIndex]?._id,
+      assignedTo: employeeOpts?.[employeeIndex]?._id,
+      break: breakMins,
+      notes: notesValue,
+    };
     if (_id) {
-      // update shift
+      // update
       assignShift({
-        start: formatT(startValue),
-        finish: formatT(finishValue),
-        area: areas?.[areaIndex]?._id,
-        assignedTo: employeeOpts?.[employeeIndex]?._id,
-        break: breakMins,
-        notes: notesValue,
+        ...vars,
         shiftID: _id,
       });
     } else {
-      // create
       createShift({
-        start: formatT(startValue),
-        finish: formatT(finishValue),
+        ...vars,
         creator: $authStore.id,
-        area: areas?.[areaIndex]?._id,
-        assignedTo: employeeOpts?.[employeeIndex]?._id,
-        break: breakMins,
-        notes: notesValue,
       });
     }
 
@@ -70,14 +72,6 @@
         .utc()
         .format();
     }
-  }
-
-  const areasOp = areasByUserID({ id: $authStore.id });
-  $: areas = $areasOp.data?.result.areas.data ?? [];
-
-  $: areas.length && initArea();
-  function initArea() {
-    areaIndex = areas.findIndex(({ _id }) => shift?.area?._id == _id);
   }
 </script>
 

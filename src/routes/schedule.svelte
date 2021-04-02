@@ -108,7 +108,7 @@
   {#if employees.length}
     <section
       transition:fade|local
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-[2px] bg-indigo-100 border-b-2 border-t-2 sm:border-t-0"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-[repeat(8,minmax(0,15rem))] gap-[2px] bg-indigo-100 border-b-2 border-t-2 sm:border-t-0"
     >
       <div class="bg-white w-full hidden sm:block" />
       {#each week as day, i}

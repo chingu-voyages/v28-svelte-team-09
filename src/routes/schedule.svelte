@@ -35,8 +35,34 @@
 
   const shiftsOp = shiftsByUserID({ id: $authStore.id });
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
-  $: console.log(shifts);
-  // $: employeeShiftsDict = shifts.reduce((acc,shift) => acc[shift?.assignedTo?._id ?? "vacant"] , {});
+
+  function datedShifts(shifts) {
+    let [vacantShifts, employeeShiftsDict] = shifts.reduce(
+      (acc, shift) =>
+        !shift.assignedTo
+          ? acc[0].push(shift) && acc
+          : (acc[1][shift.assignedTo._id]
+              ? acc[1][shift.assignedTo._id].push(shift)
+              : (acc[1][shift.assignedTo._id] = [shift])) && acc,
+      [[], {}]
+    );
+
+    vacantShifts = weekOfShifts(vacantShifts);
+    for (let [k, eShifts] of Object.entries(employeeShiftsDict)) {
+      employeeShiftsDict[k] = weekOfShifts(eShifts);
+    }
+
+    return [vacantShifts, employeeShiftsDict];
+
+    function weekOfShifts(shiftArr) {
+      return week.map(
+        (day) =>
+          shiftArr.find((shift) => day.isSame(dayjs(shift.start), "day")) || day
+      );
+    }
+  }
+  $: [vacantShifts, employeeShiftsDict] = datedShifts(shifts);
+  // $: console.log(vacantShifts, employeeShiftsDict);
 </script>
 
 <svelte:window bind:innerWidth />

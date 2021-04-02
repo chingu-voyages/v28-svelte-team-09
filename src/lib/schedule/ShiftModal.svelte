@@ -4,7 +4,7 @@
   import Button from "$lib/Button.svelte";
   import Select from "./Select.svelte";
   import AreaModal from "./AreaModal.svelte";
-  import { useCreateShift } from "$gql/shift";
+  import { useCreateShift, useAssignShift } from "$gql/shift";
   import dayjs from "dayjs";
   import utc from "dayjs/plugin/utc";
   import { areasByUserID } from "$gql/area";
@@ -14,22 +14,17 @@
   export let employeeOpts = [{ name: "N/A" }];
   export let shiftParams = {};
   let {
-    day = dayjs().startOf("day").utc(),
+    day = dayjs().startOf("day"),
     employeeIndex = -1,
     areaIndex = -1,
-    // API data
-    start = null,
-    finish = null,
-    notes = null,
-    _id = null,
-    area = null,
-    assignedTo = null,
-    break: breakMins = null,
+    shift = {}, // API data
   } = shiftParams;
+  let _id = shift?._id,
+    startValue = _id ? dayjs(shift.start).format("HH:mm") : null,
+    finishValue = _id ? dayjs(shift.finish).format("HH:mm") : null,
+    notesValue = shift?.notes,
+    breakMins = shift?.break;
   let clickOutside = true;
-
-  const [createShift, createShiftOp] = useCreateShift();
-  $: $createShiftOp.error && console.log($createShiftOp.error);
 
   const defaultColor = "green";
   let areas = [{ name: "default", color: defaultColor }];
@@ -37,38 +32,37 @@
   let areaOpen = null;
   $: !(areaOpen === null) && !areaOpen && (open = true);
 
-  function reset() {
-    // TODO: Do something about the reset or remove it.
-    // ({
-    //   employeeIndex,
-    //   areaIndex,
-    //   start,
-    //   finish,
-    //   breakMins,
-    //   notes,
-    //   area,
-    //   assignedTo,
-    // } = init);
-  }
+  const [createShift, createShiftOp] = useCreateShift();
+  $: $createShiftOp.error && console.log($createShiftOp.error);
+  const [assignShift, assignShiftOp] = useAssignShift();
+  $: $assignShiftOp.error && console.log($assignShiftOp.error);
 
   async function handleSubmit() {
     if (_id) {
       // update shift
+      assignShift({
+        start: formatT(startValue),
+        finish: formatT(finishValue),
+        area: areas?.[areaIndex]?._id,
+        assignedTo: employeeOpts?.[employeeIndex]?._id,
+        break: breakMins,
+        notes: notesValue,
+        shiftID: _id,
+      });
     } else {
       // create
       createShift({
-        start: formatT(start),
-        finish: formatT(finish),
+        start: formatT(startValue),
+        finish: formatT(finishValue),
         creator: $authStore.id,
         area: areas?.[areaIndex]?._id,
         assignedTo: employeeOpts?.[employeeIndex]?._id,
         break: breakMins,
-        notes,
+        notes: notesValue,
       });
     }
 
-    // open = false;
-    // reset();
+    open = false;
     function formatT(time) {
       return day
         .add(time.substring(0, 2), "hours")
@@ -80,13 +74,15 @@
 
   const areasOp = areasByUserID({ id: $authStore.id });
   $: areas = $areasOp.data?.result.areas.data ?? [];
+
+  $: areas.length && initArea();
+  function initArea() {
+    areaIndex = areas.findIndex(({ _id }) => shift?.area?._id == _id);
+  }
 </script>
 
 <ModalBox bind:open {clickOutside}>
-  <form
-    on:submit|preventDefault={handleSubmit}
-    on:reset={() => !(open = false) && reset()}
-  >
+  <form on:submit|preventDefault={handleSubmit} on:reset={() => (open = false)}>
     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
       <div class="sm:flex sm:items-start">
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -182,7 +178,7 @@
               >
               <input
                 id="start"
-                bind:value={start}
+                bind:value={startValue}
                 class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
                 type="time"
                 required
@@ -195,7 +191,7 @@
               >
               <input
                 id="finish"
-                bind:value={finish}
+                bind:value={finishValue}
                 class="border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded"
                 type="time"
                 required
@@ -227,7 +223,7 @@
               class="w-full border relative border-gray-300 appearance-none py-1 px-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500 rounded placeholder-indigo-200"
               name="Notes"
               id="notes"
-              bind:value={notes}
+              bind:value={notesValue}
               cols=""
               rows="4"
               placeholder="Add a note to this shift, the employee will be able to see your notes when schedule is published"

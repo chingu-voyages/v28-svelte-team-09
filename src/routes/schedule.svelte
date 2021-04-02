@@ -106,7 +106,6 @@
     </Button>
   </section>
 
-  <!-- TODO: Desktop grid & each block + shift display -->
   {#if employees.length}
     <section
       transition:fade|local
@@ -135,17 +134,27 @@
       {#each week as day, i}
         <ShiftItem
           {i}
+          shift={vacantShifts[i]}
           on:click={() => {
-            shiftParams = {
-              day,
-            };
+            let shift = vacantShifts[i];
+            if (!shift._id) {
+              shiftParams = {
+                day,
+              };
+            } else {
+              // prefill saved shift
+              shiftParams = {
+                day: dayjs(shift.start).startOf("day"),
+                shift,
+              };
+            }
             isShiftOpen = true;
           }}
         />
       {/each}
 
       <!-- Employees -->
-      {#each employees as { name, hourlyWage }, employeeIndex}
+      {#each employees as { name, hourlyWage, _id }, employeeIndex}
         <ShiftCard
           title={name}
           timeRate={hourlyWage &&
@@ -158,10 +167,12 @@
         {#each week as day, i}
           <ShiftItem
             {i}
+            shift={employeeShiftsDict[_id]?.[i]}
             on:click={() => {
               shiftParams = {
                 employeeIndex,
                 day,
+                shift: employeeShiftsDict[_id]?.[i],
               };
               isShiftOpen = true;
             }}

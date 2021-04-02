@@ -66,24 +66,34 @@ export const useAssignShift = () =>
   mutationOp(
     gql`
       mutation UpdateShift(
-        $employeeID: ID!
         $shiftID: ID!
-        $start: Time!
-        $finish: Time!
+        $start: Time
+        $finish: Time
+        $assignedTo: ShiftAssignedToRelation # employee ID
+        $break: Int
+        $notes: String
+        $area: ID
       ) {
         result: partialUpdateShift(
           id: $shiftID
           data: {
             start: $start
             finish: $finish
-            assignedTo: { connect: $employeeID }
+            break: $break
+            notes: $notes
+            area: { connect: $area }
+            assignedTo: $assignedTo
           }
         ) {
           ...shiftFields
         }
       }
       ${SHIFT_FIELDS}
-    `
+    `,
+    ({ assignedTo, ...vars }) => ({
+      assignedTo: assignedTo ? { connect: assignedTo } : undefined,
+      ...vars,
+    })
   );
 
 export const shiftsByUserID = ({ id }) =>

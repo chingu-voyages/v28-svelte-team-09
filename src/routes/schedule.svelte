@@ -35,6 +35,8 @@
 
   const shiftsOp = shiftsByUserID({ id: $authStore.id });
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
+  $: console.log(shifts);
+  // $: employeeShiftsDict = shifts.reduce((acc,shift) => acc[shift?.assignedTo?._id ?? "vacant"] , {});
 </script>
 
 <svelte:window bind:innerWidth />
@@ -60,9 +62,11 @@
         class="bg-indigo-100 px-5 py-2 font-semibold text-lg w-full md:w-auto relative"
         on:click={() => (open = true)}
       >
-        {incD === 1 ? week[0].format("DD MMM") : (week[0].format("DD MMM") + ' - ' +  week[incD-1].format("DD MMM"))}
+        {incD === 1
+          ? week[0].format("DD MMM")
+          : week[0].format("DD MMM") + " - " + week[incD - 1].format("DD MMM")}
         <div class="absolute w-64 left-0 top-14 bg-indigo-100">
-          <Calendar bind:open bind:firstDayOfWeek/>
+          <Calendar bind:open bind:firstDayOfWeek />
         </div>
       </button><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"

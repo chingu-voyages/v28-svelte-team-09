@@ -63,7 +63,6 @@
     }
   }
   $: [vacantShifts, employeeShiftsDict] = datedShifts(shifts);
-  // $: console.log(vacantShifts, employeeShiftsDict);
 </script>
 
 <svelte:window bind:innerWidth />

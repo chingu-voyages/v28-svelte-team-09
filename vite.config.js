@@ -4,6 +4,7 @@ import { readFileSync } from "fs";
 import { cwd } from "process";
 
 const pkg = JSON.parse(readFileSync(join(cwd(), "package.json")));
+const { dayjs = "", ...deps } = pkg.dependencies;
 
 /** @type {import('vite').UserConfig} */
 export default {
@@ -15,7 +16,7 @@ export default {
     },
   },
   ssr: {
-    noExternal: Object.keys(pkg.dependencies || {}),
+    noExternal: Object.keys(deps || {}),
   },
   optimizeDeps: {
     exclude: ["@urql/svelte"],

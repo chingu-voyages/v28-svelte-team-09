@@ -9,11 +9,9 @@
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
   import Calendar from "$lib/schedule/Calendar.svelte";
   import { fade } from "svelte/transition";
-  import dayjs from "dayjs";
-  import utc from "dayjs/plugin/utc";
+  import { dayjs } from "$utils/deps";
   import { shiftsByUserID } from "$gql/shift";
-  dayjs.extend(utc); // Note: dayjs will auto-convert to local when parsing utc times. You only need to use .utc() when
-  // you're writing to the DB.
+  // Note: dayjs will auto-convert to local when parsing utc times. You only need to use .utc() when you're writing to the DB.
 
   let open = false;
 

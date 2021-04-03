@@ -5,10 +5,8 @@
   import Select from "./Select.svelte";
   import AreaModal from "./AreaModal.svelte";
   import { useCreateShift, useAssignShift } from "$gql/shift";
-  import dayjs from "dayjs";
-  import utc from "dayjs/plugin/utc";
+  import { dayjs } from "$utils/deps";
   import { areasByUserID } from "$gql/area";
-  dayjs.extend(utc);
 
   export let open = false;
   export let employeeOpts = [{ name: "N/A" }];

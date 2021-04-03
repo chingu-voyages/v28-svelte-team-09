@@ -9,7 +9,7 @@
     start = null,
     finish = null,
     _id = null,
-  } = shift);
+  } = shift || {});
 </script>
 
 <div

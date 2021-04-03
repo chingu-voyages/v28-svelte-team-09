@@ -7,10 +7,10 @@
     "start": "svelte-kit start"
   },
   "dependencies": {
-    "@urql/svelte": "^1.2.0"
+    "@urql/svelte": "^1.2.0",
+    "dayjs": "^1.10.4"
   },
   "devDependencies": {
-    "dayjs": "^1.10.4",
     "@tailwindcss/line-clamp": "^0.2.0 ",
     "@sveltejs/adapter-netlify": "1.0.0-next.3",
     "@sveltejs/kit": "1.0.0-next.49",

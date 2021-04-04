@@ -1,4 +1,7 @@
+const netlify = require("@sveltejs/adapter-netlify");
 const sveltePreprocess = require("svelte-preprocess");
+const { resolve } = require("path");
+const pkg = require("./package.json");
 
 const production = process.env.NODE_ENV == "production";
 !production && // log DB API link
@@ -11,19 +14,38 @@ const production = process.env.NODE_ENV == "production";
 
 /** @type {import('@sveltejs/kit').Config} */
 module.exports = {
+  kit: {
+    // By default, `npm run build` will create a standard Netlify app.
+    // You can create optimized builds for different platforms by
+    // specifying a different adapter
+    adapter: netlify(),
+
+    // hydrate the <div id="svelte"> element in src/app.html
+    target: "#svelte",
+
+    vite: {
+      resolve: {
+        alias: {
+          $stores: resolve("src/stores"),
+          $utils: resolve("src/utils"),
+          $gql: resolve("src/gql"),
+        },
+      },
+      ssr: {
+        noExternal: Object.keys(pkg.dependencies || {}),
+      },
+      optimizeDeps: {
+        exclude: ["@urql/svelte"],
+      },
+      build: {
+        target: "esnext", // maximum minification
+      },
+    },
+  },
   preprocess: [
     sveltePreprocess({
       postcss: true,
       defaults: { style: "postcss" },
     }),
   ],
-  kit: {
-    // By default, `npm run build` will create a standard Node app.
-    // You can create optimized builds for different platforms by
-    // specifying a different adapter
-    adapter: "@sveltejs/adapter-netlify",
-
-    // hydrate the <div id="svelte"> element in src/app.html
-    target: "#svelte",
-  },
 };

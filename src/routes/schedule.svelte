@@ -1,3 +1,7 @@
+<script context="module">
+  export const ssr = false;
+</script>
+
 <script>
   import { authStore } from "$stores/auth";
   import Button from "$lib/Button.svelte";

@@ -2,8 +2,8 @@ dependencies:
   '@urql/svelte': 1.2.0_graphql@15.5.0+svelte@3.35.0
   dayjs: 1.10.4
 devDependencies:
-  '@sveltejs/adapter-netlify': 1.0.0-next.3
-  '@sveltejs/kit': 1.0.0-next.49_svelte@3.35.0+vite@2.1.0
+  '@sveltejs/adapter-netlify': 1.0.0-next.4
+  '@sveltejs/kit': 1.0.0-next.71_svelte@3.35.0+vite@2.1.0
   '@tailwindcss/jit': 0.1.17_tailwindcss@2.0.4
   '@tailwindcss/line-clamp': 0.2.0
   faunadb: 4.1.3
@@ -82,31 +82,33 @@ packages:
       rollup: ^1.20.0||^2.0.0
     resolution:
       integrity: sha512-TrBhfJkFxA+ER+ew2U2/fHbebhLT/l/2pRk0hfj9KusXUuRXd2v0R58AfaZK9VXDQ4TogOSEmICVrQAA3zFnHQ==
-  /@sveltejs/adapter-netlify/1.0.0-next.3:
+  /@sveltejs/adapter-netlify/1.0.0-next.4:
     dependencies:
       toml: 3.0.0
     dev: true
     resolution:
-      integrity: sha512-wlQmSlujoh1BM1Shh/xsSOUPTudypyKfg4ssCV05o+2An4SBHO8PIiFqgWxMBnvFyTJu2VGHu1Ruxzf1yoaQqA==
-  /@sveltejs/kit/1.0.0-next.49_svelte@3.35.0+vite@2.1.0:
+      integrity: sha512-kY3tRvnVR0MDOu+8UIgCRrJRkVj4/eQyqdcSm0K06NW8/1QIuVDYE+YZU1IZo4SDYRLeq+/md1UeaaqXBpx8NA==
+  /@sveltejs/kit/1.0.0-next.71_svelte@3.35.0+vite@2.1.0:
     dependencies:
-      '@svitejs/vite-plugin-svelte': 0.11.1_svelte@3.35.0+vite@2.1.0
+      '@sveltejs/vite-plugin-svelte': 1.0.0-next.5_svelte@3.35.0+vite@2.1.0
       cheap-watch: 1.0.3
       sade: 1.7.4
       svelte: 3.35.0
       vite: 2.1.0
     dev: true
+    engines:
+      node: '>= 12.17.0'
     hasBin: true
     peerDependencies:
       svelte: ^3.32.1
       vite: ^2.1.0
     resolution:
-      integrity: sha512-1/yqqtCuZWuE7e3yAxW7HhzHXb01GqiDLLXrryZKROkUrWuG5u75nVqgvDBoWEshpFx4+f+IvF1T7OWFnxrNww==
-  /@svitejs/vite-plugin-svelte/0.11.1_svelte@3.35.0+vite@2.1.0:
+      integrity: sha512-9oZEKtuFpmJanL0u7oJPWIoC4kWMtNSuN1SN7xKo+g54xI6JcsoH2J15OkTU89Hsd9Ctp4/OTh9j6/vgq9J7gw==
+  /@sveltejs/vite-plugin-svelte/1.0.0-next.5_svelte@3.35.0+vite@2.1.0:
     dependencies:
       '@rollup/pluginutils': 4.1.0
       chalk: 4.1.0
-      debug: 4.3.1
+      debug: 4.3.2
       hash-sum: 2.0.0
       require-relative: 0.8.7
       slash: 3.0.0
@@ -114,15 +116,14 @@ packages:
       svelte: 3.35.0
       svelte-hmr: 0.13.3_svelte@3.35.0
       vite: 2.1.0
-    deprecated: this package has moved to @sveltejs/vite-plugin-svelte, please update your dependencies.
     dev: true
     engines:
       node: '>=12.0.0'
     peerDependencies:
       svelte: ^3.35.0
-      vite: ^2.1.0
+      vite: ^2.1.2
     resolution:
-      integrity: sha512-G4UCAyRvbqr/3RuRrWib7iPZPMBmDgk7kvgCn0js76TGS2NaVce5AoWjWgPR0M5z71P9SBH77e3N/pO70ziBNw==
+      integrity: sha512-RVjafsqziWwnQm8VEy2y0qNaugNDvRd8tTaCt9rjgQkqaS/BDiyDCluXxA28PRC+ddZjvwUeq9k+0EfbLVObfg==
   /@tailwindcss/jit/0.1.17_tailwindcss@2.0.4:
     dependencies:
       chokidar: 3.5.1
@@ -420,7 +421,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-RI/Hh4kqRc1UKLOAf/T5zdMMX5DQIlDxwUe3wSyMMnEbGunnpENCdbUgM+dW7kXidZqCttBrmw7BhN4TMddkCw==
-  /debug/4.3.1:
+  /debug/4.3.2:
     dependencies:
       ms: 2.1.2
     dev: true
@@ -432,7 +433,7 @@ packages:
       supports-color:
         optional: true
     resolution:
-      integrity: sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
+      integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
   /defined/1.0.0:
     dev: true
     resolution:
@@ -1294,8 +1295,8 @@ packages:
     resolution:
       integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 specifiers:
-  '@sveltejs/adapter-netlify': 1.0.0-next.3
-  '@sveltejs/kit': 1.0.0-next.49
+  '@sveltejs/adapter-netlify': next
+  '@sveltejs/kit': next
   '@tailwindcss/jit': ^0.1.17
   '@tailwindcss/line-clamp': '^0.2.0 '
   '@urql/svelte': ^1.2.0
@@ -1306,4 +1307,4 @@ specifiers:
   svelte: ^3.35.0
   svelte-preprocess: ^4.7.0
   tailwindcss: ^2.0.4
-  vite: 2.1.0
+  vite: ^2.1.0

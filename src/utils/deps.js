@@ -16,6 +16,7 @@ export function dayjs() {
       isSame: fn1,
       daysInMonth: fn1,
       day: fn1,
+      date: fn1,
       format() {
         return "";
       },

@@ -35,6 +35,7 @@ module.exports = {
         noExternal: Object.keys(pkg.dependencies || {}),
       },
       optimizeDeps: {
+        include: ["dayjs"],
         exclude: ["@urql/svelte"],
       },
       build: {

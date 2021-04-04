@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.2.0 ",
-    "@sveltejs/adapter-netlify": "next",
+    "@sveltejs/adapter-static": "next",
     "@sveltejs/kit": "next",
     "@tailwindcss/jit": "^0.1.17",
     "faunadb": "^4.1.1",

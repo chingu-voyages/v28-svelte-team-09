@@ -65,6 +65,7 @@
     open = false;
     function formatT(time) {
       return day
+        .startOf("day")
         .add(time.substring(0, 2), "hours")
         .add(time.substring(3), "minutes")
         .utc()

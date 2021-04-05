@@ -1,10 +1,10 @@
 import djs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
-export function dayjs() {
+export function dayjs(...params) {
   if (typeof window != "undefined") {
     djs.extend(utc);
-    return djs();
+    return djs(...params);
   } else {
     // fake a server rendered dayjs API to avoid errors
     const isomorphicdjs = {

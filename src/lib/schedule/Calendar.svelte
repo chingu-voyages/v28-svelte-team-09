@@ -81,22 +81,33 @@
     </div>
     <div class="grid grid-cols-7">
       {#each WEEKDAYS as day}
-        <p class="text-red-500">{day}</p>
+        <p class="text-red-500 p-2">{day}</p>
       {/each}
       {#each prevMonthDays as day}
-        <p class="text-gray-400">{day.dayOfMonth}</p>
+        <p class="text-gray-400 calDate">{day.dayOfMonth}</p>
       {/each}
       {#each currentMonthDays as day}
-        <p on:click={() => (firstDayOfWeek = day.date)} class="cursor-pointer">
+        <p on:click={() => {firstDayOfWeek = day.date}} class:selected="{firstDayOfWeek === day.date || (day.date.isSame(dayjs(), 'day') && firstDayOfWeek.isSame(dayjs(), 'day'))}" class="cursor-pointer calDate">
           {day.dayOfMonth}
         </p>
       {/each}
       {#each nextMonthDays as day}
-        <p class="text-gray-400">{day.dayOfMonth}</p>
+        <p class="text-gray-400 calDate">{day.dayOfMonth}</p>
       {/each}
     </div>
-    <p class="mt-2 cursor-pointer" on:click={() => (firstDayOfWeek = dayjs())}>
+    <p class="mt-2 cursor-pointer" on:click={() => {firstDayOfWeek = dayjs(); m = 0}}>
       Return to current date
     </p>
   </div>
 {/if}
+
+<style>
+  .selected {
+    color: white;
+    border-radius: 6px;
+    background-color: #6366F1;
+  }
+  .calDate {
+    padding: 2px;
+  }
+</style>

@@ -19,9 +19,9 @@
     twBreakpoints = [640, 768, 1024, 1280, 1536];
   $: incD =
     (innerWidth && twBreakpoints.findIndex((w) => w > innerWidth) + 1) || 7;
-  let d = 0;
+  $: d = 0;
   const [handlePrev, handleNext] = [() => (d -= incD), () => (d += incD)];
-
+  
   $: firstDayOfWeek = dayjs().add(d, "day");
   $: week = Array.from({ length: 7 }, (_, i) => firstDayOfWeek.add(i, "day"));
 
@@ -90,7 +90,7 @@
           ? week[0].format("DD MMM")
           : week[0].format("DD MMM") + " - " + week[incD - 1].format("DD MMM")}
         <div class="absolute w-64 left-0 top-14 bg-indigo-100">
-          <Calendar bind:open bind:firstDayOfWeek />
+          <Calendar bind:open bind:firstDayOfWeek bind:d />
         </div>
       </button><button
         class="bg-indigo-100 px-8 py-2 rounded-r-md font-semibold text-lg md:px-5"

@@ -5,6 +5,7 @@
 
   export let open = false;
   export let firstDayOfWeek;
+  export let d;
 
   const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -87,7 +88,10 @@
         <p class="text-gray-400 calDate">{day.dayOfMonth}</p>
       {/each}
       {#each currentMonthDays as day}
-        <p on:click={() => {firstDayOfWeek = day.date}} class:selected="{firstDayOfWeek === day.date || (day.date.isSame(dayjs(), 'day') && firstDayOfWeek.isSame(dayjs(), 'day'))}" class="cursor-pointer calDate">
+        <p on:click={() => {firstDayOfWeek = day.date;
+          {day.date.diff(dayjs(), 'day') > 0 ? d = day.date.diff(dayjs(), 'day') + 1 : d = day.date.diff(dayjs(), 'day') }}}
+          class:selected="{firstDayOfWeek.isSame(day.date, 'day') || (day.date.isSame(dayjs(), 'day') && firstDayOfWeek.isSame(dayjs(), 'day'))}" 
+          class="cursor-pointer calDate">
           {day.dayOfMonth}
         </p>
       {/each}
@@ -95,7 +99,7 @@
         <p class="text-gray-400 calDate">{day.dayOfMonth}</p>
       {/each}
     </div>
-    <p class="mt-2 cursor-pointer" on:click={() => {firstDayOfWeek = dayjs(); m = 0}}>
+    <p class="mt-2 cursor-pointer" on:click={() => {firstDayOfWeek = dayjs(); m = 0; d = 0}}>
       Return to current date
     </p>
   </div>

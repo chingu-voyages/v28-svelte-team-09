@@ -19,7 +19,8 @@
     twBreakpoints = [640, 768, 1024, 1280, 1536];
   $: incD =
     (innerWidth && twBreakpoints.findIndex((w) => w > innerWidth) + 1) || 7;
-  $: d = 0;
+  
+  let d = 0;
   const [handlePrev, handleNext] = [() => (d -= incD), () => (d += incD)];
   
   $: firstDayOfWeek = dayjs().add(d, "day");

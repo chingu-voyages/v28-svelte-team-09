@@ -23,7 +23,7 @@
   let d = 0;
   const [handlePrev, handleNext] = [() => (d -= incD), () => (d += incD)];
   
-  $: firstDayOfWeek = dayjs().add(d, "day");
+  $: firstDayOfWeek = dayjs().startOf("day").add(d, "day");
   $: week = Array.from({ length: 7 }, (_, i) => firstDayOfWeek.add(i, "day"));
 
   let addEmployee = false;

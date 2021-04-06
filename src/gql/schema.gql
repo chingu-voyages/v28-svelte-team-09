@@ -29,6 +29,7 @@ type Shift {
   assignedTo: Employee # If null, default to open shift on client
   notes: String
   area: Area!
+  isPublished: Boolean
 }
 
 type Area {

@@ -11,6 +11,7 @@
   import { fade } from "svelte/transition";
   import { dayjs } from "$utils/deps";
   import { shiftsByUserID } from "$gql/shift";
+  import PublishModal from "$lib/schedule/PublishModal.svelte";
   // Note: dayjs will auto-convert to local when parsing utc times. You only need to use .utc() when you're writing to the DB.
 
   let open = false;
@@ -28,6 +29,7 @@
 
   let addEmployee = false;
   let isShiftOpen = false;
+  let isPublishOpen = false;
   let shiftParams = {};
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
@@ -108,7 +110,9 @@
         on:click={handleNext}>{">"}</button
       >
     </div>
-    <Button class="w-11/12 md:ml-auto md:w-auto"
+    <Button
+      class="w-11/12 md:ml-auto md:w-auto"
+      on:click={() => (isPublishOpen = true)}
       >Publish Shifts
       <!-- TODO: {numShifts}, disabled styles & state -->
     </Button>
@@ -230,4 +234,5 @@
       bind:open={isShiftOpen}
     />
   {/key}
+  <PublishModal bind:open={isPublishOpen} />
 </main>

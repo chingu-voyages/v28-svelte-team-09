@@ -43,7 +43,8 @@
       >
       <div>
         <span
-          class="font-semibold text-indigo-500 bg-yellow-300 rounded-2xl px-4 py-1 truncate"
+          class="font-medium rounded-2xl px-4 py-1 truncate text-white"
+          style="background: {area?.color}"
           >{area?.name}</span
         >
         {#if !assignedTo}

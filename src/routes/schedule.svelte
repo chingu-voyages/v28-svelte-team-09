@@ -173,7 +173,7 @@
             if (employeeShiftsDict[_id]) {
               let hrs = calcMins(employeeShiftsDict[_id]) / 60;
               let formattedHrs = hrs.toFixed(2) + "Hrs";
-              return hrs == 0
+              return hrs <= 0
                 ? ""
                 : hourlyWage
                 ? `${formattedHrs}/$${totalWage(hrs)}`

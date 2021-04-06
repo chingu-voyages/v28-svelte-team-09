@@ -64,16 +64,12 @@
   $: [vacantShifts, employeeShiftsDict] = datedShifts(shifts, week);
 
   function calcMins(shiftArr) {
-    return (
-      shiftArr.reduce(
-        (acc, { start = null, finish, break: breakMins }) =>
-          start
-            ? acc +
-              dayjs(finish).diff(dayjs(start), "minute") -
-              (breakMins || 0)
-            : acc,
-        0
-      ) / 60
+    return shiftArr.reduce(
+      (acc, { start = null, finish, break: breakMins }) =>
+        start
+          ? acc + dayjs(finish).diff(dayjs(start), "minute") - (breakMins || 0)
+          : acc,
+      0
     );
   }
 </script>
@@ -144,7 +140,7 @@
       <!-- Open Shifts -->
       <ShiftCard
         vacant
-        timeRate={((mins = calcMins(vacantShifts)) =>
+        timeRate={((mins = calcMins(vacantShifts) / 60) =>
           mins > 0 ? mins.toFixed(2) + "Hrs" : "")()}
       />
       {#each week as day, i}
@@ -173,12 +169,25 @@
       {#each employees as { name, hourlyWage, _id }, employeeIndex}
         <ShiftCard
           title={name}
-          timeRate={hourlyWage &&
-            new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-              minimumFractionDigits: 2,
-            }).format(hourlyWage)}
+          timeRate={(() => {
+            if (employeeShiftsDict[_id]) {
+              let hrs = calcMins(employeeShiftsDict[_id]) / 60;
+              let formattedHrs = hrs.toFixed(2) + "Hrs";
+              return hrs == 0
+                ? ""
+                : hourlyWage
+                ? `${formattedHrs}/$${totalWage(hrs)}`
+                : formattedHrs;
+            } else return "";
+
+            function totalWage(hours) {
+              return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2,
+              }).format(hourlyWage * hours);
+            }
+          })()}
         />
         {#each week as day, i}
           <ShiftItem

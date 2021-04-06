@@ -24,8 +24,8 @@
   const [deleteEmployee, employeeOp] = useDeleteEmployee();
 
   //TREAT DELETION ERR IF NECESSARY
-  $: if ($employeesOp.error)
-    console.log("ERR: error deleting employee", $employeesOp.error);
+  $: if ($employeeOp.error)
+    console.log("ERR: error deleting employee", $employeeOp.error);
 
   function handleDelete(i) {
     deleteEmployee({

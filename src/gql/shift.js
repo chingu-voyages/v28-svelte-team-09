@@ -132,7 +132,6 @@ export const shiftsByUserID = ({ id }) =>
       mutation DeleteShift($id: ID!) {
         deleteShift(id: $id) {
           _id
-          name
         }
       }
     `

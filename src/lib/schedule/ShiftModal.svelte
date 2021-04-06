@@ -4,7 +4,7 @@
   import Button from "$lib/Button.svelte";
   import Select from "./Select.svelte";
   import AreaModal from "./AreaModal.svelte";
-  import { useCreateShift, useAssignShift } from "$gql/shift";
+  import { useCreateShift, useAssignShift, useDeleteShift } from "$gql/shift";
   import { dayjs } from "$utils/deps";
   import { areasByUserID } from "$gql/area";
 
@@ -39,6 +39,8 @@
   $: $createShiftOp.error && console.log($createShiftOp.error);
   const [assignShift, assignShiftOp] = useAssignShift();
   $: $assignShiftOp.error && console.log($assignShiftOp.error);
+  const [deleteShift, deleteShiftOp] = useDeleteShift();
+  $: $deleteShiftOp.error && console.log($deleteShiftOp.error);
 
   async function handleSubmit() {
     const vars = {
@@ -72,6 +74,13 @@
         .format();
     }
   }
+
+  function handleDelete() {
+    deleteShift({
+      id: _id
+    });
+  }
+  
 </script>
 
 <ModalBox bind:open {clickOutside}>
@@ -228,8 +237,9 @@
     <div
       class="bg-gray-50 px-4 py-3 grid gap-2 sm:px-6 sm:flex sm:flex-row-reverse"
     >
-      <Button type="submit">Save</Button>
-      <Button type="reset" variant="outline">Cancel</Button>
+    <Button type="submit">Save</Button>
+    <Button type="reset" variant="outline">Cancel</Button>
+    <Button variant="delete" on:click={handleDelete}>Delete</Button>
     </div>
   </form>
 </ModalBox>

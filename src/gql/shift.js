@@ -125,3 +125,15 @@ export const shiftsByUserID = ({ id }) =>
     `,
     { id }
   );
+
+  export const useDeleteShift = () => 
+  mutationOp(
+    gql`
+      mutation DeleteShift($id: ID!) {
+        deleteShift(id: $id) {
+          _id
+          name
+        }
+      }
+    `
+  );

@@ -19,10 +19,10 @@
     twBreakpoints = [640, 768, 1024, 1280, 1536];
   $: incD =
     (innerWidth && twBreakpoints.findIndex((w) => w > innerWidth) + 1) || 7;
-  
+
   let d = 0;
   const [handlePrev, handleNext] = [() => (d -= incD), () => (d += incD)];
-  
+
   $: firstDayOfWeek = dayjs().startOf("day").add(d, "day");
   $: week = Array.from({ length: 7 }, (_, i) => firstDayOfWeek.add(i, "day"));
 
@@ -62,6 +62,20 @@
     }
   }
   $: [vacantShifts, employeeShiftsDict] = datedShifts(shifts, week);
+
+  function calcMins(shiftArr) {
+    return (
+      shiftArr.reduce(
+        (acc, { start = null, finish, break: breakMins }) =>
+          start
+            ? acc +
+              dayjs(finish).diff(dayjs(start), "minute") -
+              (breakMins || 0)
+            : acc,
+        0
+      ) / 60
+    );
+  }
 </script>
 
 <svelte:window bind:innerWidth />
@@ -128,7 +142,11 @@
       {/each}
 
       <!-- Open Shifts -->
-      <ShiftCard vacant />
+      <ShiftCard
+        vacant
+        timeRate={((mins = calcMins(vacantShifts)) =>
+          mins > 0 ? mins.toFixed(2) + "Hrs" : "")()}
+      />
       {#each week as day, i}
         <ShiftItem
           {i}

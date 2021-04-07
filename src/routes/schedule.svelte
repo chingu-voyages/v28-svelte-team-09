@@ -46,6 +46,7 @@
 		}
 	];
 
+  import PublishModal from "$lib/schedule/PublishModal.svelte";
   // Note: dayjs will auto-convert to local when parsing utc times. You only need to use .utc() when you're writing to the DB.
 
   let open = false;
@@ -54,15 +55,16 @@
     twBreakpoints = [640, 768, 1024, 1280, 1536];
   $: incD =
     (innerWidth && twBreakpoints.findIndex((w) => w > innerWidth) + 1) || 7;
-  
+
   let d = 0;
   const [handlePrev, handleNext] = [() => (d -= incD), () => (d += incD)];
-  
+
   $: firstDayOfWeek = dayjs().startOf("day").add(d, "day");
   $: week = Array.from({ length: 7 }, (_, i) => firstDayOfWeek.add(i, "day"));
 
   let addEmployee = false;
   let isShiftOpen = false;
+  let isPublishOpen = false;
   let shiftParams = {};
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
@@ -97,6 +99,16 @@
     }
   }
   $: [vacantShifts, employeeShiftsDict] = datedShifts(shifts, week);
+
+  function calcMins(shiftArr) {
+    return shiftArr.reduce(
+      (acc, { start = null, finish, break: breakMins }) =>
+        start
+          ? acc + dayjs(finish).diff(dayjs(start), "minute") - (breakMins || 0)
+          : acc,
+      0
+    );
+  }
 </script>
 
 <svelte:window bind:innerWidth />
@@ -133,7 +145,9 @@
         on:click={handleNext}>{">"}</button
       >
     </div>
-    <Button class="w-11/12 md:ml-auto md:w-auto"
+    <Button
+      class="w-11/12 md:ml-auto md:w-auto"
+      on:click={() => (isPublishOpen = true)}
       >Publish Shifts
       <!-- TODO: {numShifts}, disabled styles & state -->
     </Button>
@@ -163,7 +177,11 @@
       {/each}
 
       <!-- Open Shifts -->
-      <ShiftCard vacant />
+      <ShiftCard
+        vacant
+        timeRate={((mins = calcMins(vacantShifts) / 60) =>
+          mins > 0 ? mins.toFixed(2) + "Hrs" : "")()}
+      />
       {#each week as day, i}
         <ShiftItem
           {i}
@@ -190,12 +208,25 @@
       {#each employees as { name, hourlyWage, _id }, employeeIndex}
         <ShiftCard
           title={name}
-          timeRate={hourlyWage &&
-            new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-              minimumFractionDigits: 2,
-            }).format(hourlyWage)}
+          timeRate={(() => {
+            if (employeeShiftsDict[_id]) {
+              let hrs = calcMins(employeeShiftsDict[_id]) / 60;
+              let formattedHrs = hrs.toFixed(2) + "Hrs";
+              return hrs <= 0
+                ? ""
+                : hourlyWage
+                ? `${formattedHrs}/$${totalWage(hrs)}`
+                : formattedHrs;
+            } else return "";
+
+            function totalWage(hours) {
+              return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2,
+              }).format(hourlyWage * hours);
+            }
+          })()}
         />
         {#each week as day, i}
           <ShiftItem
@@ -240,4 +271,5 @@
   {/key}
   <Dnd columnItems={board} />
 
+  <PublishModal bind:open={isPublishOpen} />
 </main>

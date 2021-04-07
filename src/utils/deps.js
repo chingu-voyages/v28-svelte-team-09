@@ -17,6 +17,7 @@ export function dayjs(...params) {
       daysInMonth: fn1,
       day: fn1,
       date: fn1,
+      diff: fn1,
       format() {
         return "";
       },

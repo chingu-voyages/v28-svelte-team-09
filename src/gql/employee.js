@@ -28,7 +28,8 @@ export const employeesByUserID = ({ id }) =>
             data {
               ...employeeFields
             }
-          }
+          },
+          companyName
         }
       }
       ${EMPLOYEE_FIELDS}

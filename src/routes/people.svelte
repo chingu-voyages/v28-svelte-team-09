@@ -16,6 +16,8 @@
   let searchTerm = "";
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
+  $: companyName = $employeesOp.data?.result.companyName ?? "Loading...";
+
   $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
   $: filteredList = employees.filter(
     (employee) => employee.name.toLowerCase().indexOf(searchTerm) !== -1
@@ -43,8 +45,7 @@
     <h3
       class="bg-indigo-100 w-11/12 font-semibold p-2 text-lg rounded-md md:px-8 md:whitespace-nowrap md:w-auto"
     >
-      <!-- fetch company name -->
-      Nemesis Coffee
+      {companyName}
     </h3>
   </div>
   <div class="md:text-left py-2 px-3 md:px-0">

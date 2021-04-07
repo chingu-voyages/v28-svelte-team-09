@@ -33,6 +33,9 @@
   let shiftParams = {};
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
+  $: companyName = $employeesOp.data?.result.companyName ?? "Loading...";
+  $: console.log(companyName)
+  $: console.log(employees)
   $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
 
   const shiftsOp = shiftsByUserID({ id: $authStore.id });
@@ -87,8 +90,7 @@
     <h3
       class="bg-indigo-100 w-11/12 font-semibold p-2 text-lg rounded-md md:px-8 md:whitespace-nowrap md:w-auto"
     >
-      <!-- TODO: {companyName} -->
-      Nemesis Coffee
+      {companyName}
     </h3>
     <!-- TODO: Styles and date picker (?) -->
     <div class="space-x-2 w-11/12 md:w-auto flex m-auto">

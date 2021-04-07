@@ -215,7 +215,7 @@
               return hrs <= 0
                 ? ""
                 : hourlyWage
-                ? `${formattedHrs}/$${totalWage(hrs)}`
+                ? `${formattedHrs}/${totalWage(hrs)}`
                 : formattedHrs;
             } else return "";
 

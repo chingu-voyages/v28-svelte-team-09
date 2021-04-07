@@ -239,7 +239,9 @@
     >
     <Button type="submit">Save</Button>
     <Button type="reset" variant="outline">Cancel</Button>
+    {#if _id}
     <Button variant="delete" on:click={handleDelete}>Delete</Button>
+    {/if}
     </div>
   </form>
 </ModalBox>

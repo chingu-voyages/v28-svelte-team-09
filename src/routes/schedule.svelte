@@ -11,6 +11,41 @@
   import { fade } from "svelte/transition";
   import { dayjs } from "$utils/deps";
   import { shiftsByUserID } from "$gql/shift";
+  import Dnd from "$lib/schedule/Dnd.svelte";
+
+  let board = [
+		{
+			id: 1,
+			items: [
+				{id: 1, name: "shift1"}
+			]
+		},
+		{
+			id: 2,
+			items: [
+        {id: 2, name: "shift2"}
+      ]
+		},
+		{
+			id: 3,
+			items: [
+        {id: 3, name: "shift3"}
+      ]
+		},
+    {
+			id: 4,
+			items: []
+		},
+    {
+			id: 5,
+			items: []
+		},
+    {
+			id: 6,
+			items: []
+		}
+	];
+
   // Note: dayjs will auto-convert to local when parsing utc times. You only need to use .utc() when you're writing to the DB.
 
   let open = false;
@@ -203,4 +238,6 @@
       bind:open={isShiftOpen}
     />
   {/key}
+  <Dnd columnItems={board} />
+
 </main>

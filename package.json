@@ -9,8 +9,7 @@
   },
   "dependencies": {
     "@urql/svelte": "^1.2.0",
-    "dayjs": "^1.10.4",
-    "svelte-dnd-action": "^0.9.3"
+    "dayjs": "^1.10.4"
   },
   "devDependencies": {
     "@sveltejs/adapter-netlify": "1.0.0-next.3",

@@ -3,7 +3,7 @@ type User {
   employees: [Employee]! @relation
   areas: [Area] @relation
   shifts: [Shift] @relation
-  companyName: String
+  companyName: String!
 }
 
 type Employee {

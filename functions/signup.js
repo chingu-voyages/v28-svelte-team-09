@@ -2,10 +2,10 @@ const { createUser, login } = require("./utils/auth");
 
 exports.handler = async ({ body }) => {
   // Signs up then logs in and responds with a token for the client to consume.
-  var { name, password } = JSON.parse(body);
+  var { name, password, companyName } = JSON.parse(body);
 
   try {
-    var { ref = null } = await createUser(name, password);
+    var { ref = null } = await createUser(name, password, companyName);
   } catch (error) {
     return {
       statusCode: 400,

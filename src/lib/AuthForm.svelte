@@ -3,6 +3,7 @@
   import Button from "$lib/Button.svelte";
 
   let name = "";
+  let companyName = "";
   let password = "";
   let confirm = "";
   export let login = false;
@@ -16,7 +17,7 @@
       `/.netlify/functions/${login ? "signin" : "signup"} `,
       {
         method: "POST",
-        body: JSON.stringify({ name, password }),
+        body: JSON.stringify({ name, password, companyName }),
       }
     );
     var { secret = "", instance: { "@ref": { id } } = "" } = await res.json();
@@ -41,7 +42,7 @@
     {/if}
     <div class="mb-4 relative">
       <input
-        autofocus
+        required
         class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
         bind:value={name}
         class:filled={name}
@@ -56,8 +57,29 @@
         >Username
       </span>
     </div>
+    {#if !login}
+      <div class="mb-4 relative">
+        <input
+          required
+          class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
+          bind:value={companyName}
+          class:filled={name}
+          id="company"
+          type="text"
+          aria-labelledby="password-label"
+        />
+        <span
+          on:click={labelHandler}
+          id="password-label"
+          class="[ label ] absolute mb-0 pt-4 pl-3 leading-tighter text-gray-400 text-base mt-2 cursor-text"
+        >
+          Company Name
+        </span>
+      </div>
+    {/if}
     <div class="mb-4 relative">
       <input
+        required
         class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
         bind:value={password}
         class:filled={password}
@@ -76,6 +98,7 @@
     {#if !login}
       <div class="mb-4 relative">
         <input
+          required
           class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
           bind:value={confirm}
           class:filled={password}

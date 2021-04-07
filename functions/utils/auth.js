@@ -17,11 +17,12 @@ exports.login = (name, password, ttl = [30, "days"]) =>
     })
   );
 
-exports.createUser = (name, password) =>
+exports.createUser = (name, password, companyName) =>
   query(
     Create(Collection("User"), {
       data: {
         name,
+        companyName
       },
       credentials: {
         password,

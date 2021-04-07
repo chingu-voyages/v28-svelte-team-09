@@ -235,5 +235,5 @@
     />
   {/key}
 
-  <PublishModal bind:open={isPublishOpen} />
+  <PublishModal bind:open={isPublishOpen} {shifts} />
 </main>

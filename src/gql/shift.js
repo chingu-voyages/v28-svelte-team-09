@@ -10,6 +10,7 @@ const SHIFT_FIELDS = gql`
       name
     }
     break
+    isPublished
     assignedTo {
       name
       emergencyContact {
@@ -72,7 +73,8 @@ export const useAssignShift = () =>
         $assignedTo: ShiftAssignedToRelation # employee ID
         $break: Int
         $notes: String
-        $area: ID
+        $area: ShiftAreaRelation
+        $isPublished: Boolean
       ) {
         result: partialUpdateShift(
           id: $shiftID
@@ -81,8 +83,9 @@ export const useAssignShift = () =>
             finish: $finish
             break: $break
             notes: $notes
-            area: { connect: $area }
+            area: $area
             assignedTo: $assignedTo
+            isPublished: $isPublished
           }
         ) {
           ...shiftFields
@@ -90,8 +93,9 @@ export const useAssignShift = () =>
       }
       ${SHIFT_FIELDS}
     `,
-    ({ assignedTo, ...vars }) => ({
+    ({ assignedTo, area, ...vars }) => ({
       assignedTo: assignedTo ? { connect: assignedTo } : undefined,
+      area: area ? { connect: area } : undefined,
       ...vars,
     })
   );
@@ -126,7 +130,7 @@ export const shiftsByUserID = ({ id }) =>
     { id }
   );
 
-  export const useDeleteShift = () => 
+export const useDeleteShift = () =>
   mutationOp(
     gql`
       mutation DeleteShift($id: ID!) {

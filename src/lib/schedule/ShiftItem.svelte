@@ -9,6 +9,7 @@
     start = null,
     finish = null,
     _id = null,
+    isPublished = null
   } = shift || {});
 </script>
 
@@ -25,7 +26,9 @@
   <button
     class={!_id
       ? "rounded-sm focus:transition-colors px-1 w-full h-full grid place-items-center"
-      : "font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-indigo-500 space-y-2"}
+      : !isPublished ? "font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-indigo-500 space-y-2" 
+      : "font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-gray-400 space-y-2"
+      }
     on:click
   >
     {#if !_id}

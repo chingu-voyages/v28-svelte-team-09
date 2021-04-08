@@ -21,5 +21,6 @@ Our themed button. Able to pass in classes including Tailwind.
   class:themed-btn-delete={variant == "delete"}
   class:themed-btn-outline={variant == "outline"}
   class:shadow-md={shadow}
-  on:click><slot /></button
+  on:click
+  {...$$restProps}><slot /></button
 >

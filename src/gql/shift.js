@@ -110,6 +110,7 @@ export const shiftsByUserID = ({ id }) =>
               start
               finish
               break
+              isPublished
               notes
               assignedTo {
                 name

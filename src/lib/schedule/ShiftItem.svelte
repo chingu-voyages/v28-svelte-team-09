@@ -9,12 +9,24 @@
     start = null,
     finish = null,
     _id = null,
-    isPublished = null
+    isPublished = null,
   } = shift || {});
+
+  const cols = [
+    "col-start-2",
+    "col-start-3",
+    "col-start-4",
+    "col-start-5",
+    "col-start-6",
+    "col-start-7",
+    "col-start-8",
+  ];
 </script>
 
 <div
-  class="bg-white p-2 {i != 0 && 'hidden'}  items-center justify-center"
+  class="bg-white p-2 {i != 0 && 'hidden'} items-center justify-center {cols[
+    i
+  ]}"
   class:flex={i == 0}
   class:hidden={i != 0}
   class:sm:flex={i < 2}
@@ -26,9 +38,9 @@
   <button
     class={!_id
       ? "rounded-sm focus:transition-colors px-1 w-full h-full grid place-items-center"
-      : !isPublished ? "font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-indigo-500 space-y-2" 
-      : "font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 bg-gray-400 space-y-2"
-      }
+      : `font-semibold text-white rounded-lg focus:transition-colors h-full min-w-full sm:min-w-1/2 ${
+          !isPublished ? "bg-indigo-500" : "bg-gray-400"
+        } space-y-2 space-y-2`}
     on:click
   >
     {#if !_id}
@@ -47,8 +59,7 @@
       <div>
         <span
           class="font-medium rounded-2xl px-4 py-1 truncate text-white"
-          style="background: {area?.color}"
-          >{area?.name}</span
+          style="background: {area?.color}">{area?.name}</span
         >
         {#if !assignedTo}
           <span

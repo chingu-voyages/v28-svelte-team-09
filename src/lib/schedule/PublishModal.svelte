@@ -85,6 +85,7 @@
                   value={weekShifts}
                   bind:group={unpublishedGroup}
                 />
+                [{weekShifts.length} shift{weekShifts.length > 1 ? "s" : ""}]
                 Week of
                 {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(
                   weekShifts[0].finish
@@ -104,6 +105,7 @@
                   value={weekShifts}
                   bind:group={publishedGroup}
                 />
+                [{weekShifts.length} shift{weekShifts.length > 1 ? "s" : ""}]
                 Week of
                 {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(
                   weekShifts[0].finish

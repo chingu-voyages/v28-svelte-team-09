@@ -8,6 +8,39 @@
   export let open = false;
   export let shifts = [];
 
+  $: [published, unpublished] = publishable(shifts);
+
+  let selectedGroup = [];
+  $: console.log(selectedGroup);
+
+  function publishable(shifts) {
+    let [published, unpublished] = shifts
+      .reduce(
+        (acc, shift) =>
+          !shift.assignedTo || dayjs().isAfter(dayjs(shift.finish))
+            ? acc
+            : shift.isPublished
+            ? acc[0].push(shift) && acc
+            : acc[1].push(shift) && acc,
+        [[], []]
+      )
+      .map((shifts) =>
+        shifts
+          .sort((a, b) => dayjs(a.finish).unix() - dayjs(b.finish).unix())
+          .reduce((acc, shift) => {
+            let lastItem =
+              acc[acc.length - 1]?.[acc[acc.length - 1].length - 1];
+            if (acc[0] && dayjs(lastItem.start).isSame(shift.start, "week")) {
+              acc[acc.length - 1].push(shift);
+            } else {
+              acc.push([shift]);
+            }
+            return acc;
+          }, [])
+      );
+    return [published, unpublished];
+  }
+
   const [assignShift, assignShiftOp] = useAssignShift();
   $: $assignShiftOp.error && console.log($assignShiftOp.error);
 
@@ -29,12 +62,28 @@
             class="text-lg font-main leading-6 font-medium mb-4"
             id="modal-headline"
           >
-            Publish Your Shifts
+            Publish Your Schedules
           </h3>
+          <h3 class="text-md leading-6 mb-4">Unpublished</h3>
           <div
             class="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 justify-between"
           >
-            <h1>hi</h1>
+            {#each unpublished as weekShifts}
+              <label for={weekShifts[0]._id}>
+                <input
+                  type="checkbox"
+                  id={weekShifts[0]._id}
+                  value={weekShifts}
+                  bind:group={selectedGroup}
+                />
+                Week of
+                {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(
+                  weekShifts[0].finish
+                )
+                  .endOf("week")
+                  .format("MMM DD")}
+              </label>
+            {/each}
           </div>
         </div>
       </div>

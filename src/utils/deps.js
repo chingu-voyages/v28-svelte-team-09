@@ -14,10 +14,13 @@ export function dayjs(...params) {
       startOf: fn,
       utc: fn,
       isSame: fn1,
+      isBefore: fn1,
+      isAfter: fn1,
       daysInMonth: fn1,
       day: fn1,
       date: fn1,
       diff: fn1,
+      unix: fn1,
       format() {
         return "";
       },

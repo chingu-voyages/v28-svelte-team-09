@@ -10,8 +10,7 @@
 
   $: [published, unpublished] = publishable(shifts);
 
-  let selectedGroup = [];
-  $: console.log(selectedGroup);
+  let [publishedGroup, unpublishedGroup] = [[], []];
 
   function publishable(shifts) {
     let [published, unpublished] = shifts
@@ -45,11 +44,23 @@
   $: $assignShiftOp.error && console.log($assignShiftOp.error);
 
   async function handleSubmit() {
-    return;
-    assignShift({
-      isPublished: true,
-      shiftID: _id,
-    });
+    const selectedPublishIds = [...publishedGroup, ...unpublishedGroup].reduce(
+      (acc, arr) => {
+        arr.forEach(({ _id }) => acc.push(_id));
+        return acc;
+      },
+      []
+    );
+
+    open = false;
+    await Promise.allSettled(
+      selectedPublishIds.map((id) =>
+        assignShift({
+          isPublished: true,
+          shiftID: id,
+        })
+      )
+    );
   }
 </script>
 
@@ -65,16 +76,33 @@
             Publish Your Schedules
           </h3>
           <h3 class="text-md leading-6 mb-4">Unpublished</h3>
-          <div
-            class="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:space-x-4 justify-between"
-          >
+          <div class="flex flex-col space-y-4 sm:space-y-0 justify-between">
             {#each unpublished as weekShifts}
               <label for={weekShifts[0]._id}>
                 <input
                   type="checkbox"
                   id={weekShifts[0]._id}
                   value={weekShifts}
-                  bind:group={selectedGroup}
+                  bind:group={unpublishedGroup}
+                />
+                Week of
+                {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(
+                  weekShifts[0].finish
+                )
+                  .endOf("week")
+                  .format("MMM DD")}
+              </label>
+            {/each}
+          </div>
+          <h3 class="text-md leading-6 mb-4">Published</h3>
+          <div class="flex flex-col space-y-4 sm:space-y-0 justify-between">
+            {#each published as weekShifts}
+              <label for={weekShifts[0]._id}>
+                <input
+                  type="checkbox"
+                  id={weekShifts[0]._id}
+                  value={weekShifts}
+                  bind:group={publishedGroup}
                 />
                 Week of
                 {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(

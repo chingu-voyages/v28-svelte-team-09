@@ -77,7 +77,10 @@
           <div
             class="p-3 bg-indigo-300 icon rounded-full w-12 h-12 text-white font-semibold line-"
           >
-            {employee.name?.match(/\b[A-Za-z]/g)?.join("") ?? ""}
+            {employee.name
+              ?.match(/\b[A-Za-z]/g)
+              ?.join("")
+              ?.slice(0, 2) ?? ""}
           </div>
           <h1 class="px-3 text-xl">{employee.name}</h1>
         </div>

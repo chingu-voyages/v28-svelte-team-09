@@ -5,7 +5,7 @@
     src = "/images/icons/themed-user-circle-solid.svg";
 </script>
 
-<div class="flex space-x-5 items-center w-full bg-white py-4 px-6">
+<div class="flex space-x-5 items-center w-full bg-white py-4 px-6 col-start-1">
   <img class="rounded-full shadow-md" {src} width="55" alt="default user" />
   <div class="flex flex-col place-items-center place-content-center w-full">
     <h3 class="font-semibold line-clamp-1">{title}</h3>

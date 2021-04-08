@@ -6,13 +6,13 @@
   export let open = false;
   export let firstDayOfWeek;
   export let d;
+  
 
   const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
   let outReady = false;
   $: open ? setTimeout(() => (outReady = true)) : (outReady = false);
-
-  let m = 0;
+  $: m = firstDayOfWeek.startOf("month").diff(dayjs().startOf("month"), 'month');
   function handlePrev() {
     return (m -= 1);
   }
@@ -20,7 +20,7 @@
     return (m += 1);
   }
 
-  $: month = dayjs().add(m, "months");
+  $: month = dayjs().add(m, "month").startOf("month");
   $: getNumberOfDaysInMonth = dayjs(month).daysInMonth();
   $: firstDayOfTheMonthWeekday = dayjs(currentMonthDays[0].date).day();
   $: lastDayOfTheMonthWeekday = dayjs(
@@ -89,7 +89,8 @@
       {/each}
       {#each currentMonthDays as day}
         <p on:click={() => {firstDayOfWeek = day.date;
-          {day.date.diff(dayjs(), 'day') > 0 ? d = day.date.diff(dayjs(), 'day') + 1 : d = day.date.diff(dayjs(), 'day') }}}
+            {day.date.diff(dayjs(), 'day') > 0 ? d = day.date.diff(dayjs(), 'day') + 1 : d = day.date.diff(dayjs(), 'day')};
+          }}
           class:selected="{firstDayOfWeek.isSame(day.date, 'day') || (day.date.isSame(dayjs(), 'day') && firstDayOfWeek.isSame(dayjs(), 'day'))}" 
           class="cursor-pointer calDate">
           {day.dayOfMonth}

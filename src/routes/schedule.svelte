@@ -12,6 +12,7 @@
   import { dayjs } from "$utils/deps";
   import { shiftsByUserID } from "$gql/shift";
   import PublishModal from "$lib/schedule/PublishModal.svelte";
+
   // Note: dayjs will auto-convert to local when parsing utc times. You only need to use .utc() when you're writing to the DB.
 
   let open = false;
@@ -34,8 +35,6 @@
 
   const employeesOp = employeesByUserID({ id: $authStore.id });
   $: companyName = $employeesOp.data?.result.companyName ?? "Loading...";
-  $: console.log(companyName)
-  $: console.log(employees)
   $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
 
   const shiftsOp = shiftsByUserID({ id: $authStore.id });
@@ -238,4 +237,5 @@
   {/key}
 
   <PublishModal bind:open={isPublishOpen} {shifts} />
+  <a href="/published/{companyName}">Link to Dynamic page</a>
 </main>

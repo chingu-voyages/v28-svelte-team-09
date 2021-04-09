@@ -151,6 +151,7 @@
       {#each week as day, i}
         <ShiftItem
           {i}
+          {day}
           shift={vacantShifts[i]}
           on:click={() => {
             let shift = vacantShifts[i];
@@ -197,6 +198,8 @@
         {#each week as day, i}
           <ShiftItem
             {i}
+            {day}
+            employeeID={_id}
             shift={employeeShiftsDict[_id]?.[i]}
             on:click={() => {
               shiftParams = {

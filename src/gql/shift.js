@@ -94,7 +94,11 @@ export const useAssignShift = () =>
       ${SHIFT_FIELDS}
     `,
     ({ assignedTo, area, ...vars }) => ({
-      assignedTo: assignedTo ? { connect: assignedTo } : undefined,
+      assignedTo: !assignedTo
+        ? undefined
+        : typeof assignedTo == "string"
+        ? { connect: assignedTo }
+        : assignedTo,
       area: area ? { connect: area } : undefined,
       ...vars,
     })

@@ -31,6 +31,7 @@
 
   const shiftsOp = shiftsByUserID({ id: $page.params.userID });
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
+  $: shifts = shifts.filter(s => s.isPublished)
 
   function datedShifts(shifts, week) {
     let [vacantShifts, employeeShiftsDict] = shifts.reduce(
@@ -58,6 +59,7 @@
     }
   }
   $: [_, employeeShiftsDict] = datedShifts(shifts, week);
+ 
 
   function calcMins(shiftArr) {
     return shiftArr.reduce(

@@ -10,7 +10,8 @@
   export let i,
     day = null,
     employeeID = null,
-    shift = {};
+    shift = {},
+    onPublished = false;
   $: ({
     area = null,
     assignedTo = null,
@@ -93,13 +94,15 @@
         } space-y-2 space-y-2`}
     on:click
   >
-    {#if !_id}
-      <img
-        src="/images/icons/themed-plus-solid.svg"
-        width="40"
-        height="40"
-        alt="plus icon"
-      />
+    {#if !_id }
+      {#if !onPublished}
+        <img
+          src="/images/icons/themed-plus-solid.svg"
+          width="40"
+          height="40"
+          alt="plus icon"
+        />
+      {/if}
     {:else}
       <span
         >{dayjs(start).format("hh:mma")} - {dayjs(finish).format(

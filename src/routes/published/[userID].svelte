@@ -1,5 +1,6 @@
 <script>
-  import { authStore } from "$stores/auth";
+  import { page } from '$app/stores';
+  import { initClient } from "$utils/client";
   import { employeesByUserID } from "$gql/employee";
   import ShiftCard from "../../lib/schedule/ShiftCard.svelte";
   import ShiftItem from "$lib/schedule/ShiftItem.svelte";
@@ -7,6 +8,9 @@
   import { fade } from "svelte/transition";
   import { dayjs } from "$utils/deps";
   import { shiftsByUserID } from "$gql/shift";
+
+  let publicFaunaKey = "fnAEGUIErDACCZYPP6oqP-yAdZviRHV8C_p9EEmd"
+  initClient(publicFaunaKey);
 
   let open = false;
 
@@ -21,16 +25,11 @@
   $: firstDayOfWeek = dayjs().startOf("day").add(d, "day");
   $: week = Array.from({ length: 7 }, (_, i) => firstDayOfWeek.add(i, "day"));
 
-  // let addEmployee = false;
-  // let isShiftOpen = false;
-  // let isPublishOpen = false;
-  // let shiftParams = {};
-
-  const employeesOp = employeesByUserID({ id: $authStore.id });
+  const employeesOp = employeesByUserID({ id: $page.params.userID });
   $: companyName = $employeesOp.data?.result.companyName ?? "Loading...";
   $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
 
-  const shiftsOp = shiftsByUserID({ id: $authStore.id });
+  const shiftsOp = shiftsByUserID({ id: $page.params.userID });
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
 
   function datedShifts(shifts, week) {
@@ -58,7 +57,7 @@
       );
     }
   }
-  $: [vacantShifts, employeeShiftsDict] = datedShifts(shifts, week);
+  $: [_, employeeShiftsDict] = datedShifts(shifts, week);
 
   function calcMins(shiftArr) {
     return shiftArr.reduce(
@@ -69,6 +68,7 @@
       0
     );
   }
+ 
 </script>
 
 <svelte:window bind:innerWidth />
@@ -137,17 +137,9 @@
               return hrs <= 0
                 ? ""
                 : hourlyWage
-                ? `${formattedHrs}/${totalWage(hrs)}`
+                ? `${formattedHrs}`
                 : formattedHrs;
             } else return "";
-
-            function totalWage(hours) {
-              return new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-                minimumFractionDigits: 2,
-              }).format(hourlyWage * hours);
-            }
           })()}
         />
         {#each week as day, i}

@@ -238,7 +238,6 @@
       bind:open={isShiftOpen}
     />
   {/key}
-
+  
   <PublishModal bind:open={isPublishOpen} {shifts} />
-  <a href="/published/{companyName}">Link to Dynamic page</a>
 </main>

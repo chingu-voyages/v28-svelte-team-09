@@ -75,44 +75,42 @@
           >
             Publish Your Schedules
           </h3>
-          <h3 class="text-md leading-6 mb-4">Unpublished</h3>
+          <h3 class="text-md leading-6 mb-2 font-semibold">Unpublished</h3>
           <div class="flex flex-col space-y-4 sm:space-y-0 justify-between">
             {#each unpublished as weekShifts}
-              <label for={weekShifts[0]._id}>
-                <input
-                  type="checkbox"
-                  id={weekShifts[0]._id}
-                  value={weekShifts}
-                  bind:group={unpublishedGroup}
-                />
-                [{weekShifts.length} shift{weekShifts.length > 1 ? "s" : ""}]
-                Week of
-                {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(
-                  weekShifts[0].finish
-                )
-                  .endOf("week")
-                  .format("MMM DD")}
-              </label>
+              <div class="p-0">
+                <div class="flex items-center mr-4 mb-2">
+                <input type="checkbox" id={weekShifts[0]._id} name="A3-confirmation" value={weekShifts} bind:group={unpublishedGroup} class="opacity-0 absolute h-5 w-5" />
+                <div class="bg-white border-2 rounded-md border-indigo-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-indigo-500">
+                  <svg class="fill-current hidden w-3 h-3 text-indigo-500 pointer-events-none" version="1.1" viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" fill-rule="evenodd">
+                    <g transform="translate(-9 -11)" fill="#6366F1" fill-rule="nonzero">
+                    <path d="m25.576 11.414c0.56558 0.55188 0.56558 1.4439 0 1.9961l-9.404 9.176c-0.28213 0.27529-0.65247 0.41385-1.0228 0.41385-0.37034 0-0.74068-0.13855-1.0228-0.41385l-4.7019-4.588c-0.56584-0.55188-0.56584-1.4442 0-1.9961 0.56558-0.55214 1.4798-0.55214 2.0456 0l3.679 3.5899 8.3812-8.1779c0.56558-0.55214 1.4798-0.55214 2.0456 0z" />
+                    </g>
+                  </g>
+                  </svg>
+                </div>
+                <label for={weekShifts[0]._id} class="select-none">
+                  Week of
+                  {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(
+                    weekShifts[0].finish
+                  ).endOf("week").format("MMM DD")} 
+                  [{weekShifts.length} shift{weekShifts.length > 1 ? "s" : ""}]
+                </label>
+                </div>
+              </div>
             {/each}
           </div>
-          <h3 class="text-md leading-6 mb-4">Published</h3>
+          <h3 class="text-md leading-6 mb-2 font-semibold">Published</h3>
           <div class="flex flex-col space-y-4 sm:space-y-0 justify-between">
-            {#each published as weekShifts}
-              <label for={weekShifts[0]._id}>
-                <input
-                  type="checkbox"
-                  id={weekShifts[0]._id}
-                  value={weekShifts}
-                  bind:group={publishedGroup}
-                />
-                [{weekShifts.length} shift{weekShifts.length > 1 ? "s" : ""}]
+            {#each published as weekShifts}        
                 Week of
                 {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(
                   weekShifts[0].finish
                 )
                   .endOf("week")
-                  .format("MMM DD")}
-              </label>
+                  .format("MMM DD")} 
+                  [{weekShifts.length} shift{weekShifts.length > 1 ? "s" : ""}]<br/>
             {/each}
           </div>
         </div>
@@ -126,3 +124,12 @@
     </div>
   </form>
 </ModalBox>
+
+<style>
+input:checked + div {
+  @apply border-indigo-500;
+}
+input:checked + div svg {
+  @apply block;
+}
+</style>

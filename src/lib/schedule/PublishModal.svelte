@@ -1,5 +1,6 @@
 <script>
   import { authStore } from "$stores/auth";
+  import { goto } from "$app/navigation";
   import ModalBox from "$lib/ModalBox.svelte";
   import Button from "$lib/Button.svelte";
   import { dayjs } from "$utils/deps";
@@ -8,9 +9,11 @@
   export let open = false;
   export let shifts = [];
 
-  $: [published, unpublished] = publishable(shifts);
+  $: [_, unpublished] = publishable(shifts);
 
   let [publishedGroup, unpublishedGroup] = [[], []];
+  let linkToCopy = "https://dshift.netlify.app/published/" + $authStore.id;
+  let clicked = false;
 
   function publishable(shifts) {
     let [published, unpublished] = shifts
@@ -70,12 +73,12 @@
       <div class="sm:flex sm:items-start">
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3
-            class="text-lg font-main leading-6 font-medium mb-4"
+            class="text-lg font-main leading-6 font-semibold mb-4 "
             id="modal-headline"
           >
             Publish Your Schedules
           </h3>
-          <h3 class="text-md leading-6 mb-2 font-semibold">Unpublished</h3>
+          <h3 class="text-md leading-6 mb-2 font-semibold">Choose shifts to publish</h3>
           <div class="flex flex-col space-y-4 sm:space-y-0 justify-between">
             {#each unpublished as weekShifts}
               <div class="p-0">
@@ -101,18 +104,23 @@
               </div>
             {/each}
           </div>
-          <h3 class="text-md leading-6 mb-2 font-semibold">Published</h3>
-          <div class="flex flex-col space-y-4 sm:space-y-0 justify-between">
-            {#each published as weekShifts}        
-                Week of
-                {dayjs(weekShifts[0].start).startOf("week").format("MMM DD")} - {dayjs(
-                  weekShifts[0].finish
-                )
-                  .endOf("week")
-                  .format("MMM DD")} 
-                  [{weekShifts.length} shift{weekShifts.length > 1 ? "s" : ""}]<br/>
-            {/each}
-          </div>
+          <Button
+            class="mt-3"
+            variant="outline"
+            on:click={() => {
+              goto("/published/" + $authStore.id);
+            }}>See published shifts</Button
+          >
+          <h3 class="text-md leading-6 mt-3 font-semibold">Share link with your employees</h3>
+          <Button
+            type="button"
+            class="mt-3"
+            variant="outline"
+            on:click={() => {
+              navigator.clipboard.writeText(linkToCopy);
+              clicked = true;
+            }}>{!clicked ? "Copy link" : "Copied!"}</Button
+          >  
         </div>
       </div>
     </div>
@@ -133,3 +141,4 @@ input:checked + div svg {
   @apply block;
 }
 </style>
+

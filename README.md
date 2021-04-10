@@ -7,3 +7,5 @@
 Command to use template: `npx degit armchair-traveller/svelte-kitify#fauna`
 
 (TODO: See template for additional instructions for setting up DB, or prev examples from other repo)
+
+https://www.notion.so/Project-Process-DShift-Manager-MVP-34842eae7df6433c9fabc009394810db

@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
-    "start": "svelte-kit start",
+    "start": "svelte-kit start"
   },
   "scriptComments": {
     "pnpm": "is currently disabled due to issues. Move prebuild into scripts and enable the line in netlify.toml to enable it.",

@@ -63,7 +63,7 @@
           required
           class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
           bind:value={companyName}
-          class:filled={name}
+          class:filled={companyName}
           id="company"
           type="text"
           aria-labelledby="password-label"
@@ -101,7 +101,7 @@
           required
           class="[ input ] border border-gray-400 appearance-none rounded w-full px-3 py-3 pt-5 pb-2 focus:border-indigo-500 focus:outline-none active:outline-none active:border-indigo-500"
           bind:value={confirm}
-          class:filled={password}
+          class:filled={confirm}
           id="password"
           type="password"
           aria-labelledby="password-label"

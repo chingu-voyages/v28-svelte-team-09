@@ -12,8 +12,6 @@ Our themed button. Able to pass in classes including Tailwind.
 @shadow box-shadow
 -->
 
-<!-- TODO: Add styles for input submit type if needed based on conditions -->
-<!-- TODO: Disabled styles -->
 <button
   class="themed-btn {className}"
   {type}

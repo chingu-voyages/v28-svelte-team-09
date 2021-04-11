@@ -1,5 +1,5 @@
 <script>
-  import { page } from '$app/stores';
+  import { page } from "$app/stores";
   import { initClient } from "$utils/client";
   import { employeesByUserID } from "$gql/employee";
   import ShiftCard from "../../lib/schedule/ShiftCard.svelte";
@@ -9,7 +9,7 @@
   import { dayjs } from "$utils/deps";
   import { shiftsByUserID } from "$gql/shift";
 
-  let publicFaunaKey = "fnAEGUIErDACCZYPP6oqP-yAdZviRHV8C_p9EEmd"
+  let publicFaunaKey = "fnAEGUIErDACCZYPP6oqP-yAdZviRHV8C_p9EEmd";
   initClient(publicFaunaKey);
 
   let open = false;
@@ -31,7 +31,7 @@
 
   const shiftsOp = shiftsByUserID({ id: $page.params.userID });
   $: shifts = $shiftsOp.data?.result.shifts.data.slice() ?? [];
-  $: shifts = shifts.filter(s => s.isPublished)
+  $: shifts = shifts.filter((s) => s.isPublished);
 
   function datedShifts(shifts, week) {
     let [vacantShifts, employeeShiftsDict] = shifts.reduce(
@@ -59,7 +59,6 @@
     }
   }
   $: [_, employeeShiftsDict] = datedShifts(shifts, week);
- 
 
   function calcMins(shiftArr) {
     return shiftArr.reduce(
@@ -70,7 +69,6 @@
       0
     );
   }
- 
 </script>
 
 <svelte:window bind:innerWidth />
@@ -84,7 +82,6 @@
     >
       {companyName}
     </h3>
-    <!-- TODO: Styles and date picker (?) -->
     <div class="space-x-2 w-11/12 md:w-auto flex m-auto">
       <button
         class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"

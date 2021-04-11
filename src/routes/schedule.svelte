@@ -91,7 +91,6 @@
     >
       {companyName}
     </h3>
-    <!-- TODO: Styles and date picker (?) -->
     <div class="space-x-2 w-11/12 md:w-auto flex m-auto">
       <button
         class="bg-indigo-100 px-8 py-2 rounded-l-md font-semibold text-lg md:px-5"
@@ -115,7 +114,6 @@
       class="w-11/12 md:ml-auto md:w-auto"
       on:click={() => (isPublishOpen = true)}
       >Publish Shifts
-      <!-- TODO: {numShifts}, disabled styles & state -->
     </Button>
   </section>
 
@@ -238,6 +236,6 @@
       bind:open={isShiftOpen}
     />
   {/key}
-  
+
   <PublishModal bind:open={isPublishOpen} {shifts} />
 </main>

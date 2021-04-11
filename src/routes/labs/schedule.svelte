@@ -5,8 +5,8 @@
   import AddEmployeeModal from "$lib/schedule/AddEmployeeModal.svelte";
   import AppHeader from "$lib/AppHeader.svelte";
   import ShiftModal from "$lib/schedule/ShiftModal.svelte";
-  import ShiftCard from "../lib/schedule/ShiftCard.svelte";
-  import ShiftItem from "$lib/schedule/ShiftItem.svelte";
+  import ShiftCard from "$lib/schedule/ShiftCard.svelte";
+  import ShiftItem from "./_ShiftItem.svelte";
   import Calendar from "$lib/schedule/Calendar.svelte";
   import { fade } from "svelte/transition";
   import { dayjs } from "$utils/deps";
@@ -149,6 +149,7 @@
       {#each week as day, i}
         <ShiftItem
           {i}
+          {day}
           shift={vacantShifts[i]}
           on:click={() => {
             let shift = vacantShifts[i];
@@ -195,6 +196,8 @@
         {#each week as day, i}
           <ShiftItem
             {i}
+            {day}
+            employeeID={_id}
             shift={employeeShiftsDict[_id]?.[i]}
             on:click={() => {
               shiftParams = {

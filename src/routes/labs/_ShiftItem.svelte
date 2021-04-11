@@ -1,8 +1,15 @@
 <script>
   import { useAssignShift } from "$gql/shift";
   import { dayjs } from "$utils/deps";
+  import {
+    dndzone,
+    overrideItemIdKeyNameBeforeInitialisingDndZones,
+  } from "svelte-dnd-action";
+  overrideItemIdKeyNameBeforeInitialisingDndZones("_id");
 
   export let i,
+    day = null,
+    employeeID = null,
     shift = {},
     onPublished = false;
   $: ({
@@ -26,9 +33,48 @@
 
   const [assignShift, assignShiftOp] = useAssignShift();
   $: $assignShiftOp.error && console.log($assignShiftOp.error);
+
+  $: items = [_id ? shift : { _id: employeeID, day }];
+  var dragItem, dropZone;
+  function consider(e) {
+    if (
+      e.detail.info.trigger == "draggedEntered" &&
+      e.detail.items.length == 2
+    ) {
+      if (e.detail.items[0]?.start) [dragItem, dropZone] = e.detail.items;
+      else [dropZone, dragItem] = e.detail.items;
+    }
+  }
+  async function finalize({ detail }) {
+    if (detail.info && dragItem && dropZone) {
+      const shift = dragItem;
+      const start = dayjs(shift.start)
+        .set("date", dropZone.day.get("date"))
+        .utc()
+        .format();
+
+      let upShift = { shiftID: shift._id };
+      const diff = dayjs(shift.finish).diff(dayjs(shift.start), "minutes") || 0;
+      const finish = dayjs(start).add(diff, "minutes").utc().format();
+      if (!dayjs(start).isSame(dayjs(shift.start), "date")) {
+        upShift.start = start;
+        upShift.finish = finish;
+      }
+      upShift.assignedTo = dropZone._id ? dropZone._id : { disconnect: true };
+
+      await assignShift(upShift);
+    }
+  }
 </script>
 
 <div
+  use:dndzone={{
+    items,
+    dragDisabled: !_id,
+    dropFromOthersDisabled: _id,
+  }}
+  on:consider={consider}
+  on:finalize={finalize}
   class="bg-white p-2 {i != 0 && 'hidden'} items-center justify-center {cols[
     i
   ]}"

@@ -30,6 +30,7 @@
       <div class="flex">
         <img
           width="15"
+          height="20"
           src="/images/icons/themed-mobile-solid.svg"
           alt="mobile icon"
         />

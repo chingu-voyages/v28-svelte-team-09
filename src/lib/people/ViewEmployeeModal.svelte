@@ -27,65 +27,64 @@
       >
         Contact
       </h3>
-      <div class="flex">
+      <p class="flex my-3">
         <img
+          class="mr-2"
           width="15"
-          height="20"
           src="/images/icons/themed-mobile-solid.svg"
           alt="mobile icon"
-        />
-        <p class="p-2">{data.phone ? data.phone : 'n/a'}</p>
-      </div>
-      <div class="flex">
+        />{data.phone ? data.phone : 'n/a'}
+      </p> 
+      <p class="flex my-3">
         <img
+          class="mr-2"
           width="15"
           src="/images/icons/themed-envelope-solid.svg"
           alt="envelope icon"
-        />
-        <p class="p-2">{data.email ? data.email : 'n/a'}</p>
-      </div>
-      <div class="flex">
+        />{data.email ? data.email : 'n/a'}
+      </p>
+      <p class="flex my-3">
         <img
+          class="mr-2"
           width="15"
           src="/images/icons/themed-map-marker-alt-solid.svg"
           alt="map marker icon"
-        />
-        <p class="p-2">{data.address ? data.address : 'n/a'}</p>
-      </div>
+        />{data.address ? data.address : 'n/a'}
+      </p>
       <h3
         class="text-xl leading-6 font-medium mt-3"
       >
         Emergency Contact
       </h3>
-      <div class="flex">
+      <p class="flex my-3">
         <img
+          class="mr-2"
           width="15"
           src="/images/icons/themed-user-solid.svg"
           alt="user icon"
-        />
-        <p class="p-2">{data.emergencyContact.name ? data.emergencyContact.name : 'n/a'}</p>
-      </div>
-      <div class="flex">
+        />{data.emergencyContact.name ? data.emergencyContact.name : 'n/a'}
+      </p>
+      <p class="flex my-3">
         <img
+          class="mr-2"
           width="15"
           src="/images/icons/themed-phone-alt-solid.svg"
           alt="phone icon"
-        />
-        <p class="p-2">{data.emergencyContact.name ? data.emergencyContact.phone : 'n/a'}</p>
-      </div>
+        />{data.emergencyContact.name ? data.emergencyContact.phone : 'n/a'}
+      </p>
       <h3
         class="text-xl leading-6 font-medium mt-3"
       >
         Hourly wage
       </h3>
-      <div class="flex">
+      <p class="flex my-3">
         <img
+          class="mr-2"
           width="15"
           src="/images/icons/themed-dollar-sign-solid.svg"
           alt="dollar icon"
-        />
-        <p class="p-2">{data.hourlyWage ? data.hourlyWage : 'n/a'}</p>
-      </div>
+        />{data.hourlyWage ? data.hourlyWage : 'n/a'}
+      </p>
     </div>
   </div>
   <div

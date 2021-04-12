@@ -36,6 +36,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Manage employees - DShift</title>
+</svelte:head>
+
 <AppHeader />
 
 <main class="text-center bg-white mx-3 mb-12">

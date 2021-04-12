@@ -78,6 +78,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Schedule shifts - DShift</title>
+</svelte:head>
+
 <svelte:window bind:innerWidth />
 
 <AppHeader />

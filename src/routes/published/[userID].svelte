@@ -71,6 +71,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>View assigned shifts - DShift</title>
+</svelte:head>
+
 <svelte:window bind:innerWidth />
 
 <main class="text-center bg-white">

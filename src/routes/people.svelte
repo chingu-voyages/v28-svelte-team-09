@@ -20,7 +20,7 @@
 
   $: employees = $employeesOp.data?.result.employees.data.slice() ?? [];
   $: filteredList = employees.filter(
-    (employee) => employee.name.toLowerCase().indexOf(searchTerm) !== -1
+    (employee) => employee.name.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
   );
 
   const [deleteEmployee, employeeOp] = useDeleteEmployee();
@@ -82,7 +82,7 @@
             class="p-3 bg-indigo-300 icon rounded-full w-12 h-12 text-white font-semibold line-"
           >
             {employee.name
-              ?.match(/\b[A-Za-z]/g)
+              ?.match(/\b[a-zA-Z]/g)
               ?.join("")
               ?.slice(0, 2) ?? ""}
           </div>

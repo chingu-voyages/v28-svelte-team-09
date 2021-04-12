@@ -15,7 +15,7 @@ export default {
     },
   },
   ssr: {
-    noExternal: Object.keys(pkg.dependencies || {}),
+    noExternal: [...Object.keys(pkg.dependencies || {}), "svelte-dnd-action"],
   },
   optimizeDeps: {
     exclude: ["@urql/svelte", "svelte-dnd-action"],

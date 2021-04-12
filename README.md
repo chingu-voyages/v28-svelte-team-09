@@ -18,9 +18,9 @@ We made a blazing fast shift management web app sporting a surprisingly simple i
 
 This page summarizes our entire project process, including design, deploy, and feature development considerations.
 
-### [Design](https://www.notion.so/Project-Process-DShift-Manager-MVP-34842eae7df6433c9fabc009394810db)
+### [Design](https://www.notion.so/Project-Process-DShift-Manager-MVP-34842eae7df6433c9fabc009394810db#a010dbb82841401cad0a26557bf6902d)
 
-### [Deploy Instructions](https://www.notion.so/Project-Process-DShift-Manager-MVP-34842eae7df6433c9fabc009394810db)
+### [Deploy Instructions](https://www.notion.so/Project-Process-DShift-Manager-MVP-34842eae7df6433c9fabc009394810db#7450c38b0c8941978cf3a6a139aff610)
 
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/chingu-voyages/v28-svelte-team-09">
   <img src="https://www.netlify.com/img/deploy/button.svg">

@@ -58,7 +58,7 @@ People page: Manage your employees
 
 ![published preview](static/images/README/published.png)
 
-Schedule page: Manage your company's shifts
+Published page: Employee's public page to view your company's published shifts
 
 The display is similar to the schedule page but takes away all editing capabilities and only allows viewing published shifts for employees.
 

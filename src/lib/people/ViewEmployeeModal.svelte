@@ -13,7 +13,7 @@
     <div class="ml-4">
       <div class="mt-3 text-center sm:mt-0 sm:text-left">
         <h3
-          class="text-2xl leading-6 font-medium"
+          class="text-2xl pr-24 sm:px-0 leading-6 font-medium"
           id="modal-headline"
         >
           Personal Details

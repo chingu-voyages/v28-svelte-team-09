@@ -18,7 +18,7 @@ export default {
     noExternal: Object.keys(pkg.dependencies || {}),
   },
   optimizeDeps: {
-    exclude: ["@urql/svelte"],
+    exclude: ["@urql/svelte", "svelte-dnd-action"],
   },
   build: {
     target: "esnext", // maximum minification

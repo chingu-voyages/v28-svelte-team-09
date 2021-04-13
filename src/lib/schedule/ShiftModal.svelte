@@ -23,6 +23,7 @@
     notesValue = shift?.notes,
     breakMins = shift?.break;
   let clickOutside = true;
+  let reqFieldError = "";
 
   let areaOpen = null;
   $: !(areaOpen === null) && !areaOpen && (open = true);
@@ -51,6 +52,12 @@
       break: breakMins,
       notes: notesValue,
     };
+
+    if (!vars.area) {
+      reqFieldError = "An area must be selected";
+      return;
+    }
+
     if (_id) {
       // update
       assignShift({
@@ -234,12 +241,15 @@
       </div>
     </div>
     <div
-      class="bg-gray-50 px-4 py-3 grid gap-2 sm:px-6 sm:flex sm:flex-row-reverse"
+      class="bg-gray-50 px-4 py-3 grid gap-2 sm:px-6 sm:flex sm:flex-row-reverse sm:items-center"
     >
       <Button type="submit">Save</Button>
       <Button type="reset" variant="outline">Cancel</Button>
       {#if _id}
         <Button variant="delete" on:click={handleDelete}>Delete</Button>
+      {/if}
+      {#if reqFieldError}
+        <h3 class="text-red-400 mx-auto">{reqFieldError}</h3>
       {/if}
     </div>
   </form>

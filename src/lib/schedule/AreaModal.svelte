@@ -8,6 +8,7 @@
   import Select from "./Select.svelte";
   export let open = false;
   export let areas = [];
+  export let refresh;
 
   const defaultColor = "green";
   let areasToAdd = [newArea()];
@@ -30,6 +31,9 @@
 
   async function handleSubmit() {
     // mutations all batched at the end
+
+    // prevent stale data not refreshing
+    if (areas.length == 0) var refreshData = true;
 
     // separate already created and new areas
     const [oldAreas, areasToCreate] = areasToAdd.reduce(
@@ -61,6 +65,8 @@
     ]);
 
     reset();
+
+    if (refreshData) refresh();
 
     function dictByID(arr) {
       const dict = {};

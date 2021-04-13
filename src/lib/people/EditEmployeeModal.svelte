@@ -11,13 +11,12 @@
   let clickOutside = true;
 
   const [updateEmployee, employeeOp] = useUpdateEmployee();
-  
+
   //TREAT UPDATE ERR IF NECESSARY
   $: if ($employeeOp.error)
     console.log("ERR: error updating employee", $employeeOp.error);
 
   function handleSubmit() {
-    console.log(data._id)
     updateEmployee({
       id: data._id,
       name: data.name,
@@ -27,7 +26,7 @@
       address: data.address,
       manager: $authStore.id,
       contactName: data.emergencyContact.name,
-      contactPhone: data.emergencyContact.phone 
+      contactPhone: data.emergencyContact.phone,
     });
     open = false;
   }
@@ -48,7 +47,11 @@
             <h3 class="mt-3">Name and Rate</h3>
             <div class="[ input-box ] flex justify-between">
               <Input required id="name" label="Name*" bind:value={data.name} />
-              <Input id="hourlyWage" label="Hourly rate" bind:value={data.hourlyWage} />
+              <Input
+                id="hourlyWage"
+                label="Hourly rate"
+                bind:value={data.hourlyWage}
+              />
             </div>
             <h3 class="mt-3">Contact Information</h3>
             <div class="[ input-box ] flex justify-between">
@@ -60,8 +63,16 @@
             </div>
             <h3 class="mt-3">Emergency Contact</h3>
             <div class="[ input-box ] flex justify-between">
-              <Input id="contactName" label="Name" bind:value={data.emergencyContact.name} />
-              <Input id="contactPhone" label="Phone #" bind:value={data.emergencyContact.phone} />
+              <Input
+                id="contactName"
+                label="Name"
+                bind:value={data.emergencyContact.name}
+              />
+              <Input
+                id="contactPhone"
+                label="Phone #"
+                bind:value={data.emergencyContact.phone}
+              />
             </div>
           </div>
         </div>
